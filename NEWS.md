@@ -1,3 +1,5 @@
-# MiteMapTool (development version)
+# MiteMapTools (development version)
 
-* Initial CRAN submission.
+## Version 0.0.1
+
+First version of MiteMapTools

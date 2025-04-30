@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(MiteMapTool)
+library(MiteMapTools)
 
-test_check("MiteMapTool")
+test_check("MiteMapTools")

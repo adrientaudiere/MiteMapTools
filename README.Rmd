@@ -1,0 +1,116 @@
+---
+output: github_document
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# MiteMapTools
+
+The goal of MiteMapTools is to ...
+
+[Masier et al. 2022](https://onlinelibrary.wiley.com/doi/10.1002/jez.2651)
+
+https://github.com/LR69/MiteMap/tree/MiteMap.v6
+
+## Installation
+
+You can install the development version of MiteMapTools from [GitHub](https://github.com/) with:
+
+```{r}
+# install.packages("pak")
+pak::pak("adrientaudiere/MiteMapTools")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(MiteMapTools)
+## basic example code
+```
+
+A input folder for MiteMapTools consist of a
+ - a metadata file (in xlsx or csv) with 8 columns:
+    - Run number
+    - File name (must be present in the list of zip files)
+    - Date
+    - Start time
+    - Farm
+    - MiteMap number
+    - Bag
+    - Modality 
+
+ - a list of zip files with 4 files compressed inside
+    - A raw data file with 4 columns
+        - The time in second (position is recorded every 0.2s)
+        - The position in x (in mm)
+        - The position in y (in mm)
+        - Boolean variable indicating if the individual has remained immobile since the last record (1 if immobile)
+    - A png file figuring the position of the individual using an heatmap 
+    - A processed data file called "formeD" (also called HH) compute the time spent in an area 
+    defined by the half side of the arena (see figure \@ref(fig:cars-plot)).
+        - The date and hour of the experiment
+        - The name of the MiteMap run
+        - Total time spent in the half containing the odor source (second)
+        - Total time spent in the opposite half (second)
+        - Time spent immobile in the half containing the odor source (second)
+        - Time spent immobile in the opposite half (second)
+        - Total distance traveled in the half containing the odor source (mm)
+        - Total distance traveled in the opposite half (mm)
+    - A processed data file called "formeC" (also called CH) compute the time spent in an area 
+    defined by a circle center on the odor source (see figure \@ref(fig:cars-plot)) encompassing half of the 
+    arena surface.
+        - The date and hour of the experiment
+        - The name of the MiteMap run
+        - Total time spent in the half containing the odor source (second)
+        - Total time spent in the opposite half (second)
+        - Time spent immobile in the half containing the odor source (second)
+        - Time spent immobile in the opposite half (second)
+        - Total distance traveled in the half containing the odor source (mm)
+        - Total distance traveled in the opposite half (mm)
+        
+```{r shape, echo=FALSE}
+library(tidyverse)
+library(patchwork)
+circleFun <- function(center = c(0, 0), diameter = 1, npoints = 100) {
+  r <- diameter / 2
+  tt <- seq(0, 2 * pi, length.out = npoints)
+  xx <- center[1] + r * cos(tt)
+  yy <- center[2] + r * sin(tt)
+  return(data.frame(x = xx, y = yy))
+}
+
+dat <- circleFun(c(0, 0), 40, npoints = 1000)
+dat_C_interm <- circleFun(c(-20, 0), (26.0714 * 40 / 22.5), npoints = 1000)
+
+# compute value of intersection (-6.57, 18.89) https://planetcalc.com/8098/
+dat_C <- dat_C_interm[dat_C_interm$x > -6.57, ]
+dat_C2 <- dat[dat$x < -6.57, ]
+dat_C <- rbind(dat_C, dat_C2)
+
+
+ggplot(dat, aes(x, y)) +
+  geom_path() +
+  coord_fixed() +
+  theme_minimal() +
+  geom_vline(xintercept = 0) +
+  geom_polygon(data = mutate(dat, x = ifelse(x > 0, 0, x)), fill = "green") +
+  geom_polygon(data = dat_C, fill = "blue", alpha = 0.4) +
+  geom_point(x = -19.5, y = 0, size = 7, shape = 8, color = "red") +
+  geom_label(x = -14, y = 0, label = "Odor source", color = "red") +
+  geom_label(x = 5, y = 0, label = "CH shape", color = "blue", hjust = 0) +
+  geom_label(x = 1, y = 18, label = "HH shape", color = "green", hjust = 0) +
+  xlab("x (in mm)") +
+  ylab("y (in mm)")
+```
+
+        
