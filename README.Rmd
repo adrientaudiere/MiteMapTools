@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -24,7 +26,7 @@ https://github.com/LR69/MiteMap/tree/MiteMap.v6
 
 You can install the development version of MiteMapTools from [GitHub](https://github.com/) with:
 
-```{r}
+```{r, eval=FALSE}
 # install.packages("pak")
 pak::pak("adrientaudiere/MiteMapTools")
 ```

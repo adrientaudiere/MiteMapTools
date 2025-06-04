@@ -15,10 +15,11 @@ LazyData: true
 Depends:
     tidyverse,
     readxl,
-    R (>= 3.5)
+    R (>= 4.1.0)
 Suggests: 
     data.table,
     dplyr,
+    gganimate,
     grDevices,
     graphics,
     utils,

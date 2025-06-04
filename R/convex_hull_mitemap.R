@@ -1,6 +1,6 @@
 #' Map convex hull on MiteMap
 #'
-#' @param MiteMap  (required) The result of import_mitemap ($resulting_data) for raw_data
+#' @param MiteMap (required) The result of import_mitemap ($resulting_data) for raw_data
 #' @param unity (default = 1): size of square grid in mm
 #' @param tbe (default = 3)
 #' @param plot_show (Logical, default = TRUE) : Do we plot all mitemap ?
