@@ -35,7 +35,9 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(MiteMapTools)
-## basic example code
+
+MM_filtered_centered <- filter_mitemap(MM_example, center_x = -20, center_y = -20)
+vioplot_mitemap(MM_filtered_centered)
 ```
 
 A input folder for MiteMapTools consist of a
