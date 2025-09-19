@@ -6,7 +6,15 @@ Authors@R: c(person("Adrien", "Taudière", email = "adrien.taudiere@zaclys.net",
   person("Lise", "Roy", email = "lise.roy@cefe.cnrs.fr",
   role = c("aut"), comment = c(ORCID = "0000-0001-8833-1717"))
   )
-Description: Import, filter and visualize data from Mitemap. 
+Description: A comprehensive toolkit for importing, filtering, analyzing, and visualizing 
+    data from MiteMap tracking systems. MiteMap is a Raspberry Pi-based system used to 
+    track arthropod movement in 2D arenas, commonly used in behavioral ecology research 
+    to study chemotactic responses to volatile compounds. This package provides functions 
+    to process raw tracking data, filter movement trajectories, compute behavioral metrics 
+    (time spent in different zones, distance traveled, immobility periods), and create 
+    publication-ready visualizations including heatmaps, trajectory plots, and statistical 
+    summaries. Supports both raw positional data and processed zone-based metrics (HH and 
+    CH formats) as described in Masier et al. (2022) <doi:10.1002/jez.2651>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

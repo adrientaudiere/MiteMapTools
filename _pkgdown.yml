@@ -2,3 +2,52 @@ url: https://adrientaudiere.github.io/MiteMapTools/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left: [intro, reference, articles, tutorials, news]
+    right: [search, github]
+
+reference:
+- title: "Data Import"
+  desc: "Functions to import MiteMap data from various sources"
+  contents:
+  - import_mitemap
+  - import_mitemap_from_multiple_folder
+  
+- title: "Data Processing"
+  desc: "Functions to filter and clean tracking data"
+  contents:
+  - filter_mitemap
+  - rename_files_with_number
+  
+- title: "Visualization"
+  desc: "Functions to create plots and visualizations"
+  contents:
+  - plot_ind_mitemap
+  - vioplot_mitemap
+  - make_heatmap
+  - make_heatmap_from_multiple_folders
+  
+- title: "Statistical Analysis"
+  desc: "Functions for behavioral analysis and statistics"
+  contents:
+  - binom_test_mitemap
+  - convex_hull_mitemap
+  
+- title: "Example Data"
+  desc: "Sample datasets included with the package"
+  contents:
+  - MM_example
+  - HH_example
+  
+- title: "Utilities"
+  desc: "Helper functions and utilities"
+  contents:
+  - get_file_extension
+
+authors:
+  Adrien Taudière:
+    href: "https://github.com/adrientaudiere"
+  Lise Roy:
+    href: "https://orcid.org/0000-0001-8833-1717"
+
