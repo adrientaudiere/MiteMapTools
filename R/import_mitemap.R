@@ -5,11 +5,12 @@
 #'   Need to be set using a complete path to csv file if this file is not in
 #'   the folder or if their is multiple xlsx/csv files in the folder.
 #' @param format_metadata Either csv or xlsx
-#' @param type_of_files (default : "raw_data") A pattern to select the type
-#'   of csv (either "raw_data", "CH" or "HH") files inside the zip files.
-#' @param delete_parenthesis (Logical, default FALSE) Do we delete parenthesis with a number inside in the name of the files. Note that the name of the csv inside a zip file with a parenthesis do not have parenthesis into this name. Thus the default value to TRUE is recommended either in delete_parenthesis or in replace_parenthesis
-#' @param replace_parenthesis (Logical, default TRUE) Replace xxx(1) by xxx_1
-#' @param delete_space (Logical, default TRUE)
+#' @param delete_parenthesis (Logical, default FALSE) Do we delete parenthesis with a number
+#'   inside in the name of the files. Note that the name of the csv inside a zip
+#'   file with a parenthesis do not have parenthesis into this name. Thus, we recommended to
+#'   set TRUE at least in one of delete_parenthesis or replace_parenthesis parameter.
+#' @param replace_parenthesis (Logical, default TRUE) Replace abc_name(1) by abc_name_1
+#' @param delete_space (Logical, default TRUE) Delete_space in the file name. 
 #' @param messages (Logical, default TRUE) Do we print some warnings?
 #' @param csv_with_correction (Logical, default FALSE) If TRUE an if present in
 #'   the zip files, position files with correction (center and reduce to 0) are used.
@@ -17,31 +18,34 @@
 #'   kept. May be useful for debugging.
 #' @param dec decimal for the csv metadata files.
 #' @param force Force overwriting the path to csv_folder
-#' @param skip (default 1) skip the first line of the metadata files.
-#' @param colnames_metadata Column names for metadata column. Note that File_name
-#'   is required and must correspond to the names of zip files.
+#' @param return_with_logs (Locical, default FALSE). If TRUE, the returning 
+#'   object is a list of 4 elements containing usefull information to explore
+#'   unmatching name between file_names and metadata
+#' @param center_x (int, default 0) Center the value of x by additioning center_x mm
+#'   to x.mm.
+#' @param center_y (int, default 0) Center the value of y by additioning center_y mm
+#'   to y.mm.
+#' @param compute_metrics (Logical, default TRUE). Are metrics such as time_immobile, 
+#'   speed and turning angles are computed for each time step ? 
+#' @param file_name_column Name for the column corresponding to the File_name.
 #'
-#' @return A list of 4 elements
+#' @return If `return_with_logs` is FALSE (default), the return object is only 
+#'   the tibble called `resulting_data`. If `return_with_logs` is TRUE, it 
+#'   return a list of 4 elements:
 #' - `resulting_data`: a (possibly huge) tibble with metadata information and position in
 #'   x, y and time.
 #' - `files_not_in_csv`: a list of files not present in csv filenames from zip files.
 #' - `files_not_in_metada`: a list of files not funded in metadata.
 #' - `duplicate_file_name_in_metadata`: a list of duplicated file names in metadata.
 #'
-#'  By default, the `resulting_data` slot is structured in 12 columns (The fifth ones are from zip files
-#'  and the other from metadata files).
+#'  By default, the `resulting_data` slot is structured in 4 obligated columns + columns from
+#'   the metadata file + the computed metrics if compute_metrics is TRUE. 
 #'   - File_name
-#'   - The time in second (position is recorded every 0.2s)
-#'   - The position in x (in mm)
-#'   - The position in y (in mm)
-#'   - Boolean variable indicating if the individual has remained immobile since the last record (1 if immobile)
-#'   - Run number
-#'   - Date
-#'   - Start time
-#'   - Farm
-#'   - MiteMap number
-#'   - Bag
-#'   - Modality
+#'   - X..t.s. - The time in second (position is recorded every 0.2s)
+#'   - x.mm. - The position in x (in mm)
+#'   - y.mm. - The position in y (in mm)
+#'   - Metadata columns
+#'   - Computed metrics
 #' @export
 #' @author Adrien Taudière
 #'
@@ -51,22 +55,18 @@
 #' ))
 #' dim(mm_csv$resulting_data)
 #'
-#' mm_HH <- suppressWarnings(import_mitemap(
-#'   system.file("extdata", "POUL6", package = "MiteMapTools"),
-#'   type_of_files = "HH"
-#' ))
-#' dim(mm_HH$resulting_data)
-#'
 #' mm_xlsx <- suppressWarnings(import_mitemap(
 #'   system.file("extdata", "POUL6", package = "MiteMapTools"),
 #'   format_metadata = "xlsx"
 #' ))
 #'
 #' dim(mm_xlsx$resulting_data)
+#' 
+#' # mm_xlsx$Date <-
+#' #   as.POSIXct(strptime(mm_xlsx$Date, "%d/%m/%Y"))
 import_mitemap <- function(path_to_folder,
                            path_to_metadata = NULL,
                            format_metadata = "csv",
-                           type_of_files = "raw_data",
                            delete_parenthesis = FALSE,
                            replace_parenthesis = TRUE,
                            delete_space = TRUE,
@@ -75,17 +75,9 @@ import_mitemap <- function(path_to_folder,
                            remove_csv_folder = TRUE,
                            dec = ",",
                            force = FALSE,
-                           skip = 1,
-                           colnames_metadata = c(
-                             "Run_number",
-                             "File_name",
-                             "Date",
-                             "Start_time",
-                             "Farm",
-                             "MiteMap_number",
-                             "Bag",
-                             "Modality"
-                           )) {
+                           return_with_logs = FALSE,
+                           compute_metrics = TRUE,
+                           file_name_column = "File_name") {
   csv_folder_temp <- paste0(tempdir(), "/", "csv_folder")
 
   if (force) {
@@ -103,8 +95,8 @@ import_mitemap <- function(path_to_folder,
   zip_files <- list.files(
     path_to_folder,
     pattern = ".zip",
-    full.names = T,
-    include.dirs = T
+    full.names = TRUE,
+    include.dirs = TRUE
   )
 
   if (length(zip_files) == 0) {
@@ -117,19 +109,11 @@ import_mitemap <- function(path_to_folder,
       sep = " "
     ))
   }
-
-  if (type_of_files == "raw_data") {
-    type_of_files_in_french <- "donnees_brutes"
-  } else if (type_of_files == "HH") {
-    type_of_files_in_french <- "formeD"
-  } else if (type_of_files == "CH") {
-    type_of_files_in_french <- "formeC"
-  }
-
+ 
   for (i in 1:length(zip_files)) {
     files_in_zip <- unzip(zip_files[i], list = TRUE)
     file_of_interest <-
-      files_in_zip$Name[grepl(type_of_files_in_french, files_in_zip$Name)]
+      files_in_zip$Name[grepl("donnees_brutes", files_in_zip$Name)]
 
     if (csv_with_correction) {
       file_of_interest <-
@@ -139,9 +123,7 @@ import_mitemap <- function(path_to_folder,
       unlink(csv_folder_temp, recursive = TRUE)
 
       stop(paste(
-        "There is multiple csv files for the format.",
-        type_of_files,
-        sep = ""
+        "There is multiple csv files for the format",
       ))
     }
     if (length(file_of_interest > 0)) {
@@ -149,36 +131,16 @@ import_mitemap <- function(path_to_folder,
     }
   }
 
-  file.remove(list.files(csv_folder_temp, pattern = "jpg", full.names = T)) # remove jpg files if present
-  file.remove(list.files(csv_folder_temp, pattern = "png", full.names = T)) # remove png files if present
-  csv_files <- list.files(csv_folder_temp, full.names = T)
-
+  file.remove(list.files(csv_folder_temp, pattern = "jpg", full.names = TRUE)) # remove jpg files if present
+  file.remove(list.files(csv_folder_temp, pattern = "png", full.names = TRUE)) # remove png files if present
+  csv_files <- list.files(csv_folder_temp, full.names = TRUE)
 
   csv_list <- list()
   for (f in csv_files) {
     csv_list[[f]] <- read.delim(f)
   }
-  df <- data.table::rbindlist(csv_list, idcol = "File_name")
+  df <- data.table::rbindlist(csv_list, idcol = File_name) 
 
-  if (type_of_files == "CH") {
-    df$File_name <- gsub(
-      ".csv", "",
-      gsub(
-        "_Donnees_traitees_formeC_",
-        "",
-        gsub("csv_folder/", "", df$File_name)
-      )
-    )
-  } else if (type_of_files == "HH") {
-    df$File_name <- gsub(
-      ".csv", "",
-      gsub(
-        "_Donnees_traitees_formeD_",
-        "",
-        gsub("csv_folder/", "", df$File_name)
-      )
-    )
-  } else if (type_of_files == "raw_data") {
     df$File_name <- gsub(
       ".csv", "",
       gsub(
@@ -190,9 +152,6 @@ import_mitemap <- function(path_to_folder,
     if (csv_with_correction) {
       df$File_name <- gsub("_cor", "", df$File_name)
     }
-  } else {
-    stop("type_of_files must be one of 'CH', 'HH' or 'raw_data'")
-  }
 
   df <- tibble(df) |>
     mutate(File_name = gsub(File_name, pattern = paste0(tempdir(), "/"), replacement = ""))
@@ -204,7 +163,7 @@ import_mitemap <- function(path_to_folder,
           pattern = ".csv",
           full.names = T
         )
-      metadata <- read.csv(path_to_metadata, dec = dec, skip = skip)
+      metadata <- read.csv(path_to_metadata, dec = dec)
     } else if (format_metadata == "xlsx") {
       path_to_metadata <-
         list.files(path_to_folder,
@@ -220,9 +179,10 @@ import_mitemap <- function(path_to_folder,
         Use the path to metadata argument to set the correct path to the metadata file."
       )
     }
-    metadata <- read.csv(path_to_metadata, dec = dec, skip = skip)
+    metadata <- read.csv(path_to_metadata, dec = dec)
   }
-  colnames(metadata) <- colnames_metadata
+  metadata <- metadata |>
+    rename(File_name = .data[[file_name_column]])
 
   if (delete_parenthesis) {
     metadata$File_name <-
@@ -242,7 +202,8 @@ import_mitemap <- function(path_to_folder,
     metadata[!metadata$File_name %in% duplicated_file_name, ]
 
   df_final <- df |>
-    inner_join(distinct(metadata, File_name, .keep_all = TRUE), by = c("File_name" = "File_name")) %>%
+    inner_join(distinct(metadata, File_name, .keep_all = TRUE),
+      by = c("File_name" = "File_name")) %>%
     tibble()
 
   if (nrow(df_final) == 0) {
@@ -289,10 +250,17 @@ import_mitemap <- function(path_to_folder,
     ))
   }
 
+  if(compute_metrics) {
+    df_final <- df_final |>
+      mutate(x.mm. = x.mm. + center_x, y.mm. = y.mm. + center_y)
+      mutate(distance=sqrt(((lag(x.mm.) - x.mm.) ^ 2 + (lag(y.mm.) - y.mm.) ^ 2))) |>
+      mutate(speed_mm_s=distance/(X..t.s.-lag(X..t.s.))) |>
+      mutate(in_left_half = x.mm. < 0) |>
+      mutate(is_immobile = distance == 0) |>  
+      mutate(turning_angle = XX)
+  }
   res <- list()
   res$resulting_data <- df_final
-  res$resulting_data$Date <-
-    as.POSIXct(strptime(res$resulting_data$Date, "%d/%m/%Y"))
 
   res$files_not_in_csv <- files_not_in_csv
   res$files_not_in_metadata <- files_not_in_metadata
@@ -302,14 +270,17 @@ import_mitemap <- function(path_to_folder,
     unlink(csv_folder_temp, recursive = TRUE)
   }
 
-  return(res)
-}
+  if(return_with_logs){
+    return(res)
+  } else {
+    return(res$resulting_data)
+  }
+  }
+
 
 #' Import mitemap from multiple folders
 #'
 #' @param folders A list of path
-#' @param type_of_files A pattern to select the type of csv (either "raw_data", "CH" or "HH")
-#' files using their name (e.g. "CH")
 #' @param path_to_metadata A list of path
 #' @param verbose (logical). If TRUE, print additional information.
 #' @param ...  Other params for be passed on to [import_mitemap()]
@@ -321,7 +292,6 @@ import_mitemap <- function(path_to_folder,
 #'
 import_mitemap_from_multiple_folder <-
   function(folders = NULL,
-           type_of_files = NULL,
            path_to_metadata = NULL,
            verbose = TRUE,
            ...) {
@@ -333,22 +303,21 @@ import_mitemap_from_multiple_folder <-
       res[[i]] <-
         import_mitemap(
           path_to_folder = folders[[i]],
-          type_of_files = type_of_files,
           path_to_metadata = path_to_metadata[[i]],
           ...
         )
-      if ("MiteMap.y" %in% names(res[[i]]$resulting_data)) {
-        res[[i]]$resulting_data$MiteMap.y <-
-          as.character(res[[i]]$resulting_data$MiteMap.y)
-      }
-      if ("MiteMap" %in% names(res[[i]]$resulting_data)) {
-        res[[i]]$resulting_data$MiteMap <-
-          as.character(res[[i]]$resulting_data$MiteMap)
-      }
-      if ("Bag" %in% names(res[[i]]$resulting_data)) {
-        res[[i]]$resulting_data$Bag <-
-          as.character(res[[i]]$resulting_data$Bag)
-      }
+      # if ("MiteMap.y" %in% names(res[[i]]$resulting_data)) {
+      #   res[[i]]$resulting_data$MiteMap.y <-
+      #     as.character(res[[i]]$resulting_data$MiteMap.y)
+      # }
+      # if ("MiteMap" %in% names(res[[i]]$resulting_data)) {
+      #   res[[i]]$resulting_data$MiteMap <-
+      #     as.character(res[[i]]$resulting_data$MiteMap)
+      # }
+      # if ("Bag" %in% names(res[[i]]$resulting_data)) {
+      #   res[[i]]$resulting_data$Bag <-
+      #     as.character(res[[i]]$resulting_data$Bag)
+      # }
     }
 
     final_res <- list()

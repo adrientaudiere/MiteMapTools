@@ -1,12 +1,15 @@
 #' Map convex hull on MiteMap
 #'
-#' @param MiteMap (required) The result of import_mitemap ($resulting_data) for raw_data
+#' @param MiteMap (required) The result of import_mitemap for raw_data
 #' @param unity (default = 1): size of square grid in mm
 #' @param tbe (default = 3)
 #' @param plot_show (Logical, default = TRUE) : Do we plot all mitemap ?
 #' @param probs_quantile (default = 0.68)
 #' @param min_nb_spatial_points : Minimum number of spatial point to keep the sample
-#' @param each_point_count_one (Logical ; default = FALSE)
+#' @param each_point_count_one (Logical ; default = FALSE) If TRUE, each spatial point
+#'   count only for one time step instead. By default, if the mite stay 3t at a given
+#'   spatial location, the spatial point count 3 times in the construction of the convex
+#'   hull.
 #' @param hull_col color of hull area
 #' @param plot_center_of_mass (Logical, default = TRUE): Do we plot the center of mass?
 #'
@@ -14,7 +17,7 @@
 #' @export
 #' @author Adrien Taudière
 #' @examples
-#' MM <- filter_mitemap(MM_example,
+#' MM <- filter_mitemap(MM_data,
 #'   center_x = -20, center_y = -20,
 #'   bad_range_value_x = 50, bad_range_value_y = 50
 #' )

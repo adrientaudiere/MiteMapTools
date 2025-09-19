@@ -1,6 +1,6 @@
 Package: MiteMapTools
 Title: Import, Filter and Visualize Data from Mitemap
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(person("Adrien", "Taudière", email = "adrien.taudiere@zaclys.net",
   role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0003-1088-1182")),
   person("Lise", "Roy", email = "lise.roy@cefe.cnrs.fr",

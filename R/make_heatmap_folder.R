@@ -19,9 +19,9 @@
 #' @export
 #' @author Adrien Taudière
 #' @examples
-#' make_heatmap(system.file("extdata", "POUL6", package = "MiteMapTools"))
+#' extract_heatmap(system.file("extdata", "POUL6", package = "MiteMapTools"))
 #' unlink("Heatmap", recursive = TRUE)
-make_heatmap <- function(path_to_folder,
+extract_heatmap <- function(path_to_folder,
                          output_path = "Heatmap",
                          path_to_metadata = NULL,
                          format_metadata = "csv",
@@ -146,17 +146,17 @@ make_heatmap <- function(path_to_folder,
 #' Create folders with heatmap from multiples folders
 #'
 #' @param folders A list of path
-#' @param ... Other params for be passed on to [make_heatmap()]
+#' @param ... Other params for be passed on to [extract_heatmap()]
 #'
 #' @return Nothing. Create files in folders.
 #' @export
 #' @author Adrien Taudière
-make_heatmap_from_multiple_folders <- function(folders, ...) {
+extract_heatmap_from_multiple_folders <- function(folders, ...) {
   if (length(folders) == 1) {
-    make_heatmap(folders, output_path = gsub(".*/|$", "", gsub("/$", "", folders)), ...)
+    extract_heatmap(folders, output_path = gsub(".*/|$", "", gsub("/$", "", folders)), ...)
   } else {
     for (i in 1:length(folders)) {
-      make_heatmap(folders[i], output_path = gsub(".*/|$", "", folders[i]), ...)
+      extract_heatmap(folders[i], output_path = gsub(".*/|$", "", folders[i]), ...)
     }
   }
 }

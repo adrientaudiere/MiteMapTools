@@ -26,12 +26,12 @@
 #' @export
 #'
 #' @examples
-#' MM_filtered_centered <- filter_mitemap(MM_example,
+#' MM_filtered_centered <- filter_mitemap(MM_data,
 #'   center_x = -20, center_y = -20,
 #'   bad_range_value_x = 50, bad_range_value_y = 50
 #' )
-#' filter_mitemap(MM_example,
-#'   HH = HH_example$resulting_data,
+#' filter_mitemap(MM_data,
+#'   HH = MM_ind_data$resulting_data,
 #'   bad_range_value_x = 50, bad_range_value_y = 50
 #' )
 filter_mitemap <- function(MiteMap,

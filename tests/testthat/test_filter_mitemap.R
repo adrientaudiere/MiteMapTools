@@ -1,7 +1,7 @@
-MM_filtered_centered <- filter_mitemap(MM_example, center_x = -20, center_y = -20)
+MM_filtered_centered <- filter_mitemap(MM_data, center_x = -20, center_y = -20)
 
 
-MM_almost_no_filtered <- filter_mitemap(MM_example,
+MM_almost_no_filtered <- filter_mitemap(MM_data,
   first_seconds_to_delete = -1,
   max_x_value = 1000,
   max_y_value = 1000,
@@ -10,8 +10,8 @@ MM_almost_no_filtered <- filter_mitemap(MM_example,
   maximum_time = 100000
 )
 
-MM_filtered_HH <- filter_mitemap(MM_example,
-  HH = HH_example$resulting_data
+MM_filtered_HH <- filter_mitemap(MM_data,
+  HH = MM_ind_data$resulting_data
 )
 
 

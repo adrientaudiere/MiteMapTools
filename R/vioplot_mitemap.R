@@ -9,9 +9,9 @@
 #' @author Adrien Taudière
 #'
 #' @examples
-#' MM_filtered_centered <- filter_mitemap(MM_example, center_x = -20, center_y = -20)
+#' MM_filtered_centered <- filter_mitemap(MM_data, center_x = -20, center_y = -20)
 #' vioplot_mitemap(MM_filtered_centered)
-#' vioplot_mitemap(MM_example$resulting_data, modality = "Farm", wrap = "Modality") +
+#' vioplot_mitemap(MM_data$resulting_data, modality = "Farm", wrap = "Modality") +
 #'   geom_boxplot(alpha = 0.1)
 vioplot_mitemap <- function(MiteMap,
                             modality = "Modality",

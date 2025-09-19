@@ -2,9 +2,9 @@
 #'
 #' Obtained using code :
 #'
-#'  MM_example <- suppressWarnings(import_mitemap(system.file("extdata", "POUL6", package = "MiteMapTools")))
+#'  MM_data <- suppressWarnings(import_mitemap(system.file("extdata", "POUL6", package = "MiteMapTools")))
 #'
-#'  save(MM_example, file="data/MM_example.rda")
+#'  save(MM_data, file="data/MM_data.rda")
 #'
 #' @format
 #' A list of 4 elements
@@ -30,13 +30,13 @@
 #'   - Modality
 #'
 #' @source <https://onlinelibrary.wiley.com/doi/10.1002/jez.2651>
-#' @usage data(MM_example)
-"MM_example"
+#' @usage data(MM_data)
+"MM_data"
 
 #' example dataset from MiteMapTools for shape Half-half
 #'
 #' Obtained using code :
-#'  `mm_HH <- suppressWarnings(import_mitemap(system.file("extdata", "POUL6", package = "MiteMapTools"), type_of_files = "HH"))`
+#' #TODO  `MM_ind_data <- suppressWarnings(import_mitemap(system.file("extdata", "POUL6", package = "MiteMapTools"), type_of_files = "HH"))`
 #' @format
 #' A list of 4 elements
 #' - `resulting_data`: a (possibly huge) tibble with metadata information and position in
@@ -66,5 +66,5 @@
 #'   - Modality
 #'
 #' @source <https://onlinelibrary.wiley.com/doi/10.1002/jez.2651>
-#' @usage data(HH_example)
-"HH_example"
+#' @usage data(MM_ind_data)
+"MM_ind_data"

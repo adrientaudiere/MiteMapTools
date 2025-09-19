@@ -96,7 +96,7 @@ get_file_extension <- function(file_path) {
 #' @export
 #'
 #' @examples
-#' MM <- filter_mitemap(MM_example,
+#' MM <- filter_mitemap(MM_data,
 #'   center_x = -28, center_y = -22, max_x_value = 52, max_y_value = 52
 #' )
 #'
