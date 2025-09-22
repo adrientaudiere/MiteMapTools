@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Import, Filter and Visualize Data from Mitemap">
-<meta name="description" content="Import, filter and visualize data from Mitemap.">
-<meta property="og:description" content="Import, filter and visualize data from Mitemap.">
+<meta name="description" content="A comprehensive toolkit for importing, filtering, analyzing, and visualizing data from MiteMap tracking systems. MiteMap is a Raspberry Pi-based system used to track arthropod movement in 2D arenas, used in behavioral ecology research to study chemotactic responses to volatile compounds. This package provides functions to process raw tracking data, filter movement trajectories, compute behavioral metrics (time spent in different zones, distance traveled, immobility periods), and create visualizations including heatmaps, trajectory plots, and statistical summaries. The system is described in Masier et al. (2022) &lt;doi:10.1002/jez.2651&gt; and the code for the MiteMap system is available at &lt;https://github.com/LR69/MiteMap/tree/MiteMap.v6&gt;.">
+<meta property="og:description" content="A comprehensive toolkit for importing, filtering, analyzing, and visualizing data from MiteMap tracking systems. MiteMap is a Raspberry Pi-based system used to track arthropod movement in 2D arenas, used in behavioral ecology research to study chemotactic responses to volatile compounds. This package provides functions to process raw tracking data, filter movement trajectories, compute behavioral metrics (time spent in different zones, distance traveled, immobility periods), and create visualizations including heatmaps, trajectory plots, and statistical summaries. The system is described in Masier et al. (2022) &lt;doi:10.1002/jez.2651&gt; and the code for the MiteMap system is available at &lt;https://github.com/LR69/MiteMap/tree/MiteMap.v6&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">MiteMapTools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,9 +48,66 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="mitemaptools">MiteMapTools<a class="anchor" aria-label="anchor" href="#mitemaptools"></a>
 </h1></div>
-<p>The goal of MiteMapTools is to …</p>
-<p><a href="https://onlinelibrary.wiley.com/doi/10.1002/jez.2651" class="external-link">Masier et al. 2022</a></p>
-<p><a href="https://github.com/LR69/MiteMap/tree/MiteMap.v6" class="external-link uri">https://github.com/LR69/MiteMap/tree/MiteMap.v6</a></p>
+<p>MiteMapTools is a comprehensive R package for importing, analyzing, and visualizing movement data from MiteMap tracking systems. MiteMap is a cost-effective, open-source tool for 2D behavioral tracking of arthropods, particularly useful for studying chemotactic responses and movement patterns in controlled laboratory settings.</p>
+<div class="section level2">
+<h2 id="about-mitemap">About MiteMap<a class="anchor" aria-label="anchor" href="#about-mitemap"></a>
+</h2>
+<p>MiteMap is a Raspberry Pi-based automated tracking system designed to monitor arthropod behavior in circular arenas. The system uses infrared imaging to track individual organisms with high temporal resolution (position recorded every 0.2 seconds) and spatial precision. This technology enables researchers to study:</p>
+<ul>
+<li>
+<strong>Chemotactic behavior</strong>: How arthropods respond to attractive or repulsive volatile compounds</li>
+<li>
+<strong>Movement patterns</strong>: Analysis of trajectory complexity, speed, and spatial preferences<br>
+</li>
+<li>
+<strong>Zone preferences</strong>: Time allocation between different arena regions</li>
+<li>
+<strong>Behavioral states</strong>: Periods of activity vs. immobility</li>
+</ul>
+<p>The system consists of a circular arena (typically 40mm diameter) where test subjects are placed with potential stimuli positioned at the arena periphery. High-resolution tracking data allows for detailed quantitative analysis of behavioral responses.</p>
+</div>
+<div class="section level2">
+<h2 id="scientific-background">Scientific Background<a class="anchor" aria-label="anchor" href="#scientific-background"></a>
+</h2>
+<p>This package implements methods described in:</p>
+<p><strong>Masier, L.‐S., Roy, L., &amp; Durand, J.‐F. (2022). A new methodology for arthropod behavioral assays using MiteMap, a cost‐effective open‐source tool for 2D tracking. Journal of Experimental Zoology Part A: Ecological and Integrative Physiology, 337(4), 333-344.</strong> <a href="https://onlinelibrary.wiley.com/doi/10.1002/jez.2651" class="external-link">doi:10.1002/jez.2651</a></p>
+<p>The original MiteMap hardware and software can be found at: <a href="https://github.com/LR69/MiteMap/tree/MiteMap.v6" class="external-link uri">https://github.com/LR69/MiteMap/tree/MiteMap.v6</a></p>
+</div>
+<div class="section level2">
+<h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<ul>
+<li>
+<strong>Data Import</strong>: Seamlessly import MiteMap data from zip archives containing raw tracking files and metadata</li>
+<li>
+<strong>Data Filtering</strong>: Clean tracking data by removing artifacts, centering coordinates, and filtering by time/space constraints</li>
+<li>
+<strong>Behavioral Analysis</strong>: Calculate metrics like zone preferences, movement speeds, and immobility periods</li>
+<li>
+<strong>Visualization</strong>: Create publication-ready plots including trajectory maps, heatmaps, and statistical summaries</li>
+<li>
+<strong>Statistical Testing</strong>: Built-in functions for binomial tests of zone preferences with multiple comparison corrections</li>
+<li>
+<strong>Multiple Data Formats</strong>: Support for raw positional data and processed zone metrics (HH and CH formats)</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="data-formats">Data Formats<a class="anchor" aria-label="anchor" href="#data-formats"></a>
+</h2>
+<p>The Raw Tracking Data are comprised of: High-resolution positional data with columns: - Time (seconds, recorded every 0.2s) - X coordinate (mm)<br>
+- Y coordinate (mm)</p>
+<p>[MiteMapTools::import_mitemap()] computes summary metrics including the presence in defined zones (HH and CH formats, see figure @ref(fig:shape)):</p>
+<div class="section level3">
+<h3 id="hh-format-half-half">HH Format (Half-Half)<a class="anchor" aria-label="anchor" href="#hh-format-half-half"></a>
+</h3>
+<p>Arena divided by a line through the odor source, computing: - Time spent in each half - Distance traveled in each zone - Immobility time in each zone</p>
+</div>
+<div class="section level3">
+<h3 id="ch-format-circle-half">CH Format (Circle-Half)<a class="anchor" aria-label="anchor" href="#ch-format-circle-half"></a>
+</h3>
+<p>Arena divided by a circle centered on the odor source, encompassing half the arena surface: - Time spent inside/outside the circle - Movement metrics for each zone - Behavioral preference indices</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -60,80 +117,56 @@
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"adrientaudiere/MiteMapTools"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<div class="section level3">
+<h3 id="data-import-and-filtering">Data Import and Filtering<a class="anchor" aria-label="anchor" href="#data-import-and-filtering"></a>
+</h3>
+<p>This is a basic example showing how to filter and visualize MiteMap data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://adrientaudiere.github.io/MiteMapTools/">MiteMapTools</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Le chargement a nécessité le package : tidyverse</span></span>
 <span><span class="co">#&gt; ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">#&gt; ✔ dplyr     1.1.4     ✔ readr     2.1.5</span></span>
-<span><span class="co">#&gt; ✔ forcats   1.0.0     ✔ stringr   1.5.1</span></span>
-<span><span class="co">#&gt; ✔ ggplot2   3.5.2     ✔ tibble    3.2.1</span></span>
+<span><span class="co">#&gt; ✔ forcats   1.0.0     ✔ stringr   1.5.2</span></span>
+<span><span class="co">#&gt; ✔ ggplot2   4.0.0     ✔ tibble    3.3.0</span></span>
 <span><span class="co">#&gt; ✔ lubridate 1.9.4     ✔ tidyr     1.3.1</span></span>
-<span><span class="co">#&gt; ✔ purrr     1.0.4     </span></span>
+<span><span class="co">#&gt; ✔ purrr     1.1.0     </span></span>
 <span><span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
 <span><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></span>
 <span><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></span>
 <span><span class="co">#&gt; ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span><span class="co">#&gt; Le chargement a nécessité le package : readxl</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : conflicted</span></span>
 <span></span>
-<span><span class="va">MM_filtered_centered</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filter_mitemap.html">filter_mitemap</a></span><span class="op">(</span><span class="va">MM_example</span>, center_x <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>, center_y <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Row removed when clearing the first secondes: 536</span></span>
-<span><span class="co">#&gt; Row removed when clearing bad x range: 16860</span></span>
-<span><span class="co">#&gt; Row removed when clearing bad y range: 0</span></span>
-<span><span class="co">#&gt; Row removed when clearing bad x values: 24537</span></span>
-<span><span class="co">#&gt; Row removed when clearing bad y values: 93</span></span>
-<span><span class="co">#&gt; Row removed when clearing for run with times sup to maximum_time: 814</span></span>
-<span><span class="fu"><a href="reference/vioplot_mitemap.html">vioplot_mitemap</a></span><span class="op">(</span><span class="va">MM_filtered_centered</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Import MiteMap from folders</span></span>
+<span><span class="va">MM</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/import_mitemap.html">import_mitemap</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span>
+<span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, clean <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span> </span>
+<span><span class="co"># Create violin plots showing position distributions by experimental condition</span></span>
+<span><span class="fu"><a href="reference/vioplot_mitemap.html">vioplot_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, <span class="st">"Treatment"</span>, prop_points <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
-<p>A input folder for MiteMapTools consist of a - a metadata file (in xlsx or csv) with 8 columns: - Run number - File name (must be present in the list of zip files) - Date - Start time - Farm - MiteMap number - Bag - Modality</p>
-<ul>
-<li>a list of zip files with 4 files compressed inside
-<ul>
-<li>A raw data file with 4 columns
-<ul>
-<li>The time in second (position is recorded every 0.2s)</li>
-<li>The position in x (in mm)</li>
-<li>The position in y (in mm)</li>
-<li>Boolean variable indicating if the individual has remained immobile since the last record (1 if immobile)</li>
-</ul>
-</li>
-<li>A png file figuring the position of the individual using an heatmap</li>
-<li>A processed data file called “formeD” (also called HH) compute the time spent in an area defined by the half side of the arena (see figure @ref(fig:cars-plot)).
-<ul>
-<li>The date and hour of the experiment</li>
-<li>The name of the MiteMap run</li>
-<li>Total time spent in the half containing the odor source (second)</li>
-<li>Total time spent in the opposite half (second)</li>
-<li>Time spent immobile in the half containing the odor source (second)</li>
-<li>Time spent immobile in the opposite half (second)</li>
-<li>Total distance traveled in the half containing the odor source
-<ol start="2000" style="list-style-type: lower-roman"><li>
-</li></ol>
-</li>
-<li>Total distance traveled in the opposite half (mm)</li>
-</ul>
-</li>
-<li>A processed data file called “formeC” (also called CH) compute the time spent in an area defined by a circle center on the odor source (see figure @ref(fig:cars-plot)) encompassing half of the arena surface.
-<ul>
-<li>The date and hour of the experiment</li>
-<li>The name of the MiteMap run</li>
-<li>Total time spent in the half containing the odor source (second)</li>
-<li>Total time spent in the opposite half (second)</li>
-<li>Time spent immobile in the half containing the odor source (second)</li>
-<li>Time spent immobile in the opposite half (second)</li>
-<li>Total distance traveled in the half containing the odor source
-<ol start="2000" style="list-style-type: lower-roman"><li>
-</li></ol>
-</li>
-<li>Total distance traveled in the opposite half (mm)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</div>
+<div class="section level3">
+<h3 id="data-structure-requirements">Data Structure Requirements<a class="anchor" aria-label="anchor" href="#data-structure-requirements"></a>
+</h3>
+<p>A MiteMap experiment folder should contain:</p>
+</div>
+<div class="section level3">
+<h3 id="data-structure-requirements-1">Data Structure Requirements<a class="anchor" aria-label="anchor" href="#data-structure-requirements-1"></a>
+</h3>
+<p>A MiteMap experiment folder should contain:</p>
+<p><strong>1. Zip archives</strong> containing at least 2 files: - <strong>Raw data CSV</strong>: 3-columns tracking data - Time in seconds (recorded every 0.2s) - X position (mm) - Y position (mm) - <strong>PNG heatmap</strong>: Visual representation of movement patterns</p>
+<p><strong>2. Metadata file</strong> (Excel .xlsx or CSV format, optional) with 1 required column: - <strong>File_name</strong>: Must match the corresponding zip file names. You can use other column name with the parameter <code>file_name_column</code> in [import_mitemap()].</p>
+</div>
+<div class="section level3">
+<h3 id="arena-layout-and-zone-definitions">Arena Layout and Zone Definitions<a class="anchor" aria-label="anchor" href="#arena-layout-and-zone-definitions"></a>
+</h3>
+<p>The following diagram illustrates how the arena is divided for HH and CH zone computations:</p>
 <p><img src="reference/figures/README-shape-1.png" width="100%"></p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
@@ -155,8 +188,10 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Adrien Taudière <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-1088-1182" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Lise Roy <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8833-1717" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
+<a href="https://github.com/adrientaudiere" class="external-link">Adrien Taudière</a> <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-1088-1182" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
+<a href="https://orcid.org/0000-0001-8833-1717" class="external-link">Lise Roy</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8833-1717" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -167,7 +202,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Adrien Taudière, Lise Roy.</p>
+  <p>Developed by <a href="https://github.com/adrientaudiere" class="external-link">Adrien Taudière</a>, <a href="https://orcid.org/0000-0001-8833-1717" class="external-link">Lise Roy</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MiteMapTools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,18 +32,59 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="mitemaptools-development-version">MiteMapTools (development version)<a class="anchor" aria-label="anchor" href="#mitemaptools-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.0.2" id="version-002-development-version">Version 0.0.2 (development version)<a class="anchor" aria-label="anchor" href="#version-002-development-version"></a></h2>
 <div class="section level3">
-<h3 id="version-development-version">Version 0.0.1<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h3>
-<p>First version of MiteMapTools</p>
+<h3 id="improvements-0-0-2">Improvements<a class="anchor" aria-label="anchor" href="#improvements-0-0-2"></a></h3>
+<ul><li>Removed HH and CH params from filter_mitemap().</li>
+<li>Computed HH and CH formats directly in R inside [import_mitemap()].</li>
+</ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.1" id="version-001">Version 0.0.1<a class="anchor" aria-label="anchor" href="#version-001"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-0-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-1"></a></h3>
+<ul><li>Initial release of MiteMapTools package</li>
+<li>
+<strong>Data Import</strong>: Functions to import MiteMap data from zip archives and metadata files ([import_mitemap()], [import_mitemap_from_multiple_folder()])</li>
+<li>
+<strong>Data Processing</strong>: Filtering and cleaning of tracking data ([filter_mitemap()])</li>
+<li>
+<strong>Visualization</strong>:
+<ul><li>Individual trajectory plotting ([plot_ind_mitemap()])</li>
+<li>Violin plots for position distributions ([vioplot_mitemap()])</li>
+<li>Movement heatmap generation ([extract_heatmap()])</li>
+</ul></li>
+<li>
+<strong>Statistical Analysis</strong>: Binomial tests for zone preference analysis ([binom_test_mitemap()])</li>
+<li>
+<strong>Geometric Analysis</strong>: Convex hull calculations for movement characterization ([convex_hull_mitemap()])</li>
+</ul></div>
+<div class="section level3">
+<h3 id="data-format-support-0-0-1">Data Format Support<a class="anchor" aria-label="anchor" href="#data-format-support-0-0-1"></a></h3>
+<ul><li>Raw tracking data (x,y coordinates with temporal resolution of 0.2s)</li>
+<li>HH format (Half-Half zone analysis)</li>
+<li>Comprehensive metadata integration</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-0-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-1"></a></h3>
+<ul><li>Complete package documentation with biological context</li>
+<li>Detailed examples and use cases</li>
+<li>Integration with Masier et al. (2022) methodology</li>
+<li>Connection to original MiteMap hardware project (LR69/MiteMap)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="dependencies-0-0-1">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies-0-0-1"></a></h3>
+<ul><li>Built on tidyverse ecosystem for data manipulation</li>
+<li>Supports Excel and CSV metadata formats via readxl</li>
+<li>Compatible with ggplot2 for publication-ready visualizations</li>
+</ul></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Adrien Taudière, Lise Roy.</p>
+  <p>Developed by <a href="https://github.com/adrientaudiere" class="external-link">Adrien Taudière</a>, <a href="https://orcid.org/0000-0001-8833-1717" class="external-link">Lise Roy</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
