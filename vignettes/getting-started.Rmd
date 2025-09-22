@@ -1,0 +1,272 @@
+---
+title: "Getting Started with MiteMapTools"
+author: "Adrien Taudière and Lise Roy"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with MiteMapTools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figures/",
+  out.width = "100%",
+  dpi = 150,
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+MiteMapTools is a comprehensive R package for importing, analyzing, and visualizing movement data from MiteMap tracking systems. MiteMap is a cost-effective, open-source tool for 2D behavioral tracking of arthropods, particularly useful for studying chemotactic responses and movement patterns in controlled laboratory settings.
+
+## About MiteMap
+
+MiteMap is a Raspberry Pi-based automated tracking system designed to monitor arthropod behavior in circular arenas. The system uses infrared imaging to track individual organisms with high temporal resolution (position recorded every 0.2 seconds) and spatial precision. This technology enables researchers to study:
+
+- **Chemotactic behavior**: How arthropods respond to attractive or repulsive volatile compounds
+- **Movement patterns**: Analysis of trajectory complexity, speed, and spatial preferences  
+- **Zone preferences**: Time allocation between different arena regions
+- **Behavioral states**: Periods of activity vs. immobility
+
+The system consists of a circular arena (typically 40mm diameter) where test subjects are placed with potential stimuli positioned at the arena periphery. High-resolution tracking data allows for detailed quantitative analysis of behavioral responses.
+
+## Scientific Background
+
+This package implements methods described in:
+
+**Masier, L.‐S., Roy, L., & Durand, J.‐F. (2022). A new methodology for arthropod behavioral assays using MiteMap, a cost‐effective open‐source tool for 2D tracking. Journal of Experimental Zoology Part A: Ecological and Integrative Physiology, 337(4), 333-344.** [doi:10.1002/jez.2651](https://onlinelibrary.wiley.com/doi/10.1002/jez.2651)
+
+The original MiteMap hardware and software can be found at: <https://github.com/LR69/MiteMap/tree/MiteMap.v6>
+
+# Installation
+
+You can install the development version of MiteMapTools from GitHub with:
+
+```{r eval=FALSE}
+# install.packages("pak")
+pak::pak("adrientaudiere/MiteMapTools")
+```
+
+# Basic Usage
+
+Let's start by loading the package and exploring the example dataset:
+
+```{r setup}
+library(MiteMapTools)
+```
+
+## Data Import and Basic Visualization
+
+The main function for importing MiteMap data is `import_mitemap()`. For this tutorial, we'll use both the built-in example dataset and demonstrate how to import data from files.
+
+### Using Built-in Example Data
+
+The package includes a pre-processed example dataset:
+
+```{r load-data}
+# Load the built-in example dataset
+data(MM_data)
+
+# Examine the structure of the data
+str(MM_data)
+head(MM_data)
+```
+
+### Importing Data from Files
+
+For your own data, you would import from MiteMap output files:
+
+```{r example-import, eval=FALSE}
+# Import MiteMap data from example folder (for demonstration)
+MM <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", 
+  verbose = FALSE, 
+  clean = TRUE
+) 
+```
+
+For the rest of this tutorial, we'll use the built-in `MM_data` dataset.
+
+```{r assign-data}
+# Use the built-in data for examples
+MM <- MM_data
+```
+
+## Creating Violin Plots
+
+One of the key visualization functions is `vioplot_mitemap()`, which shows position distributions by experimental condition:
+
+```{r violin-plot}
+# Create violin plots showing position distributions by experimental condition
+vioplot_mitemap(MM, "Treatment", prop_points = 0.1)
+```
+
+This plot shows how different treatments affect the distribution of organism positions along the x-axis (with the odor source typically positioned at x = -19.5 mm).
+
+## Individual Trajectory Plotting
+
+To visualize individual movement trajectories, use `plot_ind_mitemap()`:
+
+```{r individual-plots}
+# Plot individual trajectories for the first two organisms
+library(patchwork)  # for combining plots
+
+# Get individual plots
+p_list <- plot_ind_mitemap(MM, ind_index = c(1, 2))
+
+# Combine plots side by side
+p_list[[1]] + p_list[[2]] & theme(legend.position = "none")
+```
+
+You can also add arena context:
+
+```{r individual-plots-with-arena}
+# Plot with arena circle and odor source
+p_arena <- plot_ind_mitemap(
+  MM, 
+  ind_index = 1,
+  add_base_circle = TRUE, 
+  linewidth = 1.7, 
+  label_odor_source = "Odor source"
+)
+
+p_arena[[1]]
+```
+
+## Data Structure Requirements
+
+For your own experiments, a MiteMap experiment folder should contain:
+
+**1. Zip archives** containing at least 2 files:
+   - **Raw data CSV**: 3-column tracking data (Time in seconds, X position in mm, Y position in mm)
+   - **PNG heatmap**: Visual representation of movement patterns
+
+**2. Metadata file** (Excel .xlsx or CSV format, optional) with 1 required column:
+   - **File_name**: Must match the corresponding zip file names
+
+You can use a different column name with the `file_name_column` parameter in `import_mitemap()`.
+
+## Arena Layout and Zone Definitions
+
+The arena is divided into different zones for analysis:
+
+### HH Format (Half-Half)
+- Arena divided by a line through the odor source
+- Computes time spent in each half, distance traveled, and immobility time
+
+### CH Format (Circle-Half)  
+- Arena divided by a circle centered on the odor source
+- Encompasses half the arena surface
+- Analyzes time spent inside/outside the circle and behavioral preference indices
+
+```{r arena-diagram, echo=FALSE, eval=FALSE}
+# This would show the arena layout diagram
+# The actual diagram is created in the README using custom ggplot code
+```
+
+## Statistical Analysis
+
+### Binomial Tests for Zone Preferences
+
+Test whether organisms show significant preferences for specific zones:
+
+```{r binomial-tests}
+# Test zone preferences by treatment
+binom_results <- binom_test_mitemap(MM, factor = "Treatment")
+print(binom_results)
+```
+
+### Movement Metrics and Convex Hull Analysis
+
+Calculate movement characteristics using convex hull analysis:
+
+```{r convex-hull}
+# Calculate convex hull metrics (spatial usage)
+ch_results <- convex_hull_mitemap(MM, plot_show = FALSE)
+print(head(ch_results))
+
+# Combine with metadata for analysis
+library(dplyr)
+combined_data <- full_join(ch_results, MM)
+
+# Visualize hull area by treatment
+library(ggplot2)
+combined_data %>%
+  ggplot(aes(x = Treatment, y = hull_area)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Spatial Usage (Convex Hull Area) by Treatment",
+       y = "Hull Area (mm²)")
+```
+
+## Data Filtering and Processing
+
+The `filter_mitemap()` function allows you to clean and process the tracking data:
+
+```{r filtering}
+# Apply custom filtering (this is done automatically with clean=TRUE in import_mitemap)
+MM_filtered <- filter_mitemap(
+  MM,
+  time_min = 0,      # Start time
+  time_max = 300,    # End time (5 minutes)
+  dist_max = 100     # Maximum distance from center
+)
+
+# Compare data sizes
+cat("Original data points:", nrow(MM), "\n")
+cat("Filtered data points:", nrow(MM_filtered), "\n")
+```
+
+## Advanced Visualizations
+
+### Heatmap Extraction
+
+Extract movement heatmaps from your data:
+
+```{r heatmap, eval=FALSE}
+# Extract heatmap for a specific individual
+heatmap_data <- extract_heatmap(MM, file_name = unique(MM$File_name)[1])
+```
+
+### Movement Speed Analysis
+
+Analyze movement speeds and create speed-colored trajectory plots:
+
+```{r speed-analysis}
+# Create trajectory plots colored by movement speed
+p_speed <- plot_ind_mitemap(
+  MM, 
+  ind_index = 1:3,
+  linewidth = 1.5
+)
+
+# Combine multiple speed plots
+(p_speed[[1]] + p_speed[[2]] + p_speed[[3]]) +
+  plot_layout(guides = "collect") &
+  scale_color_viridis_c(name = "Speed\n(mm/s)", trans = "log1p")
+```
+
+# Summary
+
+This vignette has introduced you to the basic functionality of MiteMapTools:
+
+1. **Data Import**: Use `import_mitemap()` to load tracking data and metadata
+2. **Visualization**: Create violin plots with `vioplot_mitemap()` and trajectory plots with `plot_ind_mitemap()`
+3. **Statistical Analysis**: Perform zone preference tests with `binom_test_mitemap()`
+4. **Movement Analysis**: Calculate spatial metrics with `convex_hull_mitemap()`
+5. **Data Processing**: Filter and clean data with `filter_mitemap()`
+
+For more detailed information about specific functions, please refer to their individual help pages using `?function_name` or browse the [reference documentation](https://adrientaudiere.github.io/MiteMapTools/reference/).
+
+# Further Reading
+
+- [Package Reference](https://adrientaudiere.github.io/MiteMapTools/reference/): Complete function documentation
+- [Masier et al. (2022)](https://onlinelibrary.wiley.com/doi/10.1002/jez.2651): Original methodology paper
+- [MiteMap Hardware](https://github.com/LR69/MiteMap/tree/MiteMap.v6): Hardware implementation details
