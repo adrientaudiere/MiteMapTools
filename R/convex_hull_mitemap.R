@@ -1,10 +1,10 @@
 #' Map convex hull on MiteMap
 #'
-#' @param MiteMap (required) The result of import_mitemap for raw_data
+#' @param MiteMap (required) The result of import_mitemap
 #' @param unity (default = 1): size of square grid in mm
 #' @param tbe (default = 3)
 #' @param plot_show (Logical, default = TRUE) : Do we plot all mitemap ?
-#' @param probs_quantile (default = 0.68)
+#' @param probs_quantile (default = 0.68) 
 #' @param min_nb_spatial_points : Minimum number of spatial point to keep the sample
 #' @param each_point_count_one (Logical ; default = FALSE) If TRUE, each spatial point
 #'   count only for one time step instead. By default, if the mite stay 3t at a given
@@ -12,28 +12,25 @@
 #'   hull.
 #' @param hull_col color of hull area
 #' @param plot_center_of_mass (Logical, default = TRUE): Do we plot the center of mass?
-#'
-#' @return A dataframe
+#' @param verbose (Logical, default = TRUE) If TRUE, the function print additional
+#' @return A dataframe with convex hull information for each run (File_name)
+#'    and plot of convex hull for each run if plot_show = TRUE. 
 #' @export
 #' @author Adrien Taudière
 #' @examples
-#' MM <- filter_mitemap(MM_data,
-#'   center_x = -20, center_y = -20,
-#'   bad_range_value_x = 50, bad_range_value_y = 50
-#' )
-#' ch <- convex_hull_mitemap(MM)
-#' ch <- convex_hull_mitemap(MM, plot_show = FALSE)
-#' full_join(ch, MM) |>
-#'   ggplot(aes(x = Modality, y = hull_area)) +
+#' ch <- convex_hull_mitemap(MM_data)
+#' ch <- convex_hull_mitemap(MM_data, plot_show = FALSE)
+#' full_join(ch, MM_data) |>
+#'   ggplot(aes(x = Treatment, y = hull_area)) +
 #'   geom_boxplot()
 #'
-#' full_join(ch, MM) |>
+#' full_join(ch, MM_data) |>
 #'   group_by(File_name) |>
 #'   summarise(
 #'     hull_center_away_from_odor = sum(center_of_mass_x > 0) > 0,
-#'     Modality = unique(Modality)
+#'     Treatment = unique(Treatment)
 #'   ) |>
-#'   ggplot(aes(fill = hull_center_away_from_odor, x = Modality)) +
+#'   ggplot(aes(fill = hull_center_away_from_odor, x = Treatment)) +
 #'   geom_bar()
 convex_hull_mitemap <- function(MiteMap,
                                 unity = 1,
@@ -43,7 +40,8 @@ convex_hull_mitemap <- function(MiteMap,
                                 min_nb_spatial_points = 2,
                                 each_point_count_one = FALSE,
                                 hull_col = "red",
-                                plot_center_of_mass = TRUE) {
+                                plot_center_of_mass = TRUE,
+                                verbose = TRUE) {
   if (!is_tibble(MiteMap)) {
     MiteMap <- MiteMap$resulting_data
   }
@@ -63,15 +61,17 @@ convex_hull_mitemap <- function(MiteMap,
         unity
     tbe_table <- table(paste(x, y, sep = ":"))
     if (length(tbe_table) < min_nb_spatial_points) {
-      message(
+     if(verbose){ 
+       message(
         paste(
           "No convex Hull found for sample:",
           run,
           "(not enough spatial points)"
         )
-      )
+      )}
       next
-    }
+     }
+    if(verbose){ 
     message(
       paste(
         "Number of spatial points conserved using tbe = ",
@@ -83,7 +83,7 @@ convex_hull_mitemap <- function(MiteMap,
         " %)",
         sep = ""
       )
-    )
+    )}
     nms <- names(tbe_table)
     coords <-
       matrix(as.numeric(unlist(strsplit(nms, ":"))), ncol = 2, byrow = TRUE)
@@ -103,13 +103,14 @@ convex_hull_mitemap <- function(MiteMap,
     dst <- rowSums(scale(xy, scale = FALSE)^2)
     idx <- which(dst < quantile(dst, probs = probs_quantile))
     if (length(idx) == 0) {
-      message(
+      if(verbose) {
+        message(
         paste(
           "No convex Hull found for sample:",
           run,
           "(none distance < quantile) "
         )
-      )
+      )}
       next
     }
     idx0 <- chull(xy[idx, 1], xy[idx, 2])

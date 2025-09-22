@@ -48,14 +48,14 @@ The original MiteMap hardware and software can be found at: <https://github.com/
 
 ## Data Formats
 
-MiteMapTools handles three main types of behavioral data:
-
-### Raw Tracking Data
+The Raw Tracking Data are comprised of:
 High-resolution positional data with columns:
 - Time (seconds, recorded every 0.2s)
 - X coordinate (mm)  
 - Y coordinate (mm)
 - Immobility flag (boolean)
+
+[MiteMapTools::import_mitemap()] computes summary metrics including the presence in defined zones (HH and CH formats, see figure \@ref(fig:shape)):
 
 ### HH Format (Half-Half)
 Arena divided by a line through the odor source, computing:
@@ -68,6 +68,7 @@ Arena divided by a circle centered on the odor source, encompassing half the are
 - Time spent inside/outside the circle
 - Movement metrics for each zone
 - Behavioral preference indices
+
 
 ## Installation
 
@@ -98,6 +99,7 @@ vioplot_mitemap(MM_filtered_centered)
 ### Data Structure Requirements
 
 A MiteMap experiment folder should contain:
+
 ### Data Structure Requirements
 
 A MiteMap experiment folder should contain:
@@ -112,25 +114,17 @@ A MiteMap experiment folder should contain:
    - **Bag**: Sample/subject container identifier
    - **Modality**: Experimental condition/treatment
 
-**2. Zip archives** containing 4 files each:
+**2. Zip archives** containing at least 2 files:
    - **Raw data CSV**: 4-column tracking data
      - Time in seconds (recorded every 0.2s)
      - X position (mm)
      - Y position (mm)
      - Immobility flag (1 if stationary since last record)
    - **PNG heatmap**: Visual representation of movement patterns
-   - **"formeD" (HH) file**: Half-half zone analysis with 8 metrics
-     - Experiment metadata (date, time, run name)
-     - Time spent in odor-source half vs. opposite half (seconds)
-     - Immobility time in each half (seconds)
-     - Distance traveled in each half (mm)
-   - **"formeC" (CH) file**: Circular zone analysis with same 8-metric structure
-     - Time spent inside vs. outside the circular zone
-     - Movement and immobility metrics for each zone
 
 ### Arena Layout and Zone Definitions
 
-The following diagram illustrates how the arena is divided for HH and CH analyses:
+The following diagram illustrates how the arena is divided for HH and CH zone computations:
         
 ```{r shape, echo=FALSE}
 library(tidyverse)

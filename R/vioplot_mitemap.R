@@ -1,7 +1,7 @@
 #' Make violin plot of MiteMap data
 #'
 #' @param MiteMap (required) The result of import_mitemap ($resulting_data) for raw_data
-#' @param modality : A name of column present in the MiteMap to separate violin plot.
+#' @param factor : A name of column present in the MiteMap to separate violin plot.
 #' @param wrap : A name of column present in the MiteMap to wrap violin plot.
 #'
 #' @return A ggplot object
@@ -9,15 +9,21 @@
 #' @author Adrien Taudière
 #'
 #' @examples
-#' MM_filtered_centered <- filter_mitemap(MM_data, center_x = -20, center_y = -20)
-#' vioplot_mitemap(MM_filtered_centered)
-#' vioplot_mitemap(MM_data$resulting_data, modality = "Farm", wrap = "Modality") +
-#'   geom_boxplot(alpha = 0.1)
+#' vioplot_mitemap(MM_data, "Treatment")
+#' vioplot_mitemap(MM_data, factor = "Treatment", wrap = "Biomol_sp") +
+#'   geom_boxplot(col="gray60", width=0.1) 
+#'   
+#' vioplot_mitemap(MM_data, "Treatment", prop_points=0.01)
 vioplot_mitemap <- function(MiteMap,
-                            modality = "Modality",
-                            wrap = NULL) {
+                            factor = NULL,
+                            wrap = NULL,
+                            prop_points=NULL) {
+  
+  if(is.null(factor)){
+    stop("You must provide a column name for factor.")
+  }
   modality_interm <-
-    eval(parse(text = paste("MiteMap$", modality, sep = "")))
+    eval(parse(text = paste("MiteMap$", factor, sep = "")))
   MiteMap$Modality_interm <- modality_interm
 
   if (!is.null(wrap)) {
@@ -34,11 +40,21 @@ vioplot_mitemap <- function(MiteMap,
     )
   ) +
     geom_violin() +
-    ggtitle(paste("Position on x axis in function of", modality))
+    ggtitle(paste("Position on x axis in function of", factor))
 
   if (!is.null(wrap)) {
     p <- p +
       facet_wrap(~Wrap)
+  }
+  
+  if(!is.null(prop_points)){
+    sampled_data <- MiteMap |>
+      group_by(Modality_interm) |>
+      sample_frac(prop_points) |> 
+      ungroup()
+    
+    p <- p + geom_jitter(data=sampled_data, alpha = 0.1) +
+      labs("subtitle"=paste("with", round(nrow(sampled_data)), "points (", round(prop_points*100,2), "% of total data)"))
   }
   return(p)
 }

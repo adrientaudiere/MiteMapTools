@@ -18,15 +18,14 @@ reference:
   desc: "Functions to filter and clean tracking data"
   contents:
   - filter_mitemap
-  - rename_files_with_number
+  - summarize_mitemap
   
 - title: "Visualization"
   desc: "Functions to create plots and visualizations"
   contents:
   - plot_ind_mitemap
   - vioplot_mitemap
-  - make_heatmap
-  - make_heatmap_from_multiple_folders
+  - extract_heatmap
   
 - title: "Statistical Analysis"
   desc: "Functions for behavioral analysis and statistics"
@@ -37,13 +36,14 @@ reference:
 - title: "Example Data"
   desc: "Sample datasets included with the package"
   contents:
-  - MM_example
-  - HH_example
+  - MM_data
   
 - title: "Utilities"
   desc: "Helper functions and utilities"
   contents:
   - get_file_extension
+  - MiteMapTools-package
+  - rename_files_with_number
 
 authors:
   Adrien Taudière:

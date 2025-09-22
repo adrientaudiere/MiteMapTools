@@ -28,18 +28,19 @@ The original MiteMap hardware and software can be found at: <https://github.com/
 - **Behavioral Analysis**: Calculate metrics like zone preferences, movement speeds, and immobility periods
 - **Visualization**: Create publication-ready plots including trajectory maps, heatmaps, and statistical summaries
 - **Statistical Testing**: Built-in functions for binomial tests of zone preferences with multiple comparison corrections
-- **Multiple Data Formats**: Support for raw positional data and processed zone metrics (HH and CH formats)
+
 
 ## Data Formats
 
-MiteMapTools handles three main types of behavioral data:
 
-### Raw Tracking Data
+The Raw Tracking Data are comprised of:
 High-resolution positional data with columns:
 - Time (seconds, recorded every 0.2s)
 - X coordinate (mm)  
 - Y coordinate (mm)
 - Immobility flag (boolean)
+
+[MiteMapTools::import_mitemap()] computes summary metrics including the presence in defined zones (HH and CH formats):
 
 ### HH Format (Half-Half)
 Arena divided by a line through the odor source, computing:
