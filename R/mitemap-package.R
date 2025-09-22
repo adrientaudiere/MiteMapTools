@@ -40,7 +40,6 @@
 #' @aliases MiteMapTools
 #' @author Adrien Taudière \email{adrien.taudiere@@zaclys.net}
 #' @author Lise Roy \email{lise.roy@@cefe.cnrs.fr}
-#' @import tidyverse readxl
 #' @keywords package
 "_PACKAGE"
 

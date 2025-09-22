@@ -27,7 +27,6 @@ Depends:
     R (>= 4.1.0)
 Suggests: 
     data.table,
-    dplyr,
     gganimate,
     grDevices,
     graphics,

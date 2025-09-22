@@ -84,7 +84,7 @@ filter_mitemap <- function(MiteMap,
   bad_time_value <- bad_time_value[bad_time_value>maximum_time]
   
   new_MiteMap_interm <- MiteMap |>
-    dplyr::filter(X..t.s. >= first_seconds_to_delete) 
+    filter(X..t.s. >= first_seconds_to_delete) 
 
   range_x <- tapply(
     new_MiteMap_interm$x.mm.,
@@ -106,11 +106,11 @@ filter_mitemap <- function(MiteMap,
 
   new_MiteMap <- new_MiteMap_interm |>
     group_by(File_name) |>
-    dplyr::filter(!File_name %in% names(bad_range_x)) |>
-    dplyr::filter(!File_name %in% names(bad_range_y)) |>
-    dplyr::filter(!File_name %in% names(bad_time_value)) |>
-    dplyr::filter(x.mm. > min_x_value & x.mm. < max_x_value) |>
-    dplyr::filter(y.mm. > min_y_value & y.mm. < max_y_value) |>
+    filter(!File_name %in% names(bad_range_x)) |>
+    filter(!File_name %in% names(bad_range_y)) |>
+    filter(!File_name %in% names(bad_time_value)) |>
+    filter(x.mm. > min_x_value & x.mm. < max_x_value) |>
+    filter(y.mm. > min_y_value & y.mm. < max_y_value) |>
     mutate(x.mm. = x.mm. + center_x, y.mm. = y.mm. + center_y)
 
 if(verbose){

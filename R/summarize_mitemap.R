@@ -19,7 +19,6 @@
 #' 
 #' @author Adrien Taudière
 #' @export
-#' @import dplyr
 #' @examples
 #' mm_csv <- suppressWarnings(import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
@@ -40,7 +39,7 @@ summarize_mitemap <- function(MiteMap, num_cols = c("distance_from_previous", "s
   
   summary_table <- MiteMap |>
     group_by(File_name)|>
-    dplyr::summarise(
+    summarise(
       total_points = n(),
       across(any_of(num_cols), 
              list(mean = ~mean(.x, na.rm = TRUE),
