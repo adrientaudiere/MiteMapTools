@@ -38,12 +38,11 @@
 #' 
 #' @name MiteMapTools-package
 #' @aliases MiteMapTools
-#' @docType package
 #' @author Adrien Taudière \email{adrien.taudiere@@zaclys.net}
 #' @author Lise Roy \email{lise.roy@@cefe.cnrs.fr}
 #' @import tidyverse readxl
 #' @keywords package
-NULL
+"_PACKAGE"
 
 
 if (getRversion() >= "2.15.1") {

@@ -21,7 +21,7 @@
 #' @param npoints_base_circle (int) The number of point to draw the base circle.
 #'    Only used if `center_base_circle` is TRUE.
 #' @param linewidth (int) The linewidth of the path
-#' @param alpha_shadow (int [0,1]) Alpha value (transparency) for shadow path.
+#' @param alpha_shadow (int \[0,1\]) Alpha value (transparency) for shadow path.
 #'    Only used if time_animation` is TRUE.
 #'
 #' @returns A list of ggplot object

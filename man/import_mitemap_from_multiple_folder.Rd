@@ -6,29 +6,47 @@
 \usage{
 import_mitemap_from_multiple_folder(
   folders = NULL,
-  type_of_files = NULL,
   path_to_metadata = NULL,
+  return_with_logs = FALSE,
   verbose = TRUE,
   ...
 )
 }
 \arguments{
-\item{folders}{A list of path}
+\item{folders}{(required) A list of path to folders}
 
-\item{type_of_files}{A pattern to select the type of csv (either "raw_data", "CH" or "HH")
-files using their name (e.g. "CH")}
+\item{path_to_metadata}{A list of path to metadata files. Can be left
+to NULL if metadata files are located at the roots of each folders
+or if no metadata is used (\code{metadata_format}=NULL).}
 
-\item{path_to_metadata}{A list of path}
+\item{return_with_logs}{(Logical, default FALSE). If TRUE, the returning
+object is a list of 4 elements containing usefull information to explore
+unmatching name between file_names and metadata.}
 
 \item{verbose}{(logical). If TRUE, print additional information.}
 
 \item{...}{Other params for be passed on to \code{\link[=import_mitemap]{import_mitemap()}}}
 }
 \value{
-A list of 4 elements. See ?\code{\link[=import_mitemap]{import_mitemap()}}
+A tibble or a list of 4 elements if \code{return_with_logs} is TRUE.
+See ?\code{\link[=import_mitemap]{import_mitemap()}}
 }
 \description{
 Import mitemap from multiple folders
+}
+\examples{
+mm <- import_mitemap_from_multiple_folder(list(
+system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+system.file("extdata", "mitemap_example_large", package = "MiteMapTools"))
+)
+
+mm_logs <- import_mitemap_from_multiple_folder(c(
+system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+system.file("extdata", "mitemap_example_large", package = "MiteMapTools")),
+return_with_logs=TRUE
+)
+
+mm_logs$files_not_in_metadata
 }
 \author{
 Adrien Taudière

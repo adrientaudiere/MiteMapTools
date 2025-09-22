@@ -4,12 +4,12 @@
 \alias{vioplot_mitemap}
 \title{Make violin plot of MiteMap data}
 \usage{
-vioplot_mitemap(MiteMap, modality = "Modality", wrap = NULL)
+vioplot_mitemap(MiteMap, factor = NULL, wrap = NULL, prop_points = NULL)
 }
 \arguments{
 \item{MiteMap}{(required) The result of import_mitemap ($resulting_data) for raw_data}
 
-\item{modality}{: A name of column present in the MiteMap to separate violin plot.}
+\item{factor}{: A name of column present in the MiteMap to separate violin plot.}
 
 \item{wrap}{: A name of column present in the MiteMap to wrap violin plot.}
 }
@@ -20,10 +20,11 @@ A ggplot object
 Make violin plot of MiteMap data
 }
 \examples{
-MM_filtered_centered <- filter_mitemap(MM_example, center_x = -20, center_y = -20)
-vioplot_mitemap(MM_filtered_centered)
-vioplot_mitemap(MM_example$resulting_data, modality = "Farm", wrap = "Modality") +
-  geom_boxplot(alpha = 0.1)
+vioplot_mitemap(MM_data, "Treatment")
+vioplot_mitemap(MM_data, factor = "Treatment", wrap = "Biomol_sp") +
+  geom_boxplot(col="gray60", width=0.1) 
+  
+vioplot_mitemap(MM_data, "Treatment", prop_points=0.01)
 }
 \author{
 Adrien Taudière

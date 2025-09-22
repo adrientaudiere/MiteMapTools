@@ -8,40 +8,51 @@ import_mitemap(
   path_to_folder,
   path_to_metadata = NULL,
   format_metadata = "csv",
-  type_of_files = "raw_data",
+  clean = TRUE,
   delete_parenthesis = FALSE,
   replace_parenthesis = TRUE,
   delete_space = TRUE,
-  messages = TRUE,
   csv_with_correction = FALSE,
   remove_csv_folder = TRUE,
   dec = ",",
+  sep = ";",
+  n_lag = 1,
+  center_x = 0,
+  center_y = 0,
+  x_odor = -20,
+  y_odor = 0,
   force = FALSE,
-  skip = 1,
-  colnames_metadata = c("Run_number", "File_name", "Date", "Start_time", "Farm",
-    "MiteMap_number", "Bag", "Modality")
+  return_with_logs = FALSE,
+  compute_metrics = TRUE,
+  file_name_column = "File_name",
+  raw_data_name = "donnees_brutes",
+  radius_CH = 23.175,
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
-\item{path_to_folder}{Path to the folder with zip files containing csv and with one metadata files in the .xlsx format}
+\item{path_to_folder}{Path to the folder with zip files containing csv
+and with one metadata files in the .xlsx format}
 
 \item{path_to_metadata}{Path to the csv file (or xlsx if format_metadata="xlsx").
 If there is only one csv file set path_to_metadata="csv" (or "xlsx").
 Need to be set using a complete path to csv file if this file is not in
 the folder or if their is multiple xlsx/csv files in the folder.}
 
-\item{format_metadata}{Either csv or xlsx}
+\item{format_metadata}{Either csv or xlsx. If set to NULL, no metadata is used.}
 
-\item{type_of_files}{(default : "raw_data") A pattern to select the type
-of csv (either "raw_data", "CH" or "HH") files inside the zip files.}
+\item{clean}{(logical, default TRUE) Do we clean the MiteMap result using
+\code{\link[=filter_mitemap]{filter_mitemap()}} function? See \code{\link[=filter_mitemap]{filter_mitemap()}} for additionnal parameters.}
 
-\item{delete_parenthesis}{(Logical, default FALSE) Do we delete parenthesis with a number inside in the name of the files. Note that the name of the csv inside a zip file with a parenthesis do not have parenthesis into this name. Thus the default value to TRUE is recommended either in delete_parenthesis or in replace_parenthesis}
+\item{delete_parenthesis}{(Logical, default FALSE) Do we delete parenthesis with a number
+inside in the name of the files. Note that the name of the csv inside a zip
+file with a parenthesis do not have parenthesis into this name. Thus, we recommended to
+set TRUE at least in one of delete_parenthesis or replace_parenthesis parameter.}
 
-\item{replace_parenthesis}{(Logical, default TRUE) Replace xxx(1) by xxx_1}
+\item{replace_parenthesis}{(Logical, default TRUE) Replace abc_name(1) by abc_name_1}
 
-\item{delete_space}{(Logical, default TRUE)}
-
-\item{messages}{(Logical, default TRUE) Do we print some warnings?}
+\item{delete_space}{(Logical, default TRUE) Delete_space in the file name.}
 
 \item{csv_with_correction}{(Logical, default FALSE) If TRUE an if present in
 the zip files, position files with correction (center and reduce to 0) are used.}
@@ -51,15 +62,49 @@ kept. May be useful for debugging.}
 
 \item{dec}{decimal for the csv metadata files.}
 
+\item{sep}{separator for the csv metadata files.}
+
+\item{n_lag}{(int, default 1) Number of time step to compute speed and
+turning angle. If n_lag=1 (default), speed and turning angle are computed
+between two consecutive time step (0.2s). If n_lag=2 speed and turning angle
+are computed between two time step before and two time step after.}
+
+\item{center_x}{(int, default 0) Center the value of x by additioning center_x mm
+to x.mm.}
+
+\item{center_y}{(int, default 0) Center the value of y by additioning center_y mm
+to y.mm.}
+
+\item{x_odor}{(int, default -20) The x position of the odor source.}
+
+\item{y_odor}{(int, default 0) The y position of the odor source.}
+
 \item{force}{Force overwriting the path to csv_folder}
 
-\item{skip}{(default 1) skip the first line of the metadata files.}
+\item{return_with_logs}{(Locical, default FALSE). If TRUE, the returning
+object is a list of 4 elements containing usefull information to explore
+unmatching name between file_names and metadata}
 
-\item{colnames_metadata}{Column names for metadata column. Note that File_name
-is required and must correspond to the names of zip files.}
+\item{compute_metrics}{(Logical, default TRUE). Are metrics such as time_immobile,
+speed and turning angles are computed for each time step ?}
+
+\item{file_name_column}{Name for the column corresponding to the File_name.}
+
+\item{raw_data_name}{Name of the raw data file in the zip file. Default is
+"donnees_brutes" (sorry for the french name). If using code from
+\url{https://github.com/LR69/MiteMap/tree/MiteMap.v6} no need to change this.}
+
+\item{radius_CH}{the radius of the circular half arena (in mm). Default is 23.175
+to fit with the area of HH shape.}
+
+\item{verbose}{(logical, default TRUE). If TRUE, print additional information.}
+
+\item{...}{Other params for be passed on to \code{\link[=filter_mitemap]{filter_mitemap()}}.}
 }
 \value{
-A list of 4 elements
+If \code{return_with_logs} is FALSE (default), the return object is only
+the tibble called \code{resulting_data}. If \code{return_with_logs} is TRUE, it
+return a list of 4 elements:
 \itemize{
 \item \code{resulting_data}: a (possibly huge) tibble with metadata information and position in
 x, y and time.
@@ -68,44 +113,69 @@ x, y and time.
 \item \code{duplicate_file_name_in_metadata}: a list of duplicated file names in metadata.
 }
 
-By default, the \code{resulting_data} slot is structured in 12 columns (The fifth ones are from zip files
-and the other from metadata files).
+By default, the \code{resulting_data} slot is structured in 4 obligated columns + columns from
+the metadata file + the computed metrics if compute_metrics is TRUE.
 \itemize{
-\item File_name
-\item The time in second (position is recorded every 0.2s)
-\item The position in x (in mm)
-\item The position in y (in mm)
-\item Boolean variable indicating if the individual has remained immobile since the last record (1 if immobile)
-\item Run number
-\item Date
-\item Start time
-\item Farm
-\item MiteMap number
-\item Bag
-\item Modality
+\item \code{File_name}
+\item \code{X..t.s.} - The time in second (position is recorded every 0.2s)
+\item \code{x.mm.} - The position in x (in mm)
+\item \code{y.mm.} - The position in y (in mm)
+\item Metadata columns
+\item Computed metrics
+\itemize{
+\item \code{distance} - distance between two consecutive time step (in mm)
+\item \code{speed_mm_s} - speed between two consecutive time step (in mm/s)
+}
 }
 }
 \description{
-Import MiteMapTools data
+This function import data from zip files generated by MiteMap software.
+It unzips all zip files in a folder, read the csv files and merge them with
+metadata if provided. It also compute some metrics such as speed and turning angle.
+By default, it also clean the data using \code{\link[=filter_mitemap]{filter_mitemap()}} with default
+parameters. See ?\code{\link[=filter_mitemap]{filter_mitemap()}} for other parameters or set \code{clean} to
+FALSE if you want raw data. By default the center of the arena is located
+at (0,0) with a diameter of 40mm and the source of the odor is located at
+c(-20 , 0).
 }
 \examples{
-mm_csv <- suppressWarnings(import_mitemap(
-  system.file("extdata", "POUL6", package = "MiteMapTools")
-))
-dim(mm_csv$resulting_data)
+mm_csv <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE
+)
+dim(mm_csv)
+mm_csv$File_name |> unique() |> length()
 
-mm_HH <- suppressWarnings(import_mitemap(
-  system.file("extdata", "POUL6", package = "MiteMapTools"),
-  type_of_files = "HH"
-))
-dim(mm_HH$resulting_data)
+mm_csv2 <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE, return_with_logs = TRUE
+)
+mm_csv2$files_not_in_csv
 
-mm_xlsx <- suppressWarnings(import_mitemap(
-  system.file("extdata", "POUL6", package = "MiteMapTools"),
-  format_metadata = "xlsx"
-))
+mm_csv_unfiltered <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE, clean=FALSE
+)
+dim(mm_csv_unfiltered)
+mm_csv_unfiltered$File_name |> unique() |> length()
 
-dim(mm_xlsx$resulting_data)
+mm_xlsx <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  format_metadata = "xlsx", verbose = FALSE
+)
+
+dim(mm_xlsx)
+
+# mm_xlsx$Date <-
+#   as.POSIXct(strptime(mm_xlsx$Date, "\%d/\%m/\%Y"))
+
+mm_wo_metadata <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  format_metadata = NULL, verbose = FALSE
+)
+
+dim(mm_wo_metadata)
+
 }
 \author{
 Adrien Taudière

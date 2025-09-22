@@ -4,25 +4,69 @@
 \alias{binom_test_mitemap}
 \title{Test binomial on MiteMap for presence in the half part of the odor}
 \usage{
-binom_test_mitemap(MiteMap, modality = "Modality", p.adjust_method = "BH")
+binom_test_mitemap(
+  MiteMap,
+  factor = NULL,
+  format = "HH",
+  verbose = TRUE,
+  p.adjust_method = "BH",
+  level = "run",
+  alternative = "two.sided"
+)
 }
 \arguments{
-\item{MiteMap}{(required) The result of import_mitemap ($resulting_data) for raw_data}
+\item{MiteMap}{(required) The result of import_mitemap}
 
-\item{modality}{The modality to separate test}
+\item{factor}{(required, default NULL) The column name to separate individuals
+in the MiteMap data frame (e.g., "Treatment").}
 
-\item{p.adjust_method}{method for p-adjustement. See \code{\link[=p.adjust]{p.adjust()}}}
+\item{format}{(default "HH") The format of \code{left} area. "HH" for Half-Half,
+"CH" for Circular-Half.}
+
+\item{verbose}{(Logical, default = TRUE) If TRUE, the function print additional
+information.}
+
+\item{p.adjust_method}{(default "BH") method for p-adjustement.
+See \code{\link[stats:p.adjust]{stats::p.adjust()}}.}
+
+\item{level}{(default "run") The level of analysis. "run" to consider each run
+(File_name) as one replicate. "lines" to consider each line
+(i.e. each temporal point) of MiteMap as one replicate. The level run is
+more conservative as it considers that each run is one independent replicate.
+Use level "lines" carefully as it introduce a high pseudoreplication risk.}
+
+\item{alternative}{(default "two.sided") The alternative hypothesis to test.
+See \code{\link[stats:binom.test]{stats::binom.test()}}.}
 }
 \value{
 A tibble of results for binomial test
 }
 \description{
-The test is run for each Modality values and each Farm with a p-adjustement
-step.
+Test binomial on MiteMap for presence in the half part of the odor
+}
+\details{
+The test is run for each factor values with a p-adjustement step. For each
+run (filename), the proportion of points in the left half is calculated. If the
+proportion is superior to 0.5, the run is considered as "in left", else "in right".
+Then a binomial test is run to test if the proportion of runs "in left" is
+significantly different from 0.5 for each levels of the factor. If format is "CH",
+the same process is done but for presence in the circular half rather than
+a half part.
+
+If level is "lines", each line of MiteMap is considered as one replicate
+(i.e. the proportion of points in left half is calculated for each line of MiteMap).
+This approach is not recommended as it introduce a high pseudoreplication risk.
 }
 \examples{
-binom_test_mitemap(HH_example$resulting_data)
-binom_test_mitemap(HH_example$resulting_data, p.adjust_method = "bonferroni")
+ 
+ 
+binom_test_mitemap(MM_data, factor = "Treatment")
+binom_test_mitemap(MM_data, factor = "Treatment", format="CH")
+binom_test_mitemap(MM_data, factor = "Treatment", level="lines")
+
+MM_data |>
+ filter(Biomol_sp \%in\% c("DGSS", "DGL1", "D_carpathicus")) |>
+  binom_test_mitemap(factor = "Biomol_sp")
 }
 \author{
 Adrien Taudière

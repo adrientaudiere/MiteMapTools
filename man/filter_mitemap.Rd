@@ -2,72 +2,100 @@
 % Please edit documentation in R/filter_mitemap.R
 \name{filter_mitemap}
 \alias{filter_mitemap}
-\title{Filter MiteMap result}
+\title{Filter (clean) MiteMap result}
 \usage{
 filter_mitemap(
   MiteMap,
-  HH = NULL,
-  CH = NULL,
   first_seconds_to_delete = 2,
-  bad_range_value_x = 50,
-  bad_range_value_y = 50,
-  max_x_value = 42,
-  min_x_value = 0,
-  max_y_value = 42,
-  min_y_value = 0,
-  maximum_time = 603,
+  bad_range_value_x = 42,
+  bad_range_value_y = 42,
+  max_x_value = 21,
+  min_x_value = -21,
+  max_y_value = 21,
+  min_y_value = -21,
+  maximum_time = 302,
   center_x = 0,
-  center_y = 0
+  center_y = 0,
+  verbose = TRUE
 )
 }
 \arguments{
 \item{MiteMap}{(required) The result of import_mitemap ($resulting_data) for raw_data}
 
-\item{HH}{The result of \code{\link[=import_mitemap]{import_mitemap()}} ($resulting_data) for type_of_files = "HH". It remove run with (i) time in <0, time out <0 and time_in/(time_in + time_out) > 1 in the HH files.}
+\item{first_seconds_to_delete}{(default: 2) How many seconds to delete?}
 
-\item{CH}{The result of \code{\link[=import_mitemap]{import_mitemap()}} ($resulting_data) for type_of_files = "CH". It remove run with (i) time in <0, time out <0 and time_in/(time_in + time_out) > 1 in the CH files.}
+\item{bad_range_value_x}{(default: 45) The range value of x that is superior
+to what we expect. This param filter values on the File_name basis.}
 
-\item{first_seconds_to_delete}{(default: 2) How many seconds we need to delete?}
+\item{bad_range_value_y}{(default: 45) The range value of y that is superior
+to what we expect. This param filter values on the File_name basis.}
 
-\item{bad_range_value_x}{(default: 42) The range value of x that is superior to what we expect.
+\item{max_x_value}{(default: 21) Maximum value for x axis.
+This param filter values on the time-point (one line) basis.}
+
+\item{min_x_value}{(default: -21) Minimum value for x axis.
+This param filter values on the time-point (one line) basis.}
+
+\item{max_y_value}{(default: 21) Maximum value for y axis.
+This param filter values on the time-point (one line) basis.}
+
+\item{min_y_value}{(default: -21) Minimum value for y axis.
+This param filter values on the time-point (one line) basis.}
+
+\item{maximum_time}{(default: 603) The final value of time (in seconds)).
 This param filter values on the File_name basis.}
-
-\item{bad_range_value_y}{(default: 42) The range value of y that is superior to what we expect.
-This param filter values on the File_name basis.}
-
-\item{max_x_value}{(default: 42) Maximum value for x axis.
-This param filter values on the point (one line) basis.}
-
-\item{min_x_value}{(default: 0) Minimum value for x axis.
-This param filter values on the point (one line) basis.}
-
-\item{max_y_value}{(default: 42) Maximum value for y axis.
-This param filter values on the point (one line) basis.}
-
-\item{min_y_value}{(default: 0) Minimum value for y axis.
-This param filter values on the point (one line) basis.}
-
-\item{maximum_time}{(default: 603) Maximum time for one run (in seconds)).}
 
 \item{center_x}{(int, default 0) Center the value of x by additioning center_x mm
 to x.mm.}
 
 \item{center_y}{(int, default 0) Center the value of y by additioning center_y mm
 to y.mm.}
+
+\item{verbose}{(Logical, default = TRUE) If TRUE, the function print additional
+information.}
 }
 \value{
-a filtered \verb{resulting table} of class tibble
+a filtered tibble
 }
 \description{
-Filter MiteMap result
+This function filter MiteMap data according to several parameters. It
+removes: the first seconds of each run, runs with aberrant range of x or y
+values, points with aberrant x or y values, runs with a total time superior
+to maximum_time. It can also center the x and y values by additioning a
+constant to all x and y values. By default the center of the arena is located
+at (0,0) with a diameter of 40mm.
+}
+\details{
+The order of filtering is:
+\enumerate{
+\item Remove runs (filename) with a total time superior to 'maximum_time'.
+\item Remove the first 'first_seconds_to_delete' seconds of each run.
+\item Remove runs (filename) with aberrant range of x or y values
+(i.e. superior to 'bad_range_value_x' or 'bad_range_value_y').
+\item Remove points with aberrant x or y values (i.e. x.mm. < 'min_x_value' or
+x.mm. > 'max_x_value', y.mm. < 'min_y value' or y.mm. > 'max_y_value').
+\item Center the x and y values by additioning 'center_x' and 'center_y' to all x and y values.
+}
 }
 \examples{
-MM_filtered_centered <- filter_mitemap(MM_example,
-  center_x = -20, center_y = -20,
-  bad_range_value_x = 50, bad_range_value_y = 50
+mm_csv <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE, clean=FALSE
 )
-filter_mitemap(MM_example,
-  HH = HH_example$resulting_data,
-  bad_range_value_x = 50, bad_range_value_y = 50
+dim(mm_csv)
+
+MM_filtered_1 <- filter_mitemap(mm_csv)
+dim(MM_filtered_1)
+
+MM_filtered_2 <- filter_mitemap(mm_csv,
+  bad_range_value_x = 41, 
+  bad_range_value_y = 44,
+  first_seconds_to_delete =1, 
+  maximum_time = 301.1
 )
+dim(MM_filtered_2)
+
+}
+\author{
+Adrien Taudière
 }

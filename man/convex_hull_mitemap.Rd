@@ -13,11 +13,12 @@ convex_hull_mitemap(
   min_nb_spatial_points = 2,
   each_point_count_one = FALSE,
   hull_col = "red",
-  plot_center_of_mass = TRUE
+  plot_center_of_mass = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
-\item{MiteMap}{(required) The result of import_mitemap ($resulting_data) for raw_data}
+\item{MiteMap}{(required) The result of import_mitemap}
 
 \item{unity}{(default = 1): size of square grid in mm}
 
@@ -29,36 +30,38 @@ convex_hull_mitemap(
 
 \item{min_nb_spatial_points}{: Minimum number of spatial point to keep the sample}
 
-\item{each_point_count_one}{(Logical ; default = FALSE)}
+\item{each_point_count_one}{(Logical ; default = FALSE) If TRUE, each spatial point
+count only for one time step instead. By default, if the mite stay 3t at a given
+spatial location, the spatial point count 3 times in the construction of the convex
+hull.}
 
 \item{hull_col}{color of hull area}
 
 \item{plot_center_of_mass}{(Logical, default = TRUE): Do we plot the center of mass?}
+
+\item{verbose}{(Logical, default = TRUE) If TRUE, the function print additional}
 }
 \value{
-A dataframe
+A dataframe with convex hull information for each run (File_name)
+and plot of convex hull for each run if plot_show = TRUE.
 }
 \description{
 Map convex hull on MiteMap
 }
 \examples{
-MM <- filter_mitemap(MM_example,
-  center_x = -20, center_y = -20,
-  bad_range_value_x = 50, bad_range_value_y = 50
-)
-ch <- convex_hull_mitemap(MM)
-ch <- convex_hull_mitemap(MM, plot_show = FALSE)
-full_join(ch, MM) |>
-  ggplot(aes(x = Modality, y = hull_area)) +
+ch <- convex_hull_mitemap(MM_data)
+ch <- convex_hull_mitemap(MM_data, plot_show = FALSE)
+full_join(ch, MM_data) |>
+  ggplot(aes(x = Treatment, y = hull_area)) +
   geom_boxplot()
 
-full_join(ch, MM) |>
+full_join(ch, MM_data) |>
   group_by(File_name) |>
   summarise(
     hull_center_away_from_odor = sum(center_of_mass_x > 0) > 0,
-    Modality = unique(Modality)
+    Treatment = unique(Treatment)
   ) |>
-  ggplot(aes(fill = hull_center_away_from_odor, x = Modality)) +
+  ggplot(aes(fill = hull_center_away_from_odor, x = Treatment)) +
   geom_bar()
 }
 \author{

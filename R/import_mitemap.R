@@ -19,7 +19,7 @@
 #'   the folder or if their is multiple xlsx/csv files in the folder.
 #' @param format_metadata Either csv or xlsx. If set to NULL, no metadata is used.
 #' @param clean (logical, default TRUE) Do we clean the MiteMap result using 
-#'  [filter_mitemap()] function? See [?filter_mitemap()] for additionnal parameters.
+#'  [filter_mitemap()] function? See [filter_mitemap()] for additionnal parameters.
 #' @param delete_parenthesis (Logical, default FALSE) Do we delete parenthesis with a number
 #'   inside in the name of the files. Note that the name of the csv inside a zip
 #'   file with a parenthesis do not have parenthesis into this name. Thus, we recommended to
@@ -414,7 +414,7 @@ import_mitemap <- function(path_to_folder,
 #' or if no metadata is used (`metadata_format`=NULL). 
 #' @param return_with_logs (Logical, default FALSE). If TRUE, the returning
 #'  object is a list of 4 elements containing usefull information to explore
-#'  unmatching name between file_names and metadata. See [?import_mitemap()].
+#'  unmatching name between file_names and metadata. 
 
 #' @param verbose (logical). If TRUE, print additional information.
 #' @param ...  Other params for be passed on to [import_mitemap()]
