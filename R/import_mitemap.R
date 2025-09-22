@@ -10,6 +10,12 @@
 #' FALSE if you want raw data. By default the center of the arena is located
 #'  at (0,0) with a diameter of 40mm and the source of the odor is located at
 #'  c(-20 , 0).
+#'  
+#'  If your zip files or metadata files have parenthesis and space in the name,
+#'  you may want to use [rename_files_with_number()] function before using 
+#'  this function. The file name in the metadata must match the zip file name, 
+#'  but [import_mitemap()] integrate some options to handle parenthesis and space in
+#'  the name of the files in the metadata. 
 #'   
 #' @param path_to_folder Path to the folder with zip files containing csv
 #'   and with one metadata files in the .xlsx format
@@ -19,13 +25,17 @@
 #'   the folder or if their is multiple xlsx/csv files in the folder.
 #' @param format_metadata Either csv or xlsx. If set to NULL, no metadata is used.
 #' @param clean (logical, default TRUE) Do we clean the MiteMap result using 
-#'  [filter_mitemap()] function? See [filter_mitemap()] for additionnal parameters.
+#'  [filter_mitemap()] function? See [filter_mitemap()] for additional parameters.
 #' @param delete_parenthesis (Logical, default FALSE) Do we delete parenthesis with a number
-#'   inside in the name of the files. Note that the name of the csv inside a zip
-#'   file with a parenthesis do not have parenthesis into this name. Thus, we recommended to
+#'   inside in the name of the files in the metadata.
+#'   Note that the name of the csv inside a zip  file with a parenthesis do not have 
+#'   parenthesis into this name. Thus, we recommended to
 #'   set TRUE at least in one of delete_parenthesis or replace_parenthesis parameter.
+#'   
 #' @param replace_parenthesis (Logical, default TRUE) Replace abc_name(1) by abc_name_1
-#' @param delete_space (Logical, default TRUE) Delete_space in the file name.
+#' in the name of the files in the metadata.
+#' @param delete_space (Logical, default TRUE) Delete_space in the name of the 
+#' files in the metadata.
 #' @param csv_with_correction (Logical, default FALSE) If TRUE an if present in
 #'   the zip files, position files with correction (center and reduce to 0) are used.
 #' @param remove_csv_folder  (Logical, default TRUE) If FALSE, the csv_folder is
@@ -37,8 +47,8 @@
 #' between two consecutive time step (0.2s). If n_lag=2 speed and turning angle
 #' are computed between two time step before and two time step after.
 #' @param force Force overwriting the path to csv_folder
-#' @param return_with_logs (Locical, default FALSE). If TRUE, the returning
-#'   object is a list of 4 elements containing usefull information to explore
+#' @param return_with_logs (Logical, default FALSE). If TRUE, the returning
+#'   object is a list of 4 elements containing useful information to explore
 #'   unmatching name between file_names and metadata
 #' @param center_x (int, default 0) Center the value of x by additioning center_x mm
 #'   to x.mm.
@@ -80,6 +90,7 @@
 #' @export
 #' @author Adrien Taudière
 #' @import tidyverse
+#' @importFrom readxl read_excel
 #' @examples
 #' mm_csv <- import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
@@ -203,7 +214,7 @@ import_mitemap <- function(path_to_folder,
   for (f in csv_files) {
     csv_list[[f]] <- read.delim(f)
   }
-  df <- data.table::rbindlist(csv_list, idcol = "File_name")
+  df <- dplyr::bind_rows(csv_list, .id = "File_name")
 
   df$File_name <- gsub(
     ".csv", "",
@@ -413,7 +424,7 @@ import_mitemap <- function(path_to_folder,
 #' to NULL if metadata files are located at the roots of each folders 
 #' or if no metadata is used (`metadata_format`=NULL). 
 #' @param return_with_logs (Logical, default FALSE). If TRUE, the returning
-#'  object is a list of 4 elements containing usefull information to explore
+#'  object is a list of 4 elements containing useful information to explore
 #'  unmatching name between file_names and metadata. 
 
 #' @param verbose (logical). If TRUE, print additional information.
@@ -425,6 +436,7 @@ import_mitemap <- function(path_to_folder,
 #' @export
 #' @author Adrien Taudière
 #' @examples
+#' \dontrun{
 #' mm <- import_mitemap_from_multiple_folder(list(
 #' system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #' system.file("extdata", "mitemap_example_large", package = "MiteMapTools"))
@@ -437,6 +449,7 @@ import_mitemap <- function(path_to_folder,
 #' )
 #' 
 #' mm_logs$files_not_in_metadata
+#' }
 import_mitemap_from_multiple_folder <-
   function(folders = NULL,
            path_to_metadata = NULL,

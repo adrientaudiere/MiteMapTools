@@ -14,7 +14,7 @@
 * **Visualization**: 
   - Individual trajectory plotting ([plot_ind_mitemap()])
   - Violin plots for position distributions ([vioplot_mitemap()])
-  - Movement heatmap generation ([make_heatmap()], [make_heatmap_from_multiple_folders()])
+  - Movement heatmap generation ([extract_heatmap()])
 * **Statistical Analysis**: Binomial tests for zone preference analysis ([binom_test_mitemap()])
 * **Geometric Analysis**: Convex hull calculations for movement characterization ([convex_hull_mitemap()])
 

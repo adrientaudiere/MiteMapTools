@@ -18,7 +18,9 @@
 #' @export
 #' @author Adrien Taudière
 #' @examples
-#' ch <- convex_hull_mitemap(MM_data)
+#' \dontrun{
+#'   ch <- convex_hull_mitemap(MM_data)
+#' }
 #' ch <- convex_hull_mitemap(MM_data, plot_show = FALSE)
 #' full_join(ch, MM_data) |>
 #'   ggplot(aes(x = Treatment, y = hull_area)) +

@@ -19,28 +19,6 @@ attractive or repulsive stimuli (e.g., volatile compounds) to study chemotactic
 behavior. Position data is recorded at high temporal resolution (every 0.2 seconds).
 }
 
-\section{Data Types}{
-
-The package handles three main data formats:
-\itemize{
-\item \strong{Raw data}: Time-series of x,y coordinates with immobility flags
-\item \strong{HH format}: Time spent in arena halves (left/right of odor source)
-\item \strong{CH format}: Time spent in circular zones around the odor source
-}
-}
-
-\section{Main Functions}{
-
-\itemize{
-\item \code{\link{import_mitemap}}: Import data from zip files and metadata
-\item \code{\link{filter_mitemap}}: Clean and filter tracking data
-\item \code{\link{plot_ind_mitemap}}: Create trajectory visualizations
-\item \code{\link{vioplot_mitemap}}: Generate distribution plots
-\item \code{\link{binom_test_mitemap}}: Perform statistical tests on zone preferences
-\item \code{\link{make_heatmap}}: Create movement heatmaps
-}
-}
-
 \section{References}{
 
 Masier, L.‐S., Roy, L., & Durand, J.‐F. (2022). A new methodology for arthropod

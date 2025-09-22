@@ -43,16 +43,19 @@ the folder or if their is multiple xlsx/csv files in the folder.}
 \item{format_metadata}{Either csv or xlsx. If set to NULL, no metadata is used.}
 
 \item{clean}{(logical, default TRUE) Do we clean the MiteMap result using
-\code{\link[=filter_mitemap]{filter_mitemap()}} function? See \code{\link[=filter_mitemap]{filter_mitemap()}} for additionnal parameters.}
+\code{\link[=filter_mitemap]{filter_mitemap()}} function? See \code{\link[=filter_mitemap]{filter_mitemap()}} for additional parameters.}
 
 \item{delete_parenthesis}{(Logical, default FALSE) Do we delete parenthesis with a number
-inside in the name of the files. Note that the name of the csv inside a zip
-file with a parenthesis do not have parenthesis into this name. Thus, we recommended to
+inside in the name of the files in the metadata.
+Note that the name of the csv inside a zip  file with a parenthesis do not have
+parenthesis into this name. Thus, we recommended to
 set TRUE at least in one of delete_parenthesis or replace_parenthesis parameter.}
 
-\item{replace_parenthesis}{(Logical, default TRUE) Replace abc_name(1) by abc_name_1}
+\item{replace_parenthesis}{(Logical, default TRUE) Replace abc_name(1) by abc_name_1
+in the name of the files in the metadata.}
 
-\item{delete_space}{(Logical, default TRUE) Delete_space in the file name.}
+\item{delete_space}{(Logical, default TRUE) Delete_space in the name of the
+files in the metadata.}
 
 \item{csv_with_correction}{(Logical, default FALSE) If TRUE an if present in
 the zip files, position files with correction (center and reduce to 0) are used.}
@@ -81,8 +84,8 @@ to y.mm.}
 
 \item{force}{Force overwriting the path to csv_folder}
 
-\item{return_with_logs}{(Locical, default FALSE). If TRUE, the returning
-object is a list of 4 elements containing usefull information to explore
+\item{return_with_logs}{(Logical, default FALSE). If TRUE, the returning
+object is a list of 4 elements containing useful information to explore
 unmatching name between file_names and metadata}
 
 \item{compute_metrics}{(Logical, default TRUE). Are metrics such as time_immobile,
@@ -137,6 +140,12 @@ parameters. See ?\code{\link[=filter_mitemap]{filter_mitemap()}} for other param
 FALSE if you want raw data. By default the center of the arena is located
 at (0,0) with a diameter of 40mm and the source of the odor is located at
 c(-20 , 0).
+
+If your zip files or metadata files have parenthesis and space in the name,
+you may want to use \code{\link[=rename_files_with_number]{rename_files_with_number()}} function before using
+this function. The file name in the metadata must match the zip file name,
+but \code{\link[=import_mitemap]{import_mitemap()}} integrate some options to handle parenthesis and space in
+the name of the files in the metadata.
 }
 \examples{
 mm_csv <- import_mitemap(

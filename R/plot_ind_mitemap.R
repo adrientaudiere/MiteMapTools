@@ -4,7 +4,7 @@
 #'   ($resulting_data) for raw_data
 #' @param file_names (vector of string, default = NULL) 
 #'  The names of the file(s) (individual(s)) you want to plot
-#'  (eg c("MM012022_05_17_13h25m12s", "MM012022_05_17_09h23m48s")).
+#'  (e.g. c("MM012022_05_17_13h25m12s", "MM012022_05_17_09h23m48s")).
 #'  If not NULL, ind_index is ignored.
 #' @param ind_index (vector of int, default = c(1))
 #'   The index numbers of the file(s) (individual(s)) you want to plot
@@ -12,6 +12,8 @@
 #'   using gganimate ?#'
 #' @param add_base_circle (logical, default FALSE) Does the base circle is plot ?
 #' @param add_odor_source (logical, default TRUE) Does the odor source is plot ?
+#' @param label_odor_source (string, default = NULL) Label of the odor source.
+#'   Only used if `add_odor_source` is TRUE. If NULL, no label is added.
 #' @param center_base_circle (int) The center of the base circle. Only used if
 #'   `center_base_circle` is TRUE.
 #' @param breaks_animation (int) The number of breaks in animation. Only used if
@@ -35,6 +37,7 @@
 #'   verbose= FALSE
 #' )
 #' 
+#' library(patchwork)
 #' p <- plot_ind_mitemap(MM, file_names=c( "MM012022_05_17_13h22m59s", "MM012022_05_17_08h23m05s"))
 #' p[[1]] + p[[2]] & theme(legend.position = "none")
 #' 
@@ -46,6 +49,8 @@
 #'    label_odor_source = "Odor source")
 #' p_l_base_c[[1]] + scale_color_gradient(name = "Speed", trans = "log10", low = "cyan", high = "red")
 #'
+#' if(!requireNamespace("gganimate", quietly = TRUE)){
+#' 
 #' p_l_anim <- plot_ind_mitemap(MM, time_animation = TRUE, breaks_animation = 15)
 #' p_l_anim[[1]]
 #'
@@ -66,7 +71,9 @@
 #'
 #' (p_l[[1]] + p_l[[2]] + p_l[[3]]) /
 #'   (p_l[[4]] + p_l[[5]] + p_l[[6]]) +
-#'   plot_layout(guides = "collect") & scale_color_viridis_c(name = "Speed", trans = "log1p", limits = c(0, 2))
+#'   plot_layout(guides = "collect") & 
+#'    scale_color_viridis_c(name = "Speed", trans = "log1p", limits = c(0, 2))
+#'  }
 plot_ind_mitemap <- function(MiteMap,
                              file_names=NULL,
                              ind_index = c(1),

@@ -53,7 +53,6 @@ High-resolution positional data with columns:
 - Time (seconds, recorded every 0.2s)
 - X coordinate (mm)  
 - Y coordinate (mm)
-- Immobility flag (boolean)
 
 [MiteMapTools::import_mitemap()] computes summary metrics including the presence in defined zones (HH and CH formats, see figure \@ref(fig:shape)):
 
@@ -88,12 +87,13 @@ This is a basic example showing how to filter and visualize MiteMap data:
 ```{r example}
 library(MiteMapTools)
 
-# Filter and center the tracking data
-# center_x, center_y: adjust coordinates so odor source is at (-20, -20)
-MM_filtered_centered <- filter_mitemap(MM_example, center_x = -20, center_y = -20)
-
+# Import MiteMap from folders
+MM <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE, clean = TRUE
+) 
 # Create violin plots showing position distributions by experimental condition
-vioplot_mitemap(MM_filtered_centered)
+vioplot_mitemap(MM, "Treatment", prop_points = 0.1)
 ```
 
 ### Data Structure Requirements
@@ -104,23 +104,17 @@ A MiteMap experiment folder should contain:
 
 A MiteMap experiment folder should contain:
 
-**1. Metadata file** (Excel .xlsx or CSV format) with 8 required columns:
-   - **Run number**: Unique identifier for each experimental run
-   - **File name**: Must match the corresponding zip file names
-   - **Date**: Experiment date
-   - **Start time**: Time when tracking began
-   - **Farm**: Experimental farm/location identifier
-   - **MiteMap number**: Device identifier (for multi-device setups)
-   - **Bag**: Sample/subject container identifier
-   - **Modality**: Experimental condition/treatment
-
-**2. Zip archives** containing at least 2 files:
-   - **Raw data CSV**: 4-column tracking data
+**1. Zip archives** containing at least 2 files:
+   - **Raw data CSV**: 3-columns tracking data
      - Time in seconds (recorded every 0.2s)
      - X position (mm)
      - Y position (mm)
-     - Immobility flag (1 if stationary since last record)
    - **PNG heatmap**: Visual representation of movement patterns
+   
+**2. Metadata file** (Excel .xlsx or CSV format, optional) with 1 required column:
+   - **File_name**: Must match the corresponding zip file names. You can 
+   use other column name with the parameter `file_name_column` in [import_mitemap()].
+
 
 ### Arena Layout and Zone Definitions
 

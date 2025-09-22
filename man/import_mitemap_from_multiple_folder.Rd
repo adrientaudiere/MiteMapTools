@@ -20,7 +20,7 @@ to NULL if metadata files are located at the roots of each folders
 or if no metadata is used (\code{metadata_format}=NULL).}
 
 \item{return_with_logs}{(Logical, default FALSE). If TRUE, the returning
-object is a list of 4 elements containing usefull information to explore
+object is a list of 4 elements containing useful information to explore
 unmatching name between file_names and metadata.}
 
 \item{verbose}{(logical). If TRUE, print additional information.}
@@ -35,6 +35,7 @@ See ?\code{\link[=import_mitemap]{import_mitemap()}}
 Import mitemap from multiple folders
 }
 \examples{
+\dontrun{
 mm <- import_mitemap_from_multiple_folder(list(
 system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 system.file("extdata", "mitemap_example_large", package = "MiteMapTools"))
@@ -47,6 +48,7 @@ return_with_logs=TRUE
 )
 
 mm_logs$files_not_in_metadata
+}
 }
 \author{
 Adrien Taudière

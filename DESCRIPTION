@@ -21,16 +21,19 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 LazyData: true
+LazyDataCompression: xz
 Depends:
     tidyverse,
+    R (>= 4.1.0),
+    dplyr,
     readxl,
-    R (>= 4.1.0)
+    conflicted
 Suggests: 
-    data.table,
     gganimate,
     grDevices,
     graphics,
     utils,
+    ggrain,
     here,
     patchwork,
     plotrix,
