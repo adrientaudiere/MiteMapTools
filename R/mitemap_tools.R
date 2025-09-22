@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' dontrun{
+#' \dontrun{
 #' rename_files_with_number(system.file("extdata", "mitemap_example", package = "MiteMapTools"))
 #' rename_files_with_number(system.file("extdata", "mitemap_example_large", package = "MiteMapTools"),
 #' keep_original=TRUE)
