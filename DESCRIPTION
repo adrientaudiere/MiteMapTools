@@ -35,15 +35,18 @@ Suggests:
     utils,
     ggrain,
     here,
+    knitr,
     patchwork,
     plotrix,
     pracma,
     readr,
+    rmarkdown,
     spelling,
     stats,
     stringr,
     testthat (>= 3.0.0),
     zip
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://adrientaudiere.github.io/MiteMapTools/
 Language: en-US
