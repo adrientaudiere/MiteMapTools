@@ -1,8 +1,16 @@
-# Version 0.0.2 (development version)
+# Version 0.1.0 
+
+## New Features
+
+- Change behavior of [summarize_mitemap()] to return mean, max, min and sd value
+for all numeric columns. Add also parameter `selected_cols` to select specific
+columns to summarize.
+
+# Version 0.0.2
 
 ## Improvements 
 
-- Removed HH and CH params from filter_mitemap().
+- Removed HH and CH params from [filter_mitemap()].
 - Computed HH and CH formats directly in R inside [import_mitemap()].
 
 # Version 0.0.1

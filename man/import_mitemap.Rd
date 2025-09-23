@@ -16,6 +16,7 @@ import_mitemap(
   remove_csv_folder = TRUE,
   dec = ",",
   sep = ";",
+  na_readxl = "NA",
   n_lag = 1,
   center_x = 0,
   center_y = 0,
@@ -161,7 +162,8 @@ mm_csv2 <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
   file_name_column = "File (mite ID)", verbose = FALSE, return_with_logs = TRUE
 )
-mm_csv2$files_not_in_csv
+mm_csv2$files_not_in_csv[1]
+length(mm_csv2$files_not_in_csv)
 
 mm_csv_unfiltered <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
@@ -178,9 +180,6 @@ mm_xlsx <- import_mitemap(
 )
 
 dim(mm_xlsx)
-
-# mm_xlsx$Date <-
-#   as.POSIXct(strptime(mm_xlsx$Date, "\%d/\%m/\%Y"))
 
 mm_wo_metadata <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),

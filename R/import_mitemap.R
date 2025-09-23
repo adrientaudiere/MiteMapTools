@@ -105,7 +105,7 @@
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   file_name_column = "File (mite ID)", verbose = FALSE, return_with_logs = TRUE
 #' )
-#' mm_csv2$files_not_in_csv[1] 
+#' mm_csv2$files_not_in_csv[1]
 #' length(mm_csv2$files_not_in_csv)
 #'
 #' mm_csv_unfiltered <- import_mitemap(
@@ -251,9 +251,10 @@ import_mitemap <- function(path_to_folder,
           pattern = ".xlsx",
           full.names = T
         )
-      metadata <- readxl::read_excel(path_to_metadata, 
-                                     na=na_readxl,
-                                     .name_repair = "unique_quiet")
+      metadata <- readxl::read_excel(path_to_metadata,
+        na = na_readxl,
+        .name_repair = "unique_quiet"
+      )
     } else {
       stop("format_metadata must be either NULL, 'csv' or 'xlsx'")
     }

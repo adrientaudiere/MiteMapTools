@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MiteMapTools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,12 +39,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">summarize_mitemap</span><span class="op">(</span></span>
-<span>  <span class="va">MiteMap</span>,</span>
-<span>  num_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"distance_from_previous"</span>, <span class="st">"speed_mm_s"</span>, <span class="st">"distance_from_sources"</span>,</span>
-<span>    <span class="st">"in_left_half_HH"</span>, <span class="st">"in_left_half_CH"</span>, <span class="st">"turning_angle_clockwise"</span>, <span class="st">"turning_angle"</span>,</span>
-<span>    <span class="st">"turning_angle_odor_clockwise"</span>, <span class="st">"turning_angle_odor"</span>, <span class="st">"turning_angle_ratio_odor"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">summarize_mitemap</span><span class="op">(</span><span class="va">MiteMap</span>, selected_cols <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -52,25 +47,34 @@
 
 
 <dl><dt id="arg-mitemap">MiteMap<a class="anchor" aria-label="anchor" href="#arg-mitemap"></a></dt>
-<dd><p>(required) The result of import_mitemap</p></dd>
+<dd><p>(required) The result of <code><a href="import_mitemap.html">import_mitemap()</a></code></p></dd>
 
 
-<dt id="arg-num-cols">num_cols<a class="anchor" aria-label="anchor" href="#arg-num-cols"></a></dt>
-<dd><p>A vector of names of numeric columns to summarize with mean, sd, min and max.</p></dd>
+<dt id="arg-selected-cols">selected_cols<a class="anchor" aria-label="anchor" href="#arg-selected-cols"></a></dt>
+<dd><p>(default = NULL) A character vector of column names
+to include in the summary in addition to <code>File_name</code>.
+If NULL, all columns are used.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A summary table (tibble) with one line per File_name and summary statistics.</p>
-<p>New columns are created with the suffixes corresponding to the applied summary function:</p><ul><li><p>For selected numeric columns num_cols summary statistics include mean,
+<p>New columns are created with the suffixes corresponding to the applied summary function:</p><ul><li><p>For numeric columns summary statistics include mean,
 standard deviation, minimum, and maximum values.</p></li>
 <li><p>For character and factor columns, the first unique value is retained.
 As file_name (individual mite) have unique metadata, all factor columns
 have one value by file_name.</p></li>
 <li><p>For logical columns, the proportion (mean) and number of TRUE values is
 calculated. The number of FALSE is also calculated.</p></li>
-<li><p>For other numeric columns, the mean value is calculated.</p></li>
+<li><p>A column <code>total_points</code> indicates the number of data points (rows)
+for each File_name.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The returns for the applied summary functions used. If you want custom
+function such as quantile, median, you can use dplyr functions directly
+inspired by this function (see examples).</p>
+    </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Adrien Taudière</p>
@@ -93,8 +97,24 @@ calculated. The number of FALSE is also calculated.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total rows after filtering: 70828 (from 76032)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total runs after filtering: 50 (from 53)</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">sum_mm</span> <span class="op">&lt;-</span> <span class="fu">summarize_mitemap</span><span class="op">(</span><span class="va">mm_csv</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">sum_mm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">distance_from_sources_mean</span>, fill <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">sum_mm</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50 94</span>
+<span class="r-in"><span><span class="va">sum_mm_selected</span> <span class="op">&lt;-</span> <span class="fu">summarize_mitemap</span><span class="op">(</span><span class="va">mm_csv</span>,</span></span>
+<span class="r-in"><span>  selected_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"speed_mm_s"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"distance_from_sources"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"in_left_half_HH"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"in_left_half_CH"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"turning_angle"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"turning_angle_odor"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"turning_angle_ratio_odor"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Treatment"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">sum_mm_selected</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">distance_from_sources_mean</span>, fill <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">ggrain</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggrain/man/geom_rain.html" class="external-link">geom_rain</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'ggpp':</span>
@@ -102,6 +122,20 @@ calculated. The number of FALSE is also calculated.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   heightDetails.titleGrob ggplot2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   widthDetails.titleGrob  ggplot2</span>
 <span class="r-plt img"><img src="summarize_mitemap-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use custom summary with dplyr functions without the use of summarize_mitemap</span></span></span>
+<span class="r-in"><span><span class="va">mm_csv</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"File_name"</span>, <span class="st">"Treatment"</span>, <span class="st">"Biomol_sp"</span>, <span class="st">"speed_mm_s"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">File_name</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    mean_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">speed_mm_s</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, .names <span class="op">=</span> <span class="st">"{col}"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">mean_speed</span>, fill <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Biomol_sp</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="summarize_mitemap-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
