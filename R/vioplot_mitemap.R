@@ -1,6 +1,6 @@
 #' Make violin plot of MiteMap data
 #'
-#' @param MiteMap (required) The result of import_mitemap ($resulting_data) for raw_data
+#' @param MiteMap (required) The result of import_mitemap
 #' @param factor : A name of column present in the MiteMap to separate violin plot.
 #' @param wrap : A name of column present in the MiteMap to wrap violin plot.
 #' @param prop_points (numeric between 0 and 1, default=NULL) If not NULL,
@@ -21,9 +21,17 @@ vioplot_mitemap <- function(MiteMap,
                             wrap = NULL,
                             prop_points=NULL) {
   
+  if (!is_tibble(MiteMap)) {
+    MiteMap <- MiteMap$resulting_data
+  }
+  
   if(is.null(factor)){
     stop("You must provide a column name for factor.")
   }
+  if(!factor %in% colnames(MiteMap)){
+    stop(paste("The factor", factor, "is not a column name of MiteMap."))
+  }
+  
   modality_interm <-
     eval(parse(text = paste("MiteMap$", factor, sep = "")))
   MiteMap$Modality_interm <- modality_interm

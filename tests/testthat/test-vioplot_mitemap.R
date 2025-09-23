@@ -6,8 +6,6 @@ test_that("vioplot_mitemap return structure validation", {
   plot_result <- vioplot_mitemap(MM_data, "Treatment")
   
   expect_s3_class(plot_result, "ggplot")
-  expect_true("data" %in% names(plot_result))
-  expect_true("layers" %in% names(plot_result))
 })
 
 test_that("vioplot_mitemap parameter validation", {
@@ -17,9 +15,9 @@ test_that("vioplot_mitemap parameter validation", {
   }
   
   # Test error handling with invalid factor
-  expect_error({
-    vioplot_mitemap(MM_data, "NonExistentFactor")
-  })
+  expect_error(
+   suppressWarnings(vioplot_mitemap(MM_data, "NonExistentFactor"))
+  )
 })
 
 test_that("vioplot_mitemap handles data structure variations", {

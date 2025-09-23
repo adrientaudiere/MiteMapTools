@@ -28,10 +28,17 @@
 #' ggplot(sum_mm, aes(x=Treatment, y=distance_from_sources_mean, fill=Treatment)) +
 #' ggrain::geom_rain() +
 #' coord_flip()
-summarize_mitemap <- function(MiteMap, num_cols = c("distance_from_previous", "speed_mm_s", "distance_from_sources", 
-                                                    "in_left_half_HH", "in_left_half_CH", "turning_angle_clockwise", 
-                                                    "turning_angle", "turning_angle_odor_clockwise", "turning_angle_odor", 
-                                                    "turning_angle_ratio_odor")) {
+summarize_mitemap <- function(MiteMap,
+                              num_cols = c("distance_from_previous", 
+                                           "speed_mm_s",
+                                           "distance_from_sources", 
+                                           "in_left_half_HH", 
+                                           "in_left_half_CH",
+                                           "turning_angle_clockwise", 
+                                           "turning_angle",
+                                           "turning_angle_odor_clockwise",
+                                           "turning_angle_odor", 
+                                           "turning_angle_ratio_odor")) {
   
   if (!is_tibble(MiteMap)) {
     MiteMap <- MiteMap$resulting_data

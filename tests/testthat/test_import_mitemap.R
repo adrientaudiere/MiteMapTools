@@ -50,11 +50,11 @@ test_that("import_mitemap handles clean parameter", {
 test_that("import_mitemap parameter validation", {
   # Test with different parameter combinations
   expect_no_error({
-    import_mitemap(
+    suppressWarnings(import_mitemap(
       system.file("extdata", "mitemap_example", package = "MiteMapTools"),
       verbose = TRUE, 
       clean = TRUE,
       compute_metrics = FALSE
-    )
+    ))
   })
 })

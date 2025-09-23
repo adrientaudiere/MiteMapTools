@@ -6,8 +6,8 @@ test_that("binom_test_mitemap return structure", {
   result <- suppressWarnings(binom_test_mitemap(MM_data, "Treatment"))
   
   expect_s3_class(result, "tbl_df")
-  expect_true("factor" %in% colnames(result))
-  expect_true("Modality" %in% colnames(result))
+  expect_equal(colnames(result), c("Treatment", "n", "yes", "no", "p.value", "p.value.adj", "estimate", 
+                                   "CI"))
   expect_gt(nrow(result), 0)
 })
 
@@ -25,11 +25,11 @@ test_that("binom_test_mitemap parameter validation", {
 test_that("binom_test_mitemap error handling", {
   # Test with invalid factor
   expect_error({
-    binom_test_mitemap(MM_data, "NonExistentColumn")
+    suppressWarnings(binom_test_mitemap(MM_data, "NonExistentColumn"))
   })
   
   # Test with invalid format
   expect_error({
-    binom_test_mitemap(MM_data, "Treatment", format = "invalid")
+    suppressWarnings( binom_test_mitemap(MM_data, "Treatment", format = "invalid"))
   })
 })

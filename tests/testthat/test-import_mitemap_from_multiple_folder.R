@@ -39,10 +39,10 @@ test_that("import_mitemap_from_multiple_folder parameter validation", {
   
   # Test with different verbose settings
   expect_no_error({
-    import_mitemap_from_multiple_folder(folders, verbose = TRUE)
+    suppressWarnings(import_mitemap_from_multiple_folder(folders, verbose = TRUE, force = TRUE))
   })
   
   expect_no_error({
-    import_mitemap_from_multiple_folder(folders, verbose = FALSE)
+    import_mitemap_from_multiple_folder(folders, verbose = FALSE, force = TRUE)
   })
 })

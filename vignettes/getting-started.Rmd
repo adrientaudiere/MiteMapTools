@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting Started with MiteMapTools}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -34,7 +36,7 @@ MiteMap is a Raspberry Pi-based automated tracking system designed to monitor ar
 - **Zone preferences**: Time allocation between different arena regions
 - **Behavioral states**: Periods of activity vs. immobility
 
-The system consists of a circular arena (typically 40mm diameter) where test subjects are placed with potential stimuli positioned at the arena periphery. High-resolution tracking data allows for detailed quantitative analysis of behavioral responses.
+The system consists of a circular arena (typically 40mm diameter) where test subjects are placed with potential stimuli positioned at the arena periphery. High-resolution tracking data allows for detailed quantitative analysis of behavioral responses. The original MiteMap hardware and software can be found at: <https://github.com/LR69/MiteMap/tree/MiteMap.v6>
 
 ## Scientific Background
 
@@ -42,7 +44,7 @@ This package implements methods described in:
 
 **Masier, L.‐S., Roy, L., & Durand, J.‐F. (2022). A new methodology for arthropod behavioral assays using MiteMap, a cost‐effective open‐source tool for 2D tracking. Journal of Experimental Zoology Part A: Ecological and Integrative Physiology, 337(4), 333-344.** [doi:10.1002/jez.2651](https://onlinelibrary.wiley.com/doi/10.1002/jez.2651)
 
-The original MiteMap hardware and software can be found at: <https://github.com/LR69/MiteMap/tree/MiteMap.v6>
+
 
 # Installation
 
@@ -74,8 +76,9 @@ The package includes a pre-processed example dataset:
 data(MM_data)
 
 # Examine the structure of the data
-str(MM_data)
 head(MM_data)
+
+glimpse(MM_data)
 ```
 
 ### Importing Data from Files
@@ -83,7 +86,6 @@ head(MM_data)
 For your own data, you would import from MiteMap output files:
 
 ```{r example-import, eval=FALSE}
-# Import MiteMap data from example folder (for demonstration)
 MM <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
   file_name_column = "File (mite ID)", 
@@ -166,12 +168,75 @@ The arena is divided into different zones for analysis:
 - Encompasses half the arena surface
 - Analyzes time spent inside/outside the circle and behavioral preference indices
 
-```{r arena-diagram, echo=FALSE, eval=FALSE}
-# This would show the arena layout diagram
-# The actual diagram is created in the README using custom ggplot code
+```{r arena-diagram, echo=FALSE}
+circleFun <- function(center = c(0, 0), diameter = 1, npoints = 100) {
+  r <- diameter / 2
+  tt <- seq(0, 2 * pi, length.out = npoints)
+  xx <- center[1] + r * cos(tt)
+  yy <- center[2] + r * sin(tt)
+  return(data.frame(x = xx, y = yy))
+}
+
+dat <- circleFun(c(0, 0), 40, npoints = 1000)
+dat_C_interm <- circleFun(c(-20, 0), (26.0714 * 40 / 22.5), npoints = 1000)
+
+# compute value of intersection (-6.57, 18.89) https://planetcalc.com/8098/
+dat_C <- dat_C_interm[dat_C_interm$x > -6.57, ]
+dat_C2 <- dat[dat$x < -6.57, ]
+dat_C <- rbind(dat_C, dat_C2)
+
+
+ggplot(dat, aes(x, y)) +
+  geom_path() +
+  coord_fixed() +
+  theme_minimal() +
+  geom_vline(xintercept = 0) +
+  geom_polygon(data = mutate(dat, x = ifelse(x > 0, 0, x)), fill = "green") +
+  geom_polygon(data = dat_C, fill = "blue", alpha = 0.4) +
+  geom_point(x = -19.5, y = 0, size = 7, shape = 8, color = "red") +
+  geom_label(x = -14, y = 0, label = "Odor source", color = "red") +
+  geom_label(x = 5, y = 0, label = "CH shape", color = "blue", hjust = 0) +
+  geom_label(x = 1, y = 18, label = "HH shape", color = "green", hjust = 0) +
+  xlab("x (in mm)") +
+  ylab("y (in mm)")
 ```
 
 ## Statistical Analysis
+
+### Summarise statistics at the run level 
+
+```{r summarise-runs}
+# Summarise statistics at the run level
+MM_summary <- suppressWarnings(summarize_mitemap(MM))
+glimpse(MM_summary)
+```
+
+```{r}
+ MM_summary |>
+  filter(Biomol_sp %in% c("DGL1", "DGSS", "D_carpathicus")) |>
+ggplot(aes(x = Treatment, y = in_left_half_CH_prop_TRUE, col=Treatment)) +
+  geom_boxplot() +
+  geom_hline(yintercept = 0.5, linetype="dashed", color = "grey") +
+  theme_minimal() +
+  labs(title = "CH Preference for left side vs Treatment",
+       y = "Proportion of run more in left side",
+       x = "Treatment") +
+  facet_wrap(~Biomol_sp)
+```
+
+
+```{r}
+ MM_summary |>
+  filter(turning_angle_mean < 20 & turning_angle_mean > -20) |>
+ggplot(aes(x = Treatment, y = turning_angle_mean, col=Treatment)) +
+  geom_boxplot() +
+    geom_hline(yintercept = 0, linetype="dashed", color = "grey") +
+  theme_minimal() +
+  labs(title = "CH Preference for left side vs Treatment",
+       y = "Turning angle",
+       x = "Treatment") 
+
+```
 
 ### Binomial Tests for Zone Preferences
 
@@ -189,8 +254,8 @@ Calculate movement characteristics using convex hull analysis:
 
 ```{r convex-hull}
 # Calculate convex hull metrics (spatial usage)
-ch_results <- convex_hull_mitemap(MM, plot_show = FALSE)
-print(head(ch_results))
+ch_results <- convex_hull_mitemap(MM, plot_show = FALSE, verbose = FALSE)
+head(ch_results)
 
 # Combine with metadata for analysis
 library(dplyr)
@@ -208,15 +273,18 @@ combined_data %>%
 
 ## Data Filtering and Processing
 
-The `filter_mitemap()` function allows you to clean and process the tracking data:
+The `filter_mitemap()` function allows you to clean and process the tracking data. Note that 
+this is done automatically with clean=TRUE in [import_mitemap()], but you can 
 
 ```{r filtering}
-# Apply custom filtering (this is done automatically with clean=TRUE in import_mitemap)
+# Apply custom filtering 
 MM_filtered <- filter_mitemap(
   MM,
-  time_min = 0,      # Start time
-  time_max = 300,    # End time (5 minutes)
-  dist_max = 100     # Maximum distance from center
+first_seconds_to_delete = 10,
+  max_x_value = 20,
+  min_x_value = -20,
+  max_y_value = 20,
+  min_y_value = -20
 )
 
 # Compare data sizes
@@ -226,15 +294,6 @@ cat("Filtered data points:", nrow(MM_filtered), "\n")
 
 ## Advanced Visualizations
 
-### Heatmap Extraction
-
-Extract movement heatmaps from your data:
-
-```{r heatmap, eval=FALSE}
-# Extract heatmap for a specific individual
-heatmap_data <- extract_heatmap(MM, file_name = unique(MM$File_name)[1])
-```
-
 ### Movement Speed Analysis
 
 Analyze movement speeds and create speed-colored trajectory plots:
@@ -243,13 +302,15 @@ Analyze movement speeds and create speed-colored trajectory plots:
 # Create trajectory plots colored by movement speed
 p_speed <- plot_ind_mitemap(
   MM, 
-  ind_index = 1:3,
+  ind_index = 1:4,
   linewidth = 1.5
 )
 
+p_speed[[1]]
+
 # Combine multiple speed plots
-(p_speed[[1]] + p_speed[[2]] + p_speed[[3]]) +
-  plot_layout(guides = "collect") &
+((p_speed[[1]] + p_speed[[2]]) / (p_speed[[3]] + p_speed[[4]])) +
+  plot_layout(guides = "collect") & theme(legend.position = "none") &
   scale_color_viridis_c(name = "Speed\n(mm/s)", trans = "log1p")
 ```
 

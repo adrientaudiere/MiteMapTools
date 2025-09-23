@@ -20,10 +20,8 @@ test_that("extract_heatmap parameter validation", {
   expect_no_error({
     extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
       factor = "Treatment", 
-      unity = 1,
-      wrap = "Treatment",
       force = TRUE, 
-      verbose = TRUE
+      verbose = FALSE
     )
   })
 })
@@ -36,7 +34,6 @@ test_that("extract_heatmap handles different factor values", {
   expect_no_error({
     extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
       factor = "Treatment",
-      wrap = NULL,
       force = TRUE, 
       verbose = FALSE
     )

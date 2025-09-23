@@ -1,5 +1,5 @@
 test_that("summarize_mitemap basic functionality works", {
-  summary_result <- summarize_mitemap(MM_data)
+  summary_result <- suppressWarnings(summarize_mitemap(MM_data))
   
   expect_s3_class(summary_result, "tbl_df")
   expect_gt(nrow(summary_result), 0)
@@ -8,7 +8,7 @@ test_that("summarize_mitemap basic functionality works", {
 })
 
 test_that("summarize_mitemap creates expected columns", {
-  summary_result <- summarize_mitemap(MM_data)
+  summary_result <- suppressWarnings(summarize_mitemap(MM_data))
   
   # Check for expected summary columns
   expected_cols <- c("File_name", "total_points")
@@ -25,7 +25,7 @@ test_that("summarize_mitemap creates expected columns", {
 
 test_that("summarize_mitemap works with custom num_cols", {
   custom_cols <- c("distance_from_previous", "speed_mm_s")
-  summary_result <- summarize_mitemap(MM_data, num_cols = custom_cols)
+  summary_result <- suppressWarnings(summarize_mitemap(MM_data, num_cols = custom_cols))
   
   expect_s3_class(summary_result, "tbl_df")
   expect_gt(nrow(summary_result), 0)
@@ -46,7 +46,7 @@ test_that("summarize_mitemap handles empty num_cols", {
 })
 
 test_that("summarize_mitemap one row per file", {
-  summary_result <- summarize_mitemap(MM_data)
+  summary_result <- suppressWarnings(summarize_mitemap(MM_data))
   
   # Number of rows should equal number of unique files
   n_files <- length(unique(MM_data$File_name))
@@ -58,11 +58,11 @@ test_that("summarize_mitemap one row per file", {
 
 test_that("summarize_mitemap handles data structure variations", {
   # Test with direct tibble input 
-  summary_result1 <- summarize_mitemap(MM_data)
+  summary_result1 <- suppressWarnings(summarize_mitemap(MM_data))
   
   # Test with list structure (should extract resulting_data)
   mm_list <- list(resulting_data = MM_data)
-  summary_result2 <- summarize_mitemap(mm_list)
+  summary_result2 <- suppressWarnings(summarize_mitemap(mm_list))
   
   expect_s3_class(summary_result1, "tbl_df")
   expect_s3_class(summary_result2, "tbl_df")

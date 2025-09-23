@@ -41,7 +41,7 @@ extract_heatmap <- function(path_to_folder,
     include.dirs = TRUE
   )
   
-  mm <- import_mitemap(path_to_folder, verbose=verbose, ...)
+  mm <- import_mitemap(path_to_folder, verbose=verbose, force=force, ...)
   dir.create(output_path)
 
   for (i in 1:length(zip_files)) {
