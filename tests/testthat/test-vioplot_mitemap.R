@@ -18,8 +18,19 @@ test_that("vioplot_mitemap parameter validation", {
   expect_error(
     suppressWarnings(vioplot_mitemap(MM_data, "NonExistentFactor"))
   )
+  
+  expect_error(
+    suppressWarnings(vioplot_mitemap(MM_data))
+  )
 })
 
+test_that("vioplot_mitemap handles other parameter correctly", {
+  plot <- vioplot_mitemap(MM_data, "Treatment", 
+                          wrap = "Biomol_sp", 
+                          prop_points = 0.02)
+  expect_s3_class(plot, "ggplot")
+
+  })
 test_that("vioplot_mitemap handles data structure variations", {
   # Test with direct tibble
   plot1 <- vioplot_mitemap(MM_data, "Treatment")
