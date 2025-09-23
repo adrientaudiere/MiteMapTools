@@ -40,6 +40,7 @@ the name of the files in the metadata."></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -258,7 +259,9 @@ the metadata file + the computed metrics if compute_metrics is TRUE.</p><ul><li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mm_csv</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70828    35</span>
-<span class="r-in"><span><span class="va">mm_csv</span><span class="op">$</span><span class="va">File_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mm_csv</span><span class="op">$</span><span class="va">File_name</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mm_csv2</span> <span class="op">&lt;-</span> <span class="fu">import_mitemap</span><span class="op">(</span></span></span>
@@ -964,36 +967,19 @@ the metadata file + the computed metrics if compute_metrics is TRUE.</p><ul><li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mm_csv_unfiltered</span> <span class="op">&lt;-</span> <span class="fu">import_mitemap</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, clean<span class="op">=</span><span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, clean <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mm_csv_unfiltered</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76032    35</span>
-<span class="r-in"><span><span class="va">mm_csv_unfiltered</span><span class="op">$</span><span class="va">File_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mm_csv_unfiltered</span><span class="op">$</span><span class="va">File_name</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mm_xlsx</span> <span class="op">&lt;-</span> <span class="fu">import_mitemap</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  format_metadata <span class="op">=</span> <span class="st">"xlsx"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1231 / R1231C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1231 / R1231C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1237 / R1237C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1237 / R1237C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1514 / R1514C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1514 / R1514C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1515 / R1515C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1515 / R1515C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1516 / R1516C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1516 / R1516C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1517 / R1517C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1517 / R1517C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1518 / R1518C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1518 / R1518C12: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in I1519 / R1519C9: got 'NA'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting numeric in L1519 / R1519C12: got 'NA'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> New names:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `MiteID` -&gt; `MiteID...1`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `MiteID` -&gt; `MiteID...4`</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mm_xlsx</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70828    35</span>

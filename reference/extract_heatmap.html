@@ -18,6 +18,7 @@ by a factor"></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -100,7 +101,8 @@ information.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">extract_heatmap</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> factor<span class="op">=</span><span class="st">"Treatment"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  factor <span class="op">=</span> <span class="st">"Treatment"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1390 file(s) described in metadata were not present in the list of csv files</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 file(s) present in the list of csv files were not described in metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -115,7 +117,8 @@ information.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total rows after filtering: 70828 (from 76032)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total runs after filtering: 50 (from 53)</span>
 <span class="r-in"><span><span class="fu">extract_heatmap</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> factor<span class="op">=</span><span class="st">"Biomol_sp"</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  factor <span class="op">=</span> <span class="st">"Biomol_sp"</span>, force <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1390 file(s) described in metadata were not present in the list of csv files</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 file(s) present in the list of csv files were not described in metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -130,7 +133,8 @@ information.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total rows after filtering: 70828 (from 76032)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Total runs after filtering: 50 (from 53)</span>
 <span class="r-in"><span><span class="fu">extract_heatmap</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> clean<span class="op">=</span><span class="cn">FALSE</span>, force<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  clean <span class="op">=</span> <span class="cn">FALSE</span>, force <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1390 file(s) described in metadata were not present in the list of csv files</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 file(s) present in the list of csv files were not described in metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
