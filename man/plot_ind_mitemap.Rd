@@ -68,47 +68,48 @@ Plot individual map
 \examples{
 MM <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column="File (mite ID)",
-  verbose= FALSE
+  file_name_column = "File (mite ID)",
+  verbose = FALSE
 )
 
 library(patchwork)
-p <- plot_ind_mitemap(MM, file_names=c( "MM012022_05_17_13h22m59s", "MM012022_05_17_08h23m05s"))
+p <- plot_ind_mitemap(MM, file_names = c("MM012022_05_17_13h22m59s", "MM012022_05_17_08h23m05s"))
 p[[1]] + p[[2]] & theme(legend.position = "none")
 
 
 p_l <- plot_ind_mitemap(MM, ind_index = c(1, 2))
 p_l[[1]] + p_l[[2]] & theme(legend.position = "none")
 
-p_l_base_c <- plot_ind_mitemap(MM, add_base_circle = TRUE, linewidth = 1.7, 
-   label_odor_source = "Odor source")
+p_l_base_c <- plot_ind_mitemap(MM,
+  add_base_circle = TRUE, linewidth = 1.7,
+  label_odor_source = "Odor source"
+)
 p_l_base_c[[1]] + scale_color_gradient(name = "Speed", trans = "log10", low = "cyan", high = "red")
 
-if(!requireNamespace("gganimate", quietly = TRUE)){
+if (!requireNamespace("gganimate", quietly = TRUE)) {
+  p_l_anim <- plot_ind_mitemap(MM, time_animation = TRUE, breaks_animation = 15)
+  p_l_anim[[1]]
 
-p_l_anim <- plot_ind_mitemap(MM, time_animation = TRUE, breaks_animation = 15)
-p_l_anim[[1]]
-
-p_l <- plot_ind_mitemap(MM, ind_index = c(1:6))
-(p_l[[1]] + p_l[[2]] + p_l[[3]]) /
-  (p_l[[4]] + p_l[[5]] + p_l[[6]]) +
-  plot_layout(guides = "collect") & scale_color_gradient(
-  name = "Speed", trans = "log1p", low = "cyan", high = "red",
-  limits = c(
-    min(unlist(lapply(p_l, function(x) {
-      min(x$data$dist_from_i_minus_1, na.rm = T)
-    }))),
-    max(unlist(lapply(p_l, function(x) {
-      max(x$data$dist_from_i_minus_1, na.rm = T)
-    })))
+  p_l <- plot_ind_mitemap(MM, ind_index = c(1:6))
+  (p_l[[1]] + p_l[[2]] + p_l[[3]]) /
+    (p_l[[4]] + p_l[[5]] + p_l[[6]]) +
+    plot_layout(guides = "collect") & scale_color_gradient(
+    name = "Speed", trans = "log1p", low = "cyan", high = "red",
+    limits = c(
+      min(unlist(lapply(p_l, function(x) {
+        min(x$data$dist_from_i_minus_1, na.rm = T)
+      }))),
+      max(unlist(lapply(p_l, function(x) {
+        max(x$data$dist_from_i_minus_1, na.rm = T)
+      })))
+    )
   )
-)
 
-(p_l[[1]] + p_l[[2]] + p_l[[3]]) /
-  (p_l[[4]] + p_l[[5]] + p_l[[6]]) +
-  plot_layout(guides = "collect") & 
-   scale_color_viridis_c(name = "Speed", trans = "log1p", limits = c(0, 2))
- }
+  (p_l[[1]] + p_l[[2]] + p_l[[3]]) /
+    (p_l[[4]] + p_l[[5]] + p_l[[6]]) +
+    plot_layout(guides = "collect") &
+    scale_color_viridis_c(name = "Speed", trans = "log1p", limits = c(0, 2))
+}
 }
 \author{
 Adrien Taudière

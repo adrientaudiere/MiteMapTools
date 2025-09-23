@@ -33,6 +33,7 @@ Suggests:
     grDevices,
     graphics,
     utils,
+    ggplot2,
     ggrain,
     here,
     knitr,

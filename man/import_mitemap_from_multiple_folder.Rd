@@ -37,14 +37,16 @@ Import mitemap from multiple folders
 \examples{
 \dontrun{
 mm <- import_mitemap_from_multiple_folder(list(
-system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-system.file("extdata", "mitemap_example_large", package = "MiteMapTools"))
-)
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  system.file("extdata", "mitemap_example_large", package = "MiteMapTools")
+))
 
-mm_logs <- import_mitemap_from_multiple_folder(c(
-system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-system.file("extdata", "mitemap_example_large", package = "MiteMapTools")),
-return_with_logs=TRUE
+mm_logs <- import_mitemap_from_multiple_folder(
+  c(
+    system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+    system.file("extdata", "mitemap_example_large", package = "MiteMapTools")
+  ),
+  return_with_logs = TRUE
 )
 
 mm_logs$files_not_in_metadata

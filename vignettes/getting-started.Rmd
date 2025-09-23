@@ -88,10 +88,10 @@ For your own data, you would import from MiteMap output files:
 ```{r example-import, eval=FALSE}
 MM <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column = "File (mite ID)", 
-  verbose = FALSE, 
+  file_name_column = "File (mite ID)",
+  verbose = FALSE,
   clean = TRUE
-) 
+)
 ```
 
 For the rest of this tutorial, we'll use the built-in `MM_data` dataset.
@@ -110,7 +110,7 @@ One of the key visualization functions is `vioplot_mitemap()`, which shows posit
 vioplot_mitemap(MM, "Treatment", prop_points = 0.1)
 ```
 
-This plot shows how different treatments affect the distribution of organism positions along the x-axis (with the odor source typically positioned at x = -19.5 mm).
+This plot shows how different treatments affect the distribution of organism positions along the x-axis (with the odor source typically positioned at x = -20mm and y = 0mm).
 
 ## Individual Trajectory Plotting
 
@@ -118,7 +118,7 @@ To visualize individual movement trajectories, use `plot_ind_mitemap()`:
 
 ```{r individual-plots}
 # Plot individual trajectories for the first two organisms
-library(patchwork)  # for combining plots
+library(patchwork) # for combining plots
 
 # Get individual plots
 p_list <- plot_ind_mitemap(MM, ind_index = c(1, 2))
@@ -132,10 +132,10 @@ You can also add arena context:
 ```{r individual-plots-with-arena}
 # Plot with arena circle and odor source
 p_arena <- plot_ind_mitemap(
-  MM, 
+  MM,
   ind_index = 1,
-  add_base_circle = TRUE, 
-  linewidth = 1.7, 
+  add_base_circle = TRUE,
+  linewidth = 1.7,
   label_odor_source = "Odor source"
 )
 
@@ -212,30 +212,33 @@ glimpse(MM_summary)
 ```
 
 ```{r}
- MM_summary |>
+MM_summary |>
   filter(Biomol_sp %in% c("DGL1", "DGSS", "D_carpathicus")) |>
-ggplot(aes(x = Treatment, y = in_left_half_CH_prop_TRUE, col=Treatment)) +
+  ggplot(aes(x = Treatment, y = in_left_half_CH_prop_TRUE, col = Treatment)) +
   geom_boxplot() +
-  geom_hline(yintercept = 0.5, linetype="dashed", color = "grey") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "grey") +
   theme_minimal() +
-  labs(title = "CH Preference for left side vs Treatment",
-       y = "Proportion of run more in left side",
-       x = "Treatment") +
+  labs(
+    title = "CH Preference for left side vs Treatment",
+    y = "Proportion of run more in left side",
+    x = "Treatment"
+  ) +
   facet_wrap(~Biomol_sp)
 ```
 
 
 ```{r}
- MM_summary |>
+MM_summary |>
   filter(turning_angle_mean < 20 & turning_angle_mean > -20) |>
-ggplot(aes(x = Treatment, y = turning_angle_mean, col=Treatment)) +
+  ggplot(aes(x = Treatment, y = turning_angle_mean, col = Treatment)) +
   geom_boxplot() +
-    geom_hline(yintercept = 0, linetype="dashed", color = "grey") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey") +
   theme_minimal() +
-  labs(title = "CH Preference for left side vs Treatment",
-       y = "Turning angle",
-       x = "Treatment") 
-
+  labs(
+    title = "CH Preference for left side vs Treatment",
+    y = "Turning angle",
+    x = "Treatment"
+  )
 ```
 
 ### Binomial Tests for Zone Preferences
@@ -267,8 +270,10 @@ combined_data %>%
   ggplot(aes(x = Treatment, y = hull_area)) +
   geom_boxplot() +
   theme_minimal() +
-  labs(title = "Spatial Usage (Convex Hull Area) by Treatment",
-       y = "Hull Area (mm²)")
+  labs(
+    title = "Spatial Usage (Convex Hull Area) by Treatment",
+    y = "Hull Area (mm²)"
+  )
 ```
 
 ## Data Filtering and Processing
@@ -277,10 +282,10 @@ The `filter_mitemap()` function allows you to clean and process the tracking dat
 this is done automatically with clean=TRUE in [import_mitemap()], but you can 
 
 ```{r filtering}
-# Apply custom filtering 
+# Apply custom filtering
 MM_filtered <- filter_mitemap(
   MM,
-first_seconds_to_delete = 10,
+  first_seconds_to_delete = 10,
   max_x_value = 20,
   min_x_value = -20,
   max_y_value = 20,
@@ -301,7 +306,7 @@ Analyze movement speeds and create speed-colored trajectory plots:
 ```{r speed-analysis}
 # Create trajectory plots colored by movement speed
 p_speed <- plot_ind_mitemap(
-  MM, 
+  MM,
   ind_index = 1:4,
   linewidth = 1.5
 )

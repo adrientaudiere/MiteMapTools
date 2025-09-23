@@ -153,7 +153,9 @@ mm_csv <- import_mitemap(
   file_name_column = "File (mite ID)", verbose = FALSE
 )
 dim(mm_csv)
-mm_csv$File_name |> unique() |> length()
+mm_csv$File_name |>
+  unique() |>
+  length()
 
 mm_csv2 <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
@@ -163,10 +165,12 @@ mm_csv2$files_not_in_csv
 
 mm_csv_unfiltered <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column = "File (mite ID)", verbose = FALSE, clean=FALSE
+  file_name_column = "File (mite ID)", verbose = FALSE, clean = FALSE
 )
 dim(mm_csv_unfiltered)
-mm_csv_unfiltered$File_name |> unique() |> length()
+mm_csv_unfiltered$File_name |>
+  unique() |>
+  length()
 
 mm_xlsx <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),

@@ -91,7 +91,7 @@ library(MiteMapTools)
 MM <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
   file_name_column = "File (mite ID)", verbose = FALSE, clean = TRUE
-) 
+)
 # Create violin plots showing position distributions by experimental condition
 vioplot_mitemap(MM, "Treatment", prop_points = 0.1)
 ```

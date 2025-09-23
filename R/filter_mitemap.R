@@ -1,10 +1,10 @@
 #' Filter (clean) MiteMap result
-#' 
+#'
 #' @description
 #'  This function filter MiteMap data according to several parameters. It
-#'  removes: the first seconds of each run, runs with aberrant range of x or y 
+#'  removes: the first seconds of each run, runs with aberrant range of x or y
 #'  values, points with aberrant x or y values, runs with a total time superior
-#'  to maximum_time. It can also center the x and y values by additioning a 
+#'  to maximum_time. It can also center the x and y values by additioning a
 #'  constant to all x and y values. By default the center of the arena is located
 #'  at (0,0) with a diameter of 40mm.
 #'
@@ -39,30 +39,30 @@
 #'   The order of filtering is:
 #'   1. Remove runs (filename) with a total time superior to 'maximum_time'.
 #'   2. Remove the first 'first_seconds_to_delete' seconds of each run.
-#'   3. Remove runs (filename) with aberrant range of x or y values 
+#'   3. Remove runs (filename) with aberrant range of x or y values
 #'     (i.e. superior to 'bad_range_value_x' or 'bad_range_value_y').
 #'   4. Remove points with aberrant x or y values (i.e. x.mm. < 'min_x_value' or
 #'   x.mm. > 'max_x_value', y.mm. < 'min_y value' or y.mm. > 'max_y_value').
 #'   5. Center the x and y values by additioning 'center_x' and 'center_y' to all x and y values.
-#' 
+#'
 #' @examples
 #' mm_csv <- import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'   file_name_column = "File (mite ID)", verbose = FALSE, clean=FALSE
+#'   file_name_column = "File (mite ID)", verbose = FALSE, clean = FALSE
 #' )
 #' dim(mm_csv)
-#' 
+#'
 #' MM_filtered_1 <- filter_mitemap(mm_csv)
 #' dim(MM_filtered_1)
-#' 
+#'
 #' MM_filtered_2 <- filter_mitemap(mm_csv,
-#'   bad_range_value_x = 41, 
+#'   bad_range_value_x = 41,
 #'   bad_range_value_y = 44,
-#'   first_seconds_to_delete =1, 
+#'   first_seconds_to_delete = 1,
 #'   maximum_time = 301.1
 #' )
 #' dim(MM_filtered_2)
-#' 
+#'
 filter_mitemap <- function(MiteMap,
                            first_seconds_to_delete = 2,
                            bad_range_value_x = 42,
@@ -74,17 +74,17 @@ filter_mitemap <- function(MiteMap,
                            maximum_time = 302,
                            center_x = 0,
                            center_y = 0,
-                           verbose= TRUE) {
+                           verbose = TRUE) {
   if (!is_tibble(MiteMap)) {
     MiteMap <- MiteMap$resulting_data
   }
-  
+
   bad_time_value <-
-    tapply(MiteMap$X..t.s., MiteMap$File_name, max) 
-  bad_time_value <- bad_time_value[bad_time_value>maximum_time]
-  
+    tapply(MiteMap$X..t.s., MiteMap$File_name, max)
+  bad_time_value <- bad_time_value[bad_time_value > maximum_time]
+
   new_MiteMap_interm <- MiteMap |>
-    filter(X..t.s. >= first_seconds_to_delete) 
+    filter(X..t.s. >= first_seconds_to_delete)
 
   range_x <- tapply(
     new_MiteMap_interm$x.mm.,
@@ -113,7 +113,7 @@ filter_mitemap <- function(MiteMap,
     filter(y.mm. > min_y_value & y.mm. < max_y_value) |>
     mutate(x.mm. = x.mm. + center_x, y.mm. = y.mm. + center_y)
 
-if(verbose){
+  if (verbose) {
     message(
       paste0(
         "Rows removed when clearing for run with times sup to maximum_time: ",
@@ -146,14 +146,14 @@ if(verbose){
         sum(MiteMap$y.mm. < min_y_value |
           MiteMap$y.mm. > max_y_value),
         "\n\n"
-      ), 
+      ),
       paste0(
         "Total rows after filtering: ",
         nrow(new_MiteMap),
         " (from ",
         nrow(MiteMap),
         ")\n"
-      ), 
+      ),
       paste0(
         "Total runs after filtering: ",
         length(unique(new_MiteMap$File_name)),
@@ -162,6 +162,6 @@ if(verbose){
         ")\n"
       )
     )
-}
+  }
   return(new_MiteMap)
 }

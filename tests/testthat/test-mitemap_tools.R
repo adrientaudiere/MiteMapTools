@@ -26,7 +26,7 @@ test_that("get_file_extension errors when no extension", {
 test_that("get_file_extension handles edge cases", {
   # File with just extension
   expect_equal(get_file_extension(".hidden"), "hidden")
-  
+
   # File with uppercase extension
   expect_equal(get_file_extension("FILE.CSV"), "CSV")
 })

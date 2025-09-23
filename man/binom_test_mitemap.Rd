@@ -58,14 +58,14 @@ If level is "lines", each line of MiteMap is considered as one replicate
 This approach is not recommended as it introduce a high pseudoreplication risk.
 }
 \examples{
- 
- 
+
+
 binom_test_mitemap(MM_data, factor = "Treatment")
-binom_test_mitemap(MM_data, factor = "Treatment", format="CH")
-binom_test_mitemap(MM_data, factor = "Treatment", level="lines")
+binom_test_mitemap(MM_data, factor = "Treatment", format = "CH")
+binom_test_mitemap(MM_data, factor = "Treatment", level = "lines")
 
 MM_data |>
- filter(Biomol_sp \%in\% c("DGSS", "DGL1", "D_carpathicus")) |>
+  filter(Biomol_sp \%in\% c("DGSS", "DGL1", "D_carpathicus")) |>
   binom_test_mitemap(factor = "Biomol_sp")
 }
 \author{

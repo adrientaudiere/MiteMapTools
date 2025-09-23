@@ -80,7 +80,7 @@ x.mm. > 'max_x_value', y.mm. < 'min_y value' or y.mm. > 'max_y_value').
 \examples{
 mm_csv <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column = "File (mite ID)", verbose = FALSE, clean=FALSE
+  file_name_column = "File (mite ID)", verbose = FALSE, clean = FALSE
 )
 dim(mm_csv)
 
@@ -88,9 +88,9 @@ MM_filtered_1 <- filter_mitemap(mm_csv)
 dim(MM_filtered_1)
 
 MM_filtered_2 <- filter_mitemap(mm_csv,
-  bad_range_value_x = 41, 
+  bad_range_value_x = 41,
   bad_range_value_y = 44,
-  first_seconds_to_delete =1, 
+  first_seconds_to_delete = 1,
   maximum_time = 301.1
 )
 dim(MM_filtered_2)

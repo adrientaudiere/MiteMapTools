@@ -54,7 +54,7 @@
                         <h4 data-toc-skip class="author">Adrien Taudière
 and Lise Roy</h4>
             
-            <h4 data-toc-skip class="date">2025-09-22</h4>
+            <h4 data-toc-skip class="date">2025-09-23</h4>
       
 
       <div class="d-none name"><code>getting-started.Rmd</code></div>
@@ -156,148 +156,6 @@ files.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">MM_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Examine the structure of the data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">MM_data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; gropd_df [319,050 × 35] (S3: grouped_df/tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ File_name                   : chr [1:319050] "MM012022_05_17_08h23m05s" "MM012022_05_17_08h23m05s" "MM012022_05_17_08h23m05s" "MM012022_05_17_08h23m05s" ...</span></span>
-<span><span class="co">#&gt;  $ X..t.s.                     : num [1:319050] 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 ...</span></span>
-<span><span class="co">#&gt;  $ x.mm.                       : num [1:319050] 19 19 19 19 19 19 16 15.7 15.7 15.7 ...</span></span>
-<span><span class="co">#&gt;  $ y.mm.                       : num [1:319050] 0.8 0.8 0.8 0.8 0.8 0.8 0.8 0.5 0.5 0.5 ...</span></span>
-<span><span class="co">#&gt;  $ Immobile..si..1.            : num [1:319050] 1 1 1 1 1 1 0 0 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ MiteID                      : chr [1:319050] "SPT01_6" "SPT01_6" "SPT01_6" "SPT01_6" ...</span></span>
-<span><span class="co">#&gt;  $ Well.Position               : chr [1:319050] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ Plate.name                  : chr [1:319050] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ MiteID.1                    : chr [1:319050] "SPT01_6" "SPT01_6" "SPT01_6" "SPT01_6" ...</span></span>
-<span><span class="co">#&gt;  $ Run_no                      : chr [1:319050] "1a" "1a" "1a" "1a" ...</span></span>
-<span><span class="co">#&gt;  $ Date                        : chr [1:319050] "11-mars" "11-mars" "11-mars" "11-mars" ...</span></span>
-<span><span class="co">#&gt;  $ Hour                        : logi [1:319050] NA NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ MM                          : int [1:319050] 10 10 10 10 10 10 10 10 10 10 ...</span></span>
-<span><span class="co">#&gt;  $ Pop.                        : chr [1:319050] "SPT" "SPT" "SPT" "SPT" ...</span></span>
-<span><span class="co">#&gt;  $ Treatment                   : chr [1:319050] "nothing" "nothing" "nothing" "nothing" ...</span></span>
-<span><span class="co">#&gt;  $ Duration                    : int [1:319050] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;  $ run                         : chr [1:319050] "1er" "1er" "1er" "1er" ...</span></span>
-<span><span class="co">#&gt;  $ Biomol_sp                   : chr [1:319050] "DGSS" "DGSS" "DGSS" "DGSS" ...</span></span>
-<span><span class="co">#&gt;  $ Haplotype                   : chr [1:319050] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ Morpho_sp                   : chr [1:319050] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ latitude                    : logi [1:319050] NA NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ longitude                   : logi [1:319050] NA NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ site                        : chr [1:319050] "SPT" "SPT" "SPT" "SPT" ...</span></span>
-<span><span class="co">#&gt;  $ notes                       : chr [1:319050] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ distance_from_previous      : num [1:319050] NA 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;  $ speed_mm_s                  : num [1:319050] NA 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;  $ is_immobile                 : logi [1:319050] NA TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;  $ distance_from_sources       : num [1:319050] 39 39 39 39 39 ...</span></span>
-<span><span class="co">#&gt;  $ in_left_half_HH             : logi [1:319050] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;  $ in_left_half_CH             : logi [1:319050] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;  $ turning_angle_clockwise     : num [1:319050] NA NaN NaN NaN NaN NaN 135 NaN NaN NaN ...</span></span>
-<span><span class="co">#&gt;  $ turning_angle               : num [1:319050] NA NaN NaN NaN NaN ...</span></span>
-<span><span class="co">#&gt;  $ turning_angle_odor_clockwise: num [1:319050] NaN NaN NaN NaN NaN ...</span></span>
-<span><span class="co">#&gt;  $ turning_angle_odor          : num [1:319050] NaN NaN NaN NaN NaN ...</span></span>
-<span><span class="co">#&gt;  $ turning_angle_ratio_odor    : num [1:319050] NA NaN NaN NaN NaN ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "groups")= tibble [226 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ File_name: chr [1:226] "MM012022_05_17_08h23m05s" "MM012022_05_17_08h23m17s" "MM012022_05_17_08h23m39s" "MM012022_05_17_08h23m53s" ...</span></span>
-<span><span class="co">#&gt;   ..$ .rows    : list&lt;int&gt; [1:226] </span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 1436 1437 1438 1439 1440 1441 1442 1443 1444 1445 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 2872 2873 2874 2875 2876 2877 2878 2879 2880 2881 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 4308 4309 4310 4311 4312 4313 4314 4315 4316 4317 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 5744 5745 5746 5747 5748 5749 5750 5751 5752 5753 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 7180 7181 7182 7183 7184 7185 7186 7187 7188 7189 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1434] 8616 8617 8618 8619 8620 8621 8622 8623 8624 8625 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1394] 10050 10051 10052 10053 10054 10055 10056 10057 10058 10059 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1433] 11444 11445 11446 11447 11448 11449 11450 11451 11452 11453 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 12877 12878 12879 12880 12881 12882 12883 12884 12885 12886 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1423] 14312 14313 14314 14315 14316 14317 14318 14319 14320 14321 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 15735 15736 15737 15738 15739 15740 15741 15742 15743 15744 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1412] 17170 17171 17172 17173 17174 17175 17176 17177 17178 17179 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1415] 18582 18583 18584 18585 18586 18587 18588 18589 18590 18591 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1425] 19997 19998 19999 20000 20001 20002 20003 20004 20005 20006 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1420] 21422 21423 21424 21425 21426 21427 21428 21429 21430 21431 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1433] 22842 22843 22844 22845 22846 22847 22848 22849 22850 22851 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1424] 24275 24276 24277 24278 24279 24280 24281 24282 24283 24284 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1422] 25699 25700 25701 25702 25703 25704 25705 25706 25707 25708 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1426] 27121 27122 27123 27124 27125 27126 27127 27128 27129 27130 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1422] 28547 28548 28549 28550 28551 28552 28553 28554 28555 28556 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1425] 29969 29970 29971 29972 29973 29974 29975 29976 29977 29978 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1421] 31394 31395 31396 31397 31398 31399 31400 31401 31402 31403 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1350] 32815 32816 32817 32818 32819 32820 32821 32822 32823 32824 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1427] 34165 34166 34167 34168 34169 34170 34171 34172 34173 34174 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1418] 35592 35593 35594 35595 35596 35597 35598 35599 35600 35601 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 37010 37011 37012 37013 37014 37015 37016 37017 37018 37019 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 38446 38447 38448 38449 38450 38451 38452 38453 38454 38455 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1432] 39882 39883 39884 39885 39886 39887 39888 39889 39890 39891 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:959] 41314 41315 41316 41317 41318 41319 41320 41321 41322 41323 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1415] 42273 42274 42275 42276 42277 42278 42279 42280 42281 42282 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1419] 43688 43689 43690 43691 43692 43693 43694 43695 43696 43697 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1406] 45107 45108 45109 45110 45111 45112 45113 45114 45115 45116 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1416] 46513 46514 46515 46516 46517 46518 46519 46520 46521 46522 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1419] 47929 47930 47931 47932 47933 47934 47935 47936 47937 47938 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1424] 49348 49349 49350 49351 49352 49353 49354 49355 49356 49357 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1428] 50772 50773 50774 50775 50776 50777 50778 50779 50780 50781 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1433] 52200 52201 52202 52203 52204 52205 52206 52207 52208 52209 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 53633 53634 53635 53636 53637 53638 53639 53640 53641 53642 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1437] 55069 55070 55071 55072 55073 55074 55075 55076 55077 55078 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 56506 56507 56508 56509 56510 56511 56512 56513 56514 56515 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 57942 57943 57944 57945 57946 57947 57948 57949 57950 57951 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 59378 59379 59380 59381 59382 59383 59384 59385 59386 59387 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 60814 60815 60816 60817 60818 60819 60820 60821 60822 60823 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 62250 62251 62252 62253 62254 62255 62256 62257 62258 62259 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 63686 63687 63688 63689 63690 63691 63692 63693 63694 63695 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 65122 65123 65124 65125 65126 65127 65128 65129 65130 65131 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 66558 66559 66560 66561 66562 66563 66564 66565 66566 66567 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 67994 67995 67996 67997 67998 67999 68000 68001 68002 68003 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 69430 69431 69432 69433 69434 69435 69436 69437 69438 69439 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 70866 70867 70868 70869 70870 70871 70872 70873 70874 70875 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 72302 72303 72304 72305 72306 72307 72308 72309 72310 72311 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 73738 73739 73740 73741 73742 73743 73744 73745 73746 73747 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 75174 75175 75176 75177 75178 75179 75180 75181 75182 75183 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 76610 76611 76612 76613 76614 76615 76616 76617 76618 76619 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 78046 78047 78048 78049 78050 78051 78052 78053 78054 78055 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 79482 79483 79484 79485 79486 79487 79488 79489 79490 79491 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 80918 80919 80920 80921 80922 80923 80924 80925 80926 80927 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 82354 82355 82356 82357 82358 82359 82360 82361 82362 82363 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 83790 83791 83792 83793 83794 83795 83796 83797 83798 83799 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 85225 85226 85227 85228 85229 85230 85231 85232 85233 85234 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 86661 86662 86663 86664 86665 86666 86667 86668 86669 86670 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 88097 88098 88099 88100 88101 88102 88103 88104 88105 88106 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 89533 89534 89535 89536 89537 89538 89539 89540 89541 89542 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 90969 90970 90971 90972 90973 90974 90975 90976 90977 90978 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1432] 92405 92406 92407 92408 92409 92410 92411 92412 92413 92414 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 93837 93838 93839 93840 93841 93842 93843 93844 93845 93846 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 95273 95274 95275 95276 95277 95278 95279 95280 95281 95282 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 96709 96710 96711 96712 96713 96714 96715 96716 96717 96718 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 98145 98146 98147 98148 98149 98150 98151 98152 98153 98154 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 99581 99582 99583 99584 99585 99586 99587 99588 99589 99590 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1437] 101017 101018 101019 101020 101021 101022 101023 101024 101025 101026 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1430] 102454 102455 102456 102457 102458 102459 102460 102461 102462 102463 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 103884 103885 103886 103887 103888 103889 103890 103891 103892 103893 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 105320 105321 105322 105323 105324 105325 105326 105327 105328 105329 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 106756 106757 106758 106759 106760 106761 106762 106763 106764 106765 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 108192 108193 108194 108195 108196 108197 108198 108199 108200 108201 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 109628 109629 109630 109631 109632 109633 109634 109635 109636 109637 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 111064 111065 111066 111067 111068 111069 111070 111071 111072 111073 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 112500 112501 112502 112503 112504 112505 112506 112507 112508 112509 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 113936 113937 113938 113939 113940 113941 113942 113943 113944 113945 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 115372 115373 115374 115375 115376 115377 115378 115379 115380 115381 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 116807 116808 116809 116810 116811 116812 116813 116814 116815 116816 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 118243 118244 118245 118246 118247 118248 118249 118250 118251 118252 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 119679 119680 119681 119682 119683 119684 119685 119686 119687 119688 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1435] 121115 121116 121117 121118 121119 121120 121121 121122 121123 121124 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 122550 122551 122552 122553 122554 122555 122556 122557 122558 122559 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 123986 123987 123988 123989 123990 123991 123992 123993 123994 123995 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 125422 125423 125424 125425 125426 125427 125428 125429 125430 125431 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1437] 126858 126859 126860 126861 126862 126863 126864 126865 126866 126867 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 128295 128296 128297 128298 128299 128300 128301 128302 128303 128304 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1204] 129731 129732 129733 129734 129735 129736 129737 129738 129739 129740 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 130935 130936 130937 130938 130939 130940 130941 130942 130943 130944 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 132371 132372 132373 132374 132375 132376 132377 132378 132379 132380 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 133807 133808 133809 133810 133811 133812 133813 133814 133815 133816 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 135243 135244 135245 135246 135247 135248 135249 135250 135251 135252 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 136679 136680 136681 136682 136683 136684 136685 136686 136687 136688 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1437] 138115 138116 138117 138118 138119 138120 138121 138122 138123 138124 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ : int [1:1436] 139552 139553 139554 139555 139556 139557 139558 139559 139560 139561 ...</span></span>
-<span><span class="co">#&gt;   .. .. [list output truncated]</span></span>
-<span><span class="co">#&gt;   .. ..@ ptype: int(0) </span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".drop")= logi TRUE</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">MM_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 35</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   File_name [1]</span></span></span>
@@ -315,7 +173,47 @@ files.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   longitude &lt;lgl&gt;, site &lt;chr&gt;, notes &lt;chr&gt;, distance_from_previous &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   speed_mm_s &lt;dbl&gt;, is_immobile &lt;lgl&gt;, distance_from_sources &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   in_left_half_HH &lt;lgl&gt;, in_left_half_CH &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   turning_angle_clockwise &lt;dbl&gt;, turning_angle &lt;dbl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   turning_angle_clockwise &lt;dbl&gt;, turning_angle &lt;dbl&gt;, …</span></span></span>
+<span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">MM_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 319,050</span></span>
+<span><span class="co">#&gt; Columns: 35</span></span>
+<span><span class="co">#&gt; Groups: File_name [226]</span></span>
+<span><span class="co">#&gt; $ File_name                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MM012022_05_17_08h23m05s"<span style="color: #949494;">, </span>"MM012022_05_…</span></span>
+<span><span class="co">#&gt; $ X..t.s.                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.2<span style="color: #949494;">, </span>2.4<span style="color: #949494;">, </span>2.6<span style="color: #949494;">, </span>2.8<span style="color: #949494;">, </span>3.0<span style="color: #949494;">, </span>3.2<span style="color: #949494;">, </span>3.4<span style="color: #949494;">, </span>3.6<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ x.mm.                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 19.0<span style="color: #949494;">, </span>19.0<span style="color: #949494;">, </span>19.0<span style="color: #949494;">, </span>19.0<span style="color: #949494;">, </span>19.0<span style="color: #949494;">, </span>19.0<span style="color: #949494;">, </span>16.0<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ y.mm.                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.8<span style="color: #949494;">, </span>0.5<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ Immobile..si..1.             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ MiteID                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT01_6"<span style="color: #949494;">, </span>"SPT01_6"<span style="color: #949494;">, </span>"SPT01_6"<span style="color: #949494;">, </span>"SPT01_6…</span></span>
+<span><span class="co">#&gt; $ Well.Position                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ Plate.name                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ MiteID.1                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT01_6"<span style="color: #949494;">, </span>"SPT01_6"<span style="color: #949494;">, </span>"SPT01_6"<span style="color: #949494;">, </span>"SPT01_6…</span></span>
+<span><span class="co">#&gt; $ Run_no                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">, </span>"1a"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Date                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11-mars"<span style="color: #949494;">, </span>"11-mars"<span style="color: #949494;">, </span>"11-mars"<span style="color: #949494;">, </span>"11-mars…</span></span>
+<span><span class="co">#&gt; $ Hour                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ MM                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ Pop.                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Treatment                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "nothing"<span style="color: #949494;">, </span>"nothing"<span style="color: #949494;">, </span>"nothing"<span style="color: #949494;">, </span>"nothing…</span></span>
+<span><span class="co">#&gt; $ Duration                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ run                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Biomol_sp                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ Haplotype                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ Morpho_sp                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ latitude                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ longitude                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ site                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ notes                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>0.0000000<span style="color: #949494;">, </span>0.0000000<span style="color: #949494;">, </span>0.0000000<span style="color: #949494;">, </span>0.00…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>0.00000<span style="color: #949494;">, </span>0.00000<span style="color: #949494;">, </span>0.00000<span style="color: #949494;">, </span>0.00000<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ is_immobile                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>TRUE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 39.00820<span style="color: #949494;">, </span>39.00820<span style="color: #949494;">, </span>39.00820<span style="color: #949494;">, </span>39.00820<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">, </span>FALSE<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>135<span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ turning_angle                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>-45<span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span>1.175133<span style="color: #949494;">, </span>316.27…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span>-178.8249<span style="color: #949494;">, </span>136.2…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>-181.273<span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">,</span>…</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="importing-data-from-files">Importing Data from Files<a class="anchor" aria-label="anchor" href="#importing-data-from-files"></a>
@@ -324,10 +222,10 @@ files.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MM</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import_mitemap.html">import_mitemap</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span>
-<span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, </span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  clean <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span> </span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p>For the rest of this tutorial, we’ll use the built-in
 <code>MM_data</code> dataset.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -356,7 +254,7 @@ positioned at x = -19.5 mm).</p>
 <code><a href="../reference/plot_ind_mitemap.html">plot_ind_mitemap()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot individual trajectories for the first two organisms</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span>  <span class="co"># for combining plots</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span> <span class="co"># for combining plots</span></span>
 <span></span>
 <span><span class="co"># Get individual plots</span></span>
 <span><span class="va">p_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_ind_mitemap.html">plot_ind_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, ind_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -368,10 +266,10 @@ positioned at x = -19.5 mm).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot with arena circle and odor source</span></span>
 <span><span class="va">p_arena</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_ind_mitemap.html">plot_ind_mitemap</a></span><span class="op">(</span></span>
-<span>  <span class="va">MM</span>, </span>
+<span>  <span class="va">MM</span>,</span>
 <span>  ind_index <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  add_base_circle <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>  linewidth <span class="op">=</span> <span class="fl">1.7</span>, </span>
+<span>  add_base_circle <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="fl">1.7</span>,</span>
 <span>  label_odor_source <span class="op">=</span> <span class="st">"Odor source"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -423,11 +321,187 @@ preference indices</li>
 <h3 id="statistical-analysis">Statistical Analysis<a class="anchor" aria-label="anchor" href="#statistical-analysis"></a>
 </h3>
 <div class="section level4">
+<h4 id="summarise-statistics-at-the-run-level">Summarise statistics at the run level<a class="anchor" aria-label="anchor" href="#summarise-statistics-at-the-run-level"></a>
+</h4>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Summarise statistics at the run level</span></span>
+<span><span class="va">MM_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/summarize_mitemap.html">summarize_mitemap</a></span><span class="op">(</span><span class="va">MM</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">MM_summary</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 226</span></span>
+<span><span class="co">#&gt; Columns: 139</span></span>
+<span><span class="co">#&gt; $ File_name                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MM012022_05_17_08h23m05s"<span style="color: #949494;">, </span>"MM…</span></span>
+<span><span class="co">#&gt; $ total_points                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1435<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_mean            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.357855172<span style="color: #949494;">, </span>0.561044253<span style="color: #949494;">, </span>0.532…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_sd              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.46575805<span style="color: #949494;">, </span>0.28105464<span style="color: #949494;">, </span>0.71827…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_min             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_max             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 16.0801119<span style="color: #949494;">, </span>6.1351447<span style="color: #949494;">, </span>24.01686…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_mean                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.74125463<span style="color: #949494;">, </span>2.72796177<span style="color: #949494;">, </span>2.56526…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_sd                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.3236597<span style="color: #949494;">, </span>1.4092594<span style="color: #949494;">, </span>2.7301272…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_min                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_max                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 80.400560<span style="color: #949494;">, </span>30.675723<span style="color: #949494;">, </span>80.056230…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_mean             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 28.96269<span style="color: #949494;">, </span>25.55369<span style="color: #949494;">, </span>28.74277<span style="color: #949494;">, </span>2…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_sd               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.9446311<span style="color: #949494;">, </span>11.5859741<span style="color: #949494;">, </span>10.00480…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_min              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 9.2444578<span style="color: #949494;">, </span>0.5099020<span style="color: #949494;">, </span>2.4698178…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_max              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 39.12608<span style="color: #949494;">, </span>39.72833<span style="color: #949494;">, </span>39.82085<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_mean                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.2411150<span style="color: #949494;">, </span>0.4206128<span style="color: #949494;">, </span>0.3119777…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_sd                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4279090<span style="color: #949494;">, </span>0.4938294<span style="color: #949494;">, </span>0.4634622…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_min                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_max                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_mean                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24250871<span style="color: #949494;">, </span>0.40181058<span style="color: #949494;">, </span>0.27924…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_sd                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4287497<span style="color: #949494;">, </span>0.4904348<span style="color: #949494;">, </span>0.4487859…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_min                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_max                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_mean           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 179.5528<span style="color: #949494;">, </span>178.4911<span style="color: #949494;">, </span>181.9409<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_sd             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37.01938<span style="color: #949494;">, </span>33.11427<span style="color: #949494;">, </span>26.74246<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_min            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.000000<span style="color: #949494;">, </span>0.000000<span style="color: #949494;">, </span>4.398705<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_max            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 352.8750<span style="color: #949494;">, </span>360.0000<span style="color: #949494;">, </span>355.2364<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_mean                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.44721608<span style="color: #949494;">, </span>-1.50890211<span style="color: #949494;">, </span>1.940…</span></span>
+<span><span class="co">#&gt; $ turning_angle_sd                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37.01938<span style="color: #949494;">, </span>33.11427<span style="color: #949494;">, </span>26.74246<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_min                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -180.0000<span style="color: #949494;">, </span>-180.0000<span style="color: #949494;">, </span>-175.6013…</span></span>
+<span><span class="co">#&gt; $ turning_angle_max                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 172.8750<span style="color: #949494;">, </span>180.0000<span style="color: #949494;">, </span>175.2364<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_mean      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 171.7055<span style="color: #949494;">, </span>152.9723<span style="color: #949494;">, </span>189.7393<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_sd        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 104.81931<span style="color: #949494;">, </span>102.71052<span style="color: #949494;">, </span>102.17589…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_min       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.26525634<span style="color: #949494;">, </span>0.23675807<span style="color: #949494;">, </span>0.59327…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_max       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 359.6384<span style="color: #949494;">, </span>359.9147<span style="color: #949494;">, </span>359.8725<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -8.2944915<span style="color: #949494;">, </span>-27.0276516<span style="color: #949494;">, </span>9.7393…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_sd                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 104.81931<span style="color: #949494;">, </span>102.71052<span style="color: #949494;">, </span>102.17589…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_min                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -179.7347<span style="color: #949494;">, </span>-179.7632<span style="color: #949494;">, </span>-179.4067…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_max                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 179.6384<span style="color: #949494;">, </span>179.9147<span style="color: #949494;">, </span>179.8725<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_mean          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.1382622<span style="color: #949494;">, </span>25.6879253<span style="color: #949494;">, </span>-7.71515…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_sd            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111.07679<span style="color: #949494;">, </span>108.89122<span style="color: #949494;">, </span>106.28259…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_min           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -343.4822<span style="color: #949494;">, </span>-335.5560<span style="color: #949494;">, </span>-302.2756…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_max           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 337.3887<span style="color: #949494;">, </span>307.0399<span style="color: #949494;">, </span>329.1341<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ MiteID                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT01_6"<span style="color: #949494;">, </span>"SPT01_12"<span style="color: #949494;">, </span>"SPT01_1…</span></span>
+<span><span class="co">#&gt; $ Well.Position                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>"B3…</span></span>
+<span><span class="co">#&gt; $ Plate.name                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ MiteID.1                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT01_6"<span style="color: #949494;">, </span>"SPT01_12"<span style="color: #949494;">, </span>"SPT01_1…</span></span>
+<span><span class="co">#&gt; $ Run_no                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1a"<span style="color: #949494;">, </span>"2a"<span style="color: #949494;">, </span>"3b"<span style="color: #949494;">, </span>"2b"<span style="color: #949494;">, </span>"1b"<span style="color: #949494;">, </span>"…</span></span>
+<span><span class="co">#&gt; $ Date                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11-mars"<span style="color: #949494;">, </span>"11-mars"<span style="color: #949494;">, </span>"11-mars"…</span></span>
+<span><span class="co">#&gt; $ Pop.                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SP…</span></span>
+<span><span class="co">#&gt; $ Treatment                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "nothing"<span style="color: #949494;">, </span>"nothing"<span style="color: #949494;">, </span>"DCM"<span style="color: #949494;">, </span>"M…</span></span>
+<span><span class="co">#&gt; $ run                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1er"<span style="color: #949494;">, </span>"1er"<span style="color: #949494;">, </span>"2e"<span style="color: #949494;">, </span>"2e"<span style="color: #949494;">, </span>"2e"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Biomol_sp                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">, </span>"DGSS"<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Haplotype                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Morpho_sp                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ site                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SPT"<span style="color: #949494;">, </span>"SP…</span></span>
+<span><span class="co">#&gt; $ notes                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> ""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">, </span>""<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Hour_prop_TRUE                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ Hour_nb_TRUE                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ Hour_nb_FALSE                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ latitude_prop_TRUE                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ latitude_nb_TRUE                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ latitude_nb_FALSE                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ longitude_prop_TRUE                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ longitude_nb_TRUE                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ longitude_nb_FALSE                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ is_immobile_prop_TRUE                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11436541<span style="color: #949494;">, </span>0.03693380<span style="color: #949494;">, </span>0.09407…</span></span>
+<span><span class="co">#&gt; $ is_immobile_nb_TRUE                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 164<span style="color: #949494;">, </span>53<span style="color: #949494;">, </span>135<span style="color: #949494;">, </span>90<span style="color: #949494;">, </span>107<span style="color: #949494;">, </span>106<span style="color: #949494;">, </span>167…</span></span>
+<span><span class="co">#&gt; $ is_immobile_nb_FALSE                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1270<span style="color: #949494;">, </span>1382<span style="color: #949494;">, </span>1300<span style="color: #949494;">, </span>1345<span style="color: #949494;">, </span>1328<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_prop_TRUE              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.2411150<span style="color: #949494;">, </span>0.4206128<span style="color: #949494;">, </span>0.3119777…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_nb_TRUE                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 346<span style="color: #949494;">, </span>604<span style="color: #949494;">, </span>448<span style="color: #949494;">, </span>714<span style="color: #949494;">, </span>1252<span style="color: #949494;">, </span>656<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_nb_FALSE               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1089<span style="color: #949494;">, </span>832<span style="color: #949494;">, </span>988<span style="color: #949494;">, </span>722<span style="color: #949494;">, </span>184<span style="color: #949494;">, </span>780<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_prop_TRUE              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24250871<span style="color: #949494;">, </span>0.40181058<span style="color: #949494;">, </span>0.27924…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_nb_TRUE                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 348<span style="color: #949494;">, </span>577<span style="color: #949494;">, </span>401<span style="color: #949494;">, </span>660<span style="color: #949494;">, </span>1168<span style="color: #949494;">, </span>633<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_nb_FALSE               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1087<span style="color: #949494;">, </span>859<span style="color: #949494;">, </span>1035<span style="color: #949494;">, </span>776<span style="color: #949494;">, </span>268<span style="color: #949494;">, </span>803<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ X..t.s._mean                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 151.6256<span style="color: #949494;">, </span>151.6254<span style="color: #949494;">, </span>151.5908<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ x.mm._mean                             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 6.5036237<span style="color: #949494;">, </span>2.3161560<span style="color: #949494;">, </span>5.9896240…</span></span>
+<span><span class="co">#&gt; $ y.mm._mean                             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.1159582<span style="color: #949494;">, </span>4.6247911<span style="color: #949494;">, </span>-3.737883…</span></span>
+<span><span class="co">#&gt; $ Immobile..si..1._mean                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.09477352<span style="color: #949494;">, </span>0.02158774<span style="color: #949494;">, </span>0.08217…</span></span>
+<span><span class="co">#&gt; $ MM_mean                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">#&gt; $ Duration_mean                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5<span style="color: #949494;">, </span>5…</span></span>
+<span><span class="co">#&gt; $ total_points_mean                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1435<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1436<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_mean_mean       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.357855172<span style="color: #949494;">, </span>0.561044253<span style="color: #949494;">, </span>0.532…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_sd_mean         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.46575805<span style="color: #949494;">, </span>0.28105464<span style="color: #949494;">, </span>0.71827…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_min_mean        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ distance_from_previous_max_mean        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 16.0801119<span style="color: #949494;">, </span>6.1351447<span style="color: #949494;">, </span>24.01686…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_mean_mean                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.74125463<span style="color: #949494;">, </span>2.72796177<span style="color: #949494;">, </span>2.56526…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_sd_mean                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.3236597<span style="color: #949494;">, </span>1.4092594<span style="color: #949494;">, </span>2.7301272…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_min_mean                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ speed_mm_s_max_mean                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 80.400560<span style="color: #949494;">, </span>30.675723<span style="color: #949494;">, </span>80.056230…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_mean_mean        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 28.96269<span style="color: #949494;">, </span>25.55369<span style="color: #949494;">, </span>28.74277<span style="color: #949494;">, </span>2…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_sd_mean          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.9446311<span style="color: #949494;">, </span>11.5859741<span style="color: #949494;">, </span>10.00480…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_min_mean         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 9.2444578<span style="color: #949494;">, </span>0.5099020<span style="color: #949494;">, </span>2.4698178…</span></span>
+<span><span class="co">#&gt; $ distance_from_sources_max_mean         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 39.12608<span style="color: #949494;">, </span>39.72833<span style="color: #949494;">, </span>39.82085<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_mean_mean              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.2411150<span style="color: #949494;">, </span>0.4206128<span style="color: #949494;">, </span>0.3119777…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_sd_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4279090<span style="color: #949494;">, </span>0.4938294<span style="color: #949494;">, </span>0.4634622…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_min_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_max_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_mean_mean              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24250871<span style="color: #949494;">, </span>0.40181058<span style="color: #949494;">, </span>0.27924…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_sd_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.4287497<span style="color: #949494;">, </span>0.4904348<span style="color: #949494;">, </span>0.4487859…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_min_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_max_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_mean_mean      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 179.5528<span style="color: #949494;">, </span>178.4911<span style="color: #949494;">, </span>181.9409<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_sd_mean        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37.01938<span style="color: #949494;">, </span>33.11427<span style="color: #949494;">, </span>26.74246<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_min_mean       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.000000<span style="color: #949494;">, </span>0.000000<span style="color: #949494;">, </span>4.398705<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ turning_angle_clockwise_max_mean       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 352.8750<span style="color: #949494;">, </span>360.0000<span style="color: #949494;">, </span>355.2364<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_mean_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.44721608<span style="color: #949494;">, </span>-1.50890211<span style="color: #949494;">, </span>1.940…</span></span>
+<span><span class="co">#&gt; $ turning_angle_sd_mean                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 37.01938<span style="color: #949494;">, </span>33.11427<span style="color: #949494;">, </span>26.74246<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_min_mean                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -180.0000<span style="color: #949494;">, </span>-180.0000<span style="color: #949494;">, </span>-175.6013…</span></span>
+<span><span class="co">#&gt; $ turning_angle_max_mean                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 172.8750<span style="color: #949494;">, </span>180.0000<span style="color: #949494;">, </span>175.2364<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_mean_mean <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 171.7055<span style="color: #949494;">, </span>152.9723<span style="color: #949494;">, </span>189.7393<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_sd_mean   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 104.81931<span style="color: #949494;">, </span>102.71052<span style="color: #949494;">, </span>102.17589…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_min_mean  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.26525634<span style="color: #949494;">, </span>0.23675807<span style="color: #949494;">, </span>0.59327…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_clockwise_max_mean  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 359.6384<span style="color: #949494;">, </span>359.9147<span style="color: #949494;">, </span>359.8725<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_mean_mean           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -8.2944915<span style="color: #949494;">, </span>-27.0276516<span style="color: #949494;">, </span>9.7393…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_sd_mean             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 104.81931<span style="color: #949494;">, </span>102.71052<span style="color: #949494;">, </span>102.17589…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_min_mean            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -179.7347<span style="color: #949494;">, </span>-179.7632<span style="color: #949494;">, </span>-179.4067…</span></span>
+<span><span class="co">#&gt; $ turning_angle_odor_max_mean            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 179.6384<span style="color: #949494;">, </span>179.9147<span style="color: #949494;">, </span>179.8725<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_mean_mean     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.1382622<span style="color: #949494;">, </span>25.6879253<span style="color: #949494;">, </span>-7.71515…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_sd_mean       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 111.07679<span style="color: #949494;">, </span>108.89122<span style="color: #949494;">, </span>106.28259…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_min_mean      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -343.4822<span style="color: #949494;">, </span>-335.5560<span style="color: #949494;">, </span>-302.2756…</span></span>
+<span><span class="co">#&gt; $ turning_angle_ratio_odor_max_mean      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 337.3887<span style="color: #949494;">, </span>307.0399<span style="color: #949494;">, </span>329.1341<span style="color: #949494;">, </span>3…</span></span>
+<span><span class="co">#&gt; $ Hour_prop_TRUE_mean                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ Hour_nb_TRUE_mean                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ Hour_nb_FALSE_mean                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ latitude_prop_TRUE_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ latitude_nb_TRUE_mean                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ latitude_nb_FALSE_mean                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ longitude_prop_TRUE_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NaN</span><span style="color: #949494;">, </span><span style="color: #BB0000;">N</span>…</span></span>
+<span><span class="co">#&gt; $ longitude_nb_TRUE_mean                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ longitude_nb_FALSE_mean                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0…</span></span>
+<span><span class="co">#&gt; $ is_immobile_prop_TRUE_mean             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.11436541<span style="color: #949494;">, </span>0.03693380<span style="color: #949494;">, </span>0.09407…</span></span>
+<span><span class="co">#&gt; $ is_immobile_nb_TRUE_mean               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 164<span style="color: #949494;">, </span>53<span style="color: #949494;">, </span>135<span style="color: #949494;">, </span>90<span style="color: #949494;">, </span>107<span style="color: #949494;">, </span>106<span style="color: #949494;">, </span>167…</span></span>
+<span><span class="co">#&gt; $ is_immobile_nb_FALSE_mean              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1270<span style="color: #949494;">, </span>1382<span style="color: #949494;">, </span>1300<span style="color: #949494;">, </span>1345<span style="color: #949494;">, </span>1328<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_prop_TRUE_mean         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.2411150<span style="color: #949494;">, </span>0.4206128<span style="color: #949494;">, </span>0.3119777…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_nb_TRUE_mean           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 346<span style="color: #949494;">, </span>604<span style="color: #949494;">, </span>448<span style="color: #949494;">, </span>714<span style="color: #949494;">, </span>1252<span style="color: #949494;">, </span>656<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_HH_nb_FALSE_mean          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1089<span style="color: #949494;">, </span>832<span style="color: #949494;">, </span>988<span style="color: #949494;">, </span>722<span style="color: #949494;">, </span>184<span style="color: #949494;">, </span>780<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_prop_TRUE_mean         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.24250871<span style="color: #949494;">, </span>0.40181058<span style="color: #949494;">, </span>0.27924…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_nb_TRUE_mean           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 348<span style="color: #949494;">, </span>577<span style="color: #949494;">, </span>401<span style="color: #949494;">, </span>660<span style="color: #949494;">, </span>1168<span style="color: #949494;">, </span>633<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ in_left_half_CH_nb_FALSE_mean          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1087<span style="color: #949494;">, </span>859<span style="color: #949494;">, </span>1035<span style="color: #949494;">, </span>776<span style="color: #949494;">, </span>268<span style="color: #949494;">, </span>803<span style="color: #949494;">,</span>…</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">MM_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Biomol_sp</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DGL1"</span>, <span class="st">"DGSS"</span>, <span class="st">"D_carpathicus"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">in_left_half_CH_prop_TRUE</span>, col <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"CH Preference for left side vs Treatment"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Proportion of run more in left side"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Treatment"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Biomol_sp</span><span class="op">)</span></span></code></pre></div>
+<p><img src="figures/unnamed-chunk-3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">MM_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">turning_angle_mean</span> <span class="op">&lt;</span> <span class="fl">20</span> <span class="op">&amp;</span> <span class="va">turning_angle_mean</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">turning_angle_mean</span>, col <span class="op">=</span> <span class="va">Treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"CH Preference for left side vs Treatment"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Turning angle"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Treatment"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="figures/unnamed-chunk-4-1.png" width="100%"></p>
+</div>
+<div class="section level4">
 <h4 id="binomial-tests-for-zone-preferences">Binomial Tests for Zone Preferences<a class="anchor" aria-label="anchor" href="#binomial-tests-for-zone-preferences"></a>
 </h4>
 <p>Test whether organisms show significant preferences for specific
 zones:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test zone preferences by treatment</span></span>
 <span><span class="va">binom_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/binom_test_mitemap.html">binom_test_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, factor <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: There were 48 warnings in `summarise()`.</span></span>
@@ -449,240 +523,10 @@ zones:</p>
 <h4 id="movement-metrics-and-convex-hull-analysis">Movement Metrics and Convex Hull Analysis<a class="anchor" aria-label="anchor" href="#movement-metrics-and-convex-hull-analysis"></a>
 </h4>
 <p>Calculate movement characteristics using convex hull analysis:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate convex hull metrics (spatial usage)</span></span>
-<span><span class="va">ch_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/convex_hull_mitemap.html">convex_hull_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, plot_show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (28.36 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 110 (21.36 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 99 (20.84 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 107 (20.98 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 149 (35.82 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (24.95 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 103 (20.89 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 85 (24.15 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 129 (29.05 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 128 (25.86 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (27.92 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 115 (27.64 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 107 (25.24 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 11 (78.57 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_17_10h23m30s (none distance &lt; quantile)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 155 (57.84 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 100 (22.62 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 122 (28.77 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 88 (17.89 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 120 (30.15 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 25 (7.65 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 157 (43.37 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 146 (66.97 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 135 (54.66 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 66 (16.71 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (43.12 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 93 (80.87 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 109 (44.31 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 110 (19.71 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 89 (13.82 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 17 (65.38 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 124 (30.85 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 132 (42.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 90 (14.15 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 97 (15.57 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 28 (80 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 101 (17.97 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 115 (28.68 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (26.48 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 111 (21.1 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 100 (20.28 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 102 (19.73 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 114 (26.76 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 108 (29.11 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 124 (32.38 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 142 (31.91 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 130 (36.01 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 145 (39.19 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 108 (21.43 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 133 (28 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 176 (54.83 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 167 (52.85 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 149 (59.36 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 126 (26.92 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 107 (87.7 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 117 (26.9 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 124 (72.09 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 102 (22.32 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 74 (33.94 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 108 (73.47 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 111 (26 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 147 (65.92 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 155 (41.55 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (22.42 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 148 (84.57 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 2 (66.67 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_17_15h23m58s (none distance &lt; quantile)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 101 (19.54 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 57 (77.03 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 121 (85.21 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 105 (21.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (15.64 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 146 (42.07 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 122 (37.89 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 148 (38.54 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (22.06 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 3 (100 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 4 (80 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_17_15h33m59s (none distance &lt; quantile)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 104 (19.55 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 176 (60.27 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 100 (66.23 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 119 (34.39 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 106 (25.48 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (25.55 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 145 (37.76 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 99 (69.23 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 111 (33.33 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 141 (36.81 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 92 (21.05 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 55 (80.88 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 132 (27.1 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 169 (49.85 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 153 (40.8 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 82 (25.08 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 115 (26.93 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 119 (27.67 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 103 (19.07 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (39.46 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 95 (17.21 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 33 (70.21 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 89 (32.96 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 100 (35.09 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 61 (18.89 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 129 (27.45 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 94 (28.83 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 165 (44.35 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 80 (45.71 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 105 (36.46 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 5 (100 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 109 (26.72 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 59 (45.04 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 78 (48.15 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 131 (35.6 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 84 (25.53 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 102 (31.87 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 74 (51.39 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 107 (38.35 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 126 (50.2 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 112 (21.58 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 41 (69.49 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_17_20h27m19s (not enough spatial points)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_17_20h27m50s (not enough spatial points)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 61 (52.14 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 51 (76.12 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 3 (100 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (56.14 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 81 (44.75 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (26.22 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 64 (66.67 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 68 (13.13 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 108 (29.51 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 103 (17.73 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 102 (17.2 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (24.2 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (19.18 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 92 (17.9 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 92 (29.97 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 115 (32.76 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 83 (19.53 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (27.55 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (18.57 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 89 (45.18 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 106 (43.8 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 89 (58.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 55 (35.71 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 70 (43.75 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 85 (41.87 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 87 (20.33 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (16.24 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 101 (36.73 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 132 (35.58 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 121 (21.72 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 3 (100 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_18_00h25m45s (none distance &lt; quantile)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (35.8 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 73 (29.2 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 94 (20.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 95 (22.95 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 104 (16.8 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 92 (16.91 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 93 (21.33 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 121 (28.67 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 30 (10.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 99 (24.21 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 21 (22.58 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 106 (22.89 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (24.95 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 77 (11.48 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 90 (15.65 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 80 (11.56 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 123 (25.79 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 138 (41.82 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (25.11 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (24.69 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 92 (17.86 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 42 (11.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 133 (25.58 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 90 (16.95 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 145 (44.75 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 86 (27.13 %)</span></span>
-<span><span class="co">#&gt; No convex Hull found for sample: MM012022_05_18_02h24m49s (not enough spatial points)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 105 (21.43 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (19.35 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 6 (100 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 99 (20.5 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 103 (25.18 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (43.75 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 125 (29.9 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 101 (42.98 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (14.48 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (21.77 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 99 (24.63 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 104 (23.11 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 152 (54.09 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 135 (60 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 133 (30.86 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 121 (26.13 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 123 (49.8 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (17.85 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 135 (41.93 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 95 (22.09 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 130 (41.53 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 90 (28.66 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 129 (29.86 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 116 (37.91 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 100 (23.42 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 106 (22.18 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 81 (26.91 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 82 (20.71 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 102 (28.9 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 86 (27.22 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 88 (20.56 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 108 (24.05 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 94 (23.44 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 118 (25.82 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 98 (24.44 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 148 (69.48 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 112 (26.73 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 41 (56.16 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 113 (77.4 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 97 (19.17 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 151 (51.01 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 86 (14.1 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 96 (17.36 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 129 (25.75 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 72 (14.94 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 81 (33.61 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 20 (20.2 %)</span></span>
-<span><span class="co">#&gt; Number of spatial points conserved using tbe = 3: 83 (13.47 %)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ch_results</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ch_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/convex_hull_mitemap.html">convex_hull_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, plot_show <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ch_results</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                         File_name hull_area center_of_area_x</span></span>
 <span><span class="co">#&gt; MM012022_05_17_08h23m05s MM012022_05_17_08h23m05s    -508.0        7.5821429</span></span>
 <span><span class="co">#&gt; MM012022_05_17_08h23m17s MM012022_05_17_08h23m17s    -690.0        2.6984334</span></span>
@@ -716,8 +560,10 @@ zones:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Treatment</span>, y <span class="op">=</span> <span class="va">hull_area</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Spatial Usage (Convex Hull Area) by Treatment"</span>,</span>
-<span>       y <span class="op">=</span> <span class="st">"Hull Area (mm²)"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Spatial Usage (Convex Hull Area) by Treatment"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Hull Area (mm²)"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 9995 rows containing non-finite outside the scale range</span></span>
 <span><span class="co">#&gt; (`stat_boxplot()`).</span></span></code></pre></div>
 <p><img src="figures/convex-hull-1.png" width="100%"></p>
@@ -729,11 +575,11 @@ zones:</p>
 <p>The <code><a href="../reference/filter_mitemap.html">filter_mitemap()</a></code> function allows you to clean and
 process the tracking data. Note that this is done automatically with
 clean=TRUE in [import_mitemap()], but you can</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Apply custom filtering </span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Apply custom filtering</span></span>
 <span><span class="va">MM_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_mitemap.html">filter_mitemap</a></span><span class="op">(</span></span>
 <span>  <span class="va">MM</span>,</span>
-<span>first_seconds_to_delete <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  first_seconds_to_delete <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  max_x_value <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  min_x_value <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>,</span>
 <span>  max_y_value <span class="op">=</span> <span class="fl">20</span>,</span>
@@ -763,25 +609,31 @@ clean=TRUE in [import_mitemap()], but you can</p>
 </h4>
 <p>Analyze movement speeds and create speed-colored trajectory
 plots:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create trajectory plots colored by movement speed</span></span>
 <span><span class="va">p_speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_ind_mitemap.html">plot_ind_mitemap</a></span><span class="op">(</span></span>
-<span>  <span class="va">MM</span>, </span>
-<span>  ind_index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>  <span class="va">MM</span>,</span>
+<span>  ind_index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
 <span>  linewidth <span class="op">=</span> <span class="fl">1.5</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">p_speed</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<p><img src="figures/speed-analysis-1.png" width="100%"></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Combine multiple speed plots</span></span>
-<span><span class="op">(</span><span class="va">p_speed</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">p_speed</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">p_speed</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span></span>
+<span><span class="op">(</span><span class="op">(</span><span class="va">p_speed</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">p_speed</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">p_speed</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">p_speed</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_color_viridis_c</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Speed\n(mm/s)"</span>, trans <span class="op">=</span> <span class="st">"log1p"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span>
 <span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span>
 <span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre></div>
-<p><img src="figures/speed-analysis-1.png" width="100%"></p>
+<p><img src="figures/speed-analysis-2.png" width="100%"></p>
 </div>
 </div>
 </div>

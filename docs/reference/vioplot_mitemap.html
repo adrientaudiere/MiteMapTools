@@ -47,7 +47,7 @@
 
 
 <dl><dt id="arg-mitemap">MiteMap<a class="anchor" aria-label="anchor" href="#arg-mitemap"></a></dt>
-<dd><p>(required) The result of import_mitemap ($resulting_data) for raw_data</p></dd>
+<dd><p>(required) The result of import_mitemap</p></dd>
 
 
 <dt id="arg-factor">factor<a class="anchor" aria-label="anchor" href="#arg-factor"></a></dt>
@@ -78,10 +78,10 @@ This can help to visualize the data distribution, especially with large datasets
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">vioplot_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, <span class="st">"Treatment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="vioplot_mitemap-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">vioplot_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, factor <span class="op">=</span> <span class="st">"Treatment"</span>, wrap <span class="op">=</span> <span class="st">"Biomol_sp"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">geom_boxplot</span><span class="op">(</span>col<span class="op">=</span><span class="st">"gray60"</span>, width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span> </span></span>
+<span class="r-in"><span>  <span class="fu">geom_boxplot</span><span class="op">(</span>col <span class="op">=</span> <span class="st">"gray60"</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="vioplot_mitemap-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span>  </span></span>
-<span class="r-in"><span><span class="fu">vioplot_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, <span class="st">"Treatment"</span>, prop_points<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">vioplot_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, <span class="st">"Treatment"</span>, prop_points <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="vioplot_mitemap-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

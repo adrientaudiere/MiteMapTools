@@ -1,5 +1,6 @@
 MM_data_messy <- import_mitemap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-                                clean=FALSE, verbose = FALSE)
+  clean = FALSE, verbose = FALSE
+)
 
 MM_filtered <- filter_mitemap(MM_data_messy, verbose = FALSE)
 
@@ -26,7 +27,7 @@ test_that("filter_mitemap parameter validation", {
     bad_range_value_y = 50,
     verbose = FALSE
   )
-  
+
   expect_s3_class(MM_custom1, "tbl_df")
   expect_lte(nrow(MM_custom1), nrow(MM_data_messy))
 })
@@ -41,7 +42,7 @@ test_that("filter_mitemap handles extreme filtering", {
     min_y_value = -5,
     verbose = FALSE
   )
-  
+
   expect_s3_class(MM_restrictive, "tbl_df")
   expect_lte(nrow(MM_restrictive), nrow(MM_filtered))
 })
@@ -53,7 +54,7 @@ test_that("filter_mitemap handles center parameters", {
     center_y = 5,
     verbose = FALSE
   )
-  
+
   expect_s3_class(MM_centered, "tbl_df")
   expect_true("x.mm." %in% colnames(MM_centered))
   expect_true("y.mm." %in% colnames(MM_centered))
@@ -62,7 +63,7 @@ test_that("filter_mitemap handles center parameters", {
 test_that("filter_mitemap return structure", {
   expect_s3_class(MM_filtered, "tbl_df")
   expect_true(all(c("x.mm.", "y.mm.", "X..t.s.", "File_name") %in% colnames(MM_filtered)))
-  
+
   # Check that filtering actually removes data points
   expect_lt(nrow(MM_filtered), nrow(MM_data_messy))
 })

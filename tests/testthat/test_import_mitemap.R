@@ -19,7 +19,7 @@ test_that("import_mitemap handles different file_name_column", {
     system.file("extdata", "mitemap_example", package = "MiteMapTools"),
     verbose = FALSE
   )
-  
+
   expect_s3_class(mm_default, "tbl_df")
   expect_gt(nrow(mm_default), 0)
   expect_true("File_name" %in% colnames(mm_default))
@@ -30,7 +30,7 @@ test_that("import_mitemap return structure validation", {
   expect_type(mm_csv_log, "list")
   expect_true("resulting_data" %in% names(mm_csv_log))
   expect_s3_class(mm_csv_log$resulting_data, "tbl_df")
-  
+
   # Test direct return structure
   expect_s3_class(mm_csv, "tbl_df")
   expect_true(all(c("x.mm.", "y.mm.", "X..t.s.", "File_name") %in% colnames(mm_csv)))
@@ -42,7 +42,7 @@ test_that("import_mitemap handles clean parameter", {
     system.file("extdata", "mitemap_example", package = "MiteMapTools"),
     clean = FALSE, verbose = FALSE
   )
-  
+
   expect_s3_class(mm_messy, "tbl_df")
   expect_gt(nrow(mm_messy), nrow(mm_csv)) # Should have more rows when not cleaned
 })
@@ -52,7 +52,7 @@ test_that("import_mitemap parameter validation", {
   expect_no_error({
     suppressWarnings(import_mitemap(
       system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-      verbose = TRUE, 
+      verbose = TRUE,
       clean = TRUE,
       compute_metrics = FALSE
     ))

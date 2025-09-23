@@ -7,7 +7,7 @@
 vioplot_mitemap(MiteMap, factor = NULL, wrap = NULL, prop_points = NULL)
 }
 \arguments{
-\item{MiteMap}{(required) The result of import_mitemap ($resulting_data) for raw_data}
+\item{MiteMap}{(required) The result of import_mitemap}
 
 \item{factor}{: A name of column present in the MiteMap to separate violin plot.}
 
@@ -26,9 +26,9 @@ Make violin plot of MiteMap data
 \examples{
 vioplot_mitemap(MM_data, "Treatment")
 vioplot_mitemap(MM_data, factor = "Treatment", wrap = "Biomol_sp") +
-  geom_boxplot(col="gray60", width=0.1) 
-  
-vioplot_mitemap(MM_data, "Treatment", prop_points=0.01)
+  geom_boxplot(col = "gray60", width = 0.1)
+
+vioplot_mitemap(MM_data, "Treatment", prop_points = 0.01)
 }
 \author{
 Adrien Taudière

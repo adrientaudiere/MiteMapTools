@@ -13,25 +13,24 @@
 #' @examples
 #' vioplot_mitemap(MM_data, "Treatment")
 #' vioplot_mitemap(MM_data, factor = "Treatment", wrap = "Biomol_sp") +
-#'   geom_boxplot(col="gray60", width=0.1) 
-#'   
-#' vioplot_mitemap(MM_data, "Treatment", prop_points=0.01)
+#'   geom_boxplot(col = "gray60", width = 0.1)
+#'
+#' vioplot_mitemap(MM_data, "Treatment", prop_points = 0.01)
 vioplot_mitemap <- function(MiteMap,
                             factor = NULL,
                             wrap = NULL,
-                            prop_points=NULL) {
-  
+                            prop_points = NULL) {
   if (!is_tibble(MiteMap)) {
     MiteMap <- MiteMap$resulting_data
   }
-  
-  if(is.null(factor)){
+
+  if (is.null(factor)) {
     stop("You must provide a column name for factor.")
   }
-  if(!factor %in% colnames(MiteMap)){
+  if (!factor %in% colnames(MiteMap)) {
     stop(paste("The factor", factor, "is not a column name of MiteMap."))
   }
-  
+
   modality_interm <-
     eval(parse(text = paste("MiteMap$", factor, sep = "")))
   MiteMap$Modality_interm <- modality_interm
@@ -56,15 +55,15 @@ vioplot_mitemap <- function(MiteMap,
     p <- p +
       facet_wrap(~Wrap)
   }
-  
-  if(!is.null(prop_points)){
+
+  if (!is.null(prop_points)) {
     sampled_data <- MiteMap |>
       group_by(Modality_interm) |>
-      sample_frac(prop_points) |> 
+      sample_frac(prop_points) |>
       ungroup()
-    
-    p <- p + geom_jitter(data=sampled_data, alpha = 0.1) +
-      labs("subtitle"=paste("with", round(nrow(sampled_data)), "points (", round(prop_points*100,2), "% of total data)"))
+
+    p <- p + geom_jitter(data = sampled_data, alpha = 0.1) +
+      labs("subtitle" = paste("with", round(nrow(sampled_data)), "points (", round(prop_points * 100, 2), "% of total data)"))
   }
   return(p)
 }

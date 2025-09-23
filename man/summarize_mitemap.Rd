@@ -37,12 +37,12 @@ Summarize MiteMap data at the individual (File) level
 \examples{
 mm_csv <- suppressWarnings(import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column="File (mite ID)"
+  file_name_column = "File (mite ID)"
 ))
 sum_mm <- summarize_mitemap(mm_csv)
-ggplot(sum_mm, aes(x=Treatment, y=distance_from_sources_mean, fill=Treatment)) +
-ggrain::geom_rain() +
-coord_flip()
+ggplot(sum_mm, aes(x = Treatment, y = distance_from_sources_mean, fill = Treatment)) +
+  ggrain::geom_rain() +
+  coord_flip()
 }
 \author{
 Adrien Taudière

@@ -1,4 +1,4 @@
-#' Create folder(s) with heatmaps extracted from zip files optionally organized 
+#' Create folder(s) with heatmaps extracted from zip files optionally organized
 #' by a factor
 #'
 #' @param path_to_folder Path to folder
@@ -17,19 +17,22 @@
 #' @author Adrien Taudière
 #' @examples
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'  factor="Treatment")
+#'   factor = "Treatment"
+#' )
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'  factor="Biomol_sp", force=TRUE)
+#'   factor = "Biomol_sp", force = TRUE
+#' )
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'  clean=FALSE, force=TRUE)
+#'   clean = FALSE, force = TRUE
+#' )
 #' unlink("Heatmap", recursive = TRUE)
 extract_heatmap <- function(path_to_folder,
                             factor = NULL,
-                         output_path = "Heatmap",
-                         verbose= TRUE,
-                         force = FALSE, 
-                         heatmap_file_name= "_carte_thermique_",
-                         ...) {
+                            output_path = "Heatmap",
+                            verbose = TRUE,
+                            force = FALSE,
+                            heatmap_file_name = "_carte_thermique_",
+                            ...) {
   if (force) {
     unlink(output_path, recursive = TRUE)
   }
@@ -40,8 +43,8 @@ extract_heatmap <- function(path_to_folder,
     full.names = TRUE,
     include.dirs = TRUE
   )
-  
-  mm <- import_mitemap(path_to_folder, verbose=verbose, force=force, ...)
+
+  mm <- import_mitemap(path_to_folder, verbose = verbose, force = force, ...)
   dir.create(output_path)
 
   for (i in 1:length(zip_files)) {
@@ -55,16 +58,15 @@ extract_heatmap <- function(path_to_folder,
 
     if (is.null(factor)) {
       unzip(zip_files[i],
-            heatmap_file,
-            exdir = paste(output_path, sep = "")
+        heatmap_file,
+        exdir = paste(output_path, sep = "")
       )
     } else {
-      
       mod <- mm |>
         filter(File_name == heatmap_name) |>
-        pull(factor) |> 
+        pull(factor) |>
         unique()
-      
+
       unzip(zip_files[i],
         heatmap_file,
         exdir = paste(output_path, "/", mod, sep = "")

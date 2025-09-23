@@ -43,11 +43,14 @@ by a factor
 }
 \examples{
 extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
- factor="Treatment")
+  factor = "Treatment"
+)
 extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
- factor="Biomol_sp", force=TRUE)
+  factor = "Biomol_sp", force = TRUE
+)
 extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
- clean=FALSE, force=TRUE)
+  clean = FALSE, force = TRUE
+)
 unlink("Heatmap", recursive = TRUE)
 }
 \author{

@@ -4,7 +4,7 @@
 #' @param unity (default = 1): size of square grid in mm
 #' @param tbe (default = 3)
 #' @param plot_show (Logical, default = TRUE) : Do we plot all mitemap ?
-#' @param probs_quantile (default = 0.68) 
+#' @param probs_quantile (default = 0.68)
 #' @param min_nb_spatial_points : Minimum number of spatial point to keep the sample
 #' @param each_point_count_one (Logical ; default = FALSE) If TRUE, each spatial point
 #'   count only for one time step instead. By default, if the mite stay 3t at a given
@@ -14,12 +14,12 @@
 #' @param plot_center_of_mass (Logical, default = TRUE): Do we plot the center of mass?
 #' @param verbose (Logical, default = TRUE) If TRUE, the function print additional
 #' @return A dataframe with convex hull information for each run (File_name)
-#'    and plot of convex hull for each run if plot_show = TRUE. 
+#'    and plot of convex hull for each run if plot_show = TRUE.
 #' @export
 #' @author Adrien Taudière
 #' @examples
 #' \dontrun{
-#'   ch <- convex_hull_mitemap(MM_data)
+#' ch <- convex_hull_mitemap(MM_data)
 #' }
 #' ch <- convex_hull_mitemap(MM_data, plot_show = FALSE)
 #' full_join(ch, MM_data) |>
@@ -63,29 +63,31 @@ convex_hull_mitemap <- function(MiteMap,
         unity
     tbe_table <- table(paste(x, y, sep = ":"))
     if (length(tbe_table) < min_nb_spatial_points) {
-     if(verbose){ 
-       message(
-        paste(
-          "No convex Hull found for sample:",
-          run,
-          "(not enough spatial points)"
+      if (verbose) {
+        message(
+          paste(
+            "No convex Hull found for sample:",
+            run,
+            "(not enough spatial points)"
+          )
         )
-      )}
+      }
       next
-     }
-    if(verbose){ 
-    message(
-      paste(
-        "Number of spatial points conserved using tbe = ",
-        tbe,
-        ": ",
-        sum(tbe_table > tbe),
-        " (",
-        round(sum(tbe_table > tbe) / length(tbe_table) * 100, 2),
-        " %)",
-        sep = ""
+    }
+    if (verbose) {
+      message(
+        paste(
+          "Number of spatial points conserved using tbe = ",
+          tbe,
+          ": ",
+          sum(tbe_table > tbe),
+          " (",
+          round(sum(tbe_table > tbe) / length(tbe_table) * 100, 2),
+          " %)",
+          sep = ""
+        )
       )
-    )}
+    }
     nms <- names(tbe_table)
     coords <-
       matrix(as.numeric(unlist(strsplit(nms, ":"))), ncol = 2, byrow = TRUE)
@@ -105,14 +107,15 @@ convex_hull_mitemap <- function(MiteMap,
     dst <- rowSums(scale(xy, scale = FALSE)^2)
     idx <- which(dst < quantile(dst, probs = probs_quantile))
     if (length(idx) == 0) {
-      if(verbose) {
+      if (verbose) {
         message(
-        paste(
-          "No convex Hull found for sample:",
-          run,
-          "(none distance < quantile) "
+          paste(
+            "No convex Hull found for sample:",
+            run,
+            "(none distance < quantile) "
+          )
         )
-      )}
+      }
       next
     }
     idx0 <- chull(xy[idx, 1], xy[idx, 2])

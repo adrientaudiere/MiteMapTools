@@ -1,15 +1,15 @@
 #' Test binomial on MiteMap for presence in the half part of the odor
-#' 
-#' @details 
-#'  The test is run for each factor values with a p-adjustement step. For each 
+#'
+#' @details
+#'  The test is run for each factor values with a p-adjustement step. For each
 #'  run (filename), the proportion of points in the left half is calculated. If the
 #'  proportion is superior to 0.5, the run is considered as "in left", else "in right".
-#'  Then a binomial test is run to test if the proportion of runs "in left" is  
+#'  Then a binomial test is run to test if the proportion of runs "in left" is
 #'  significantly different from 0.5 for each levels of the factor. If format is "CH",
-#'  the same process is done but for presence in the circular half rather than 
+#'  the same process is done but for presence in the circular half rather than
 #'  a half part.
-#'  
-#'  If level is "lines", each line of MiteMap is considered as one replicate 
+#'
+#'  If level is "lines", each line of MiteMap is considered as one replicate
 #'  (i.e. the proportion of points in left half is calculated for each line of MiteMap).
 #'  This approach is not recommended as it introduce a high pseudoreplication risk.
 #'
@@ -20,79 +20,83 @@
 #' "CH" for Circular-Half.
 #' @param verbose (Logical, default = TRUE) If TRUE, the function print additional
 #'  information.
-#' @param p.adjust_method (default "BH") method for p-adjustement. 
+#' @param p.adjust_method (default "BH") method for p-adjustement.
 #'   See [stats::p.adjust()].
 #' @param level (default "run") The level of analysis. "run" to consider each run
-#'  (File_name) as one replicate. "lines" to consider each line 
-#'  (i.e. each temporal point) of MiteMap as one replicate. The level run is 
+#'  (File_name) as one replicate. "lines" to consider each line
+#'  (i.e. each temporal point) of MiteMap as one replicate. The level run is
 #'  more conservative as it considers that each run is one independent replicate.
 #'  Use level "lines" carefully as it introduce a high pseudoreplication risk.
 #' @param alternative (default "two.sided") The alternative hypothesis to test.
 #'  See [stats::binom.test()].
-#'  
+#'
 #' @return A tibble of results for binomial test
 #'
 #' @export
 #' @author Adrien Taudière
 #' @examples
-#'  
-#'  
+#'
+#'
 #' binom_test_mitemap(MM_data, factor = "Treatment")
-#' binom_test_mitemap(MM_data, factor = "Treatment", format="CH")
-#' binom_test_mitemap(MM_data, factor = "Treatment", level="lines")
-#' 
+#' binom_test_mitemap(MM_data, factor = "Treatment", format = "CH")
+#' binom_test_mitemap(MM_data, factor = "Treatment", level = "lines")
+#'
 #' MM_data |>
-#'  filter(Biomol_sp %in% c("DGSS", "DGL1", "D_carpathicus")) |>
+#'   filter(Biomol_sp %in% c("DGSS", "DGL1", "D_carpathicus")) |>
 #'   binom_test_mitemap(factor = "Biomol_sp")
-binom_test_mitemap <- function(MiteMap, 
+binom_test_mitemap <- function(MiteMap,
                                factor = NULL,
-                               format= "HH",
+                               format = "HH",
                                verbose = TRUE,
                                p.adjust_method = "BH",
-                               level="run",
-                               alternative="two.sided") {
- if(verbose){
-   MM_ind<- summarize_mitemap(MiteMap)
-   } else {
-     MM_ind<- suppressWarnings(summarize_mitemap(MiteMap))
- }
-  
-  if(format== "HH"){
+                               level = "run",
+                               alternative = "two.sided") {
+  if (verbose) {
+    MM_ind <- summarize_mitemap(MiteMap)
+  } else {
+    MM_ind <- suppressWarnings(summarize_mitemap(MiteMap))
+  }
+
+  if (format == "HH") {
     MM_ind <- MM_ind |>
-      mutate(in_left_TRUE= in_left_half_HH_nb_TRUE,
-             in_left_FALSE= in_left_half_HH_nb_FALSE,
-             in_left_prop_TRUE = in_left_TRUE/(in_left_TRUE + in_left_FALSE),
-             in_left_prop_TRUE = in_left_FALSE/(in_left_TRUE + in_left_FALSE),
-             in_left=in_left_prop_TRUE>0.5,
-             in_right=in_left_prop_TRUE<=0.5) 
-  } else if(format=="CH"){
-    MM_ind <-  MM_ind |>
-      mutate(in_left_TRUE= in_left_half_CH_nb_TRUE,
-             in_left_FALSE= in_left_half_CH_nb_FALSE,
-             in_left_prop_TRUE = in_left_TRUE/(in_left_TRUE + in_left_FALSE),
-             in_left_prop_TRUE = in_left_FALSE/(in_left_TRUE + in_left_FALSE),
-             in_left=in_left_prop_TRUE>0.5,
-             in_right=in_left_prop_TRUE<=0.5) 
+      mutate(
+        in_left_TRUE = in_left_half_HH_nb_TRUE,
+        in_left_FALSE = in_left_half_HH_nb_FALSE,
+        in_left_prop_TRUE = in_left_TRUE / (in_left_TRUE + in_left_FALSE),
+        in_left_prop_TRUE = in_left_FALSE / (in_left_TRUE + in_left_FALSE),
+        in_left = in_left_prop_TRUE > 0.5,
+        in_right = in_left_prop_TRUE <= 0.5
+      )
+  } else if (format == "CH") {
+    MM_ind <- MM_ind |>
+      mutate(
+        in_left_TRUE = in_left_half_CH_nb_TRUE,
+        in_left_FALSE = in_left_half_CH_nb_FALSE,
+        in_left_prop_TRUE = in_left_TRUE / (in_left_TRUE + in_left_FALSE),
+        in_left_prop_TRUE = in_left_FALSE / (in_left_TRUE + in_left_FALSE),
+        in_left = in_left_prop_TRUE > 0.5,
+        in_right = in_left_prop_TRUE <= 0.5
+      )
   } else {
     stop("format must be 'HH' or 'CH'")
   }
 
-  if(level=="run") {
-    MM_ind <- MM_ind |> 
-      group_by(.data[[factor]]) |> 
+  if (level == "run") {
+    MM_ind <- MM_ind |>
+      group_by(.data[[factor]]) |>
       summarise(
         n = n(),
         yes = sum(in_left, na.rm = TRUE),
         no = sum(in_right, na.rm = TRUE)
-      ) 
-  } else if(level=="lines") {
-    MM_ind <- MM_ind |> 
-      group_by(.data[[factor]]) |> 
+      )
+  } else if (level == "lines") {
+    MM_ind <- MM_ind |>
+      group_by(.data[[factor]]) |>
       summarise(
         n = n(),
         yes = sum(in_left_TRUE, na.rm = TRUE),
         no = sum(in_left_FALSE, na.rm = TRUE)
-      ) 
+      )
   } else {
     stop("Paramter `level` must be 'run' or 'lines'")
   }
