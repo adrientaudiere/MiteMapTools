@@ -1,0 +1,182 @@
+---
+title: "MiteMapTools"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/",
+  out.width = "100%",
+  dpi = 150
+)
+```
+
+# MiteMapTools <img src="man/figures/logo.png" align="right" height="139" alt="" />
+
+MiteMapTools is a comprehensive R package for importing, analyzing, and visualizing movement data from MiteMap tracking systems. MiteMap is a cost-effective, open-source tool for 2D behavioral tracking of arthropods, particularly useful for studying chemotactic responses and movement patterns in controlled laboratory settings.
+
+## About MiteMap
+
+MiteMap is a Raspberry Pi-based automated tracking system designed to monitor arthropod behavior in circular arenas. The system uses infrared imaging to track individual organisms with high temporal resolution (position recorded every 0.2 seconds) and spatial precision. This technology enables researchers to study:
+
+- **Chemotactic behavior**: How arthropods respond to attractive or repulsive volatile compounds
+- **Movement patterns**: Analysis of trajectory complexity, speed, and spatial preferences  
+- **Zone preferences**: Time allocation between different arena regions
+- **Behavioral states**: Periods of activity vs. immobility
+
+The system consists of a circular arena (typically 40mm diameter) where test subjects are placed with potential stimuli positioned at the arena periphery. High-resolution tracking data allows for detailed quantitative analysis of behavioral responses.
+
+## Installation
+
+You can install the development version of MiteMapTools from GitHub with:
+
+```{r eval=FALSE}
+# install.packages("pak")
+pak::pak("adrientaudiere/MiteMapTools")
+```
+
+## Quick Start
+
+Here's a basic example showing how to import and visualize MiteMap data:
+
+```{r example, eval=FALSE}
+library(MiteMapTools)
+
+# Import MiteMap data from a folder containing zip files
+MM <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", 
+  verbose = FALSE, 
+  clean = TRUE
+)
+
+# Create violin plots showing position distributions by treatment
+vioplot_mitemap(MM, "Treatment", prop_points = 0.1)
+
+# Plot individual trajectories
+plot_results <- plot_ind_mitemap(MM, ind_index = c(1, 2, 3))
+plot_results[[1]]
+```
+
+## Key Features
+
+### 🔄 Data Import & Processing
+- **Seamless import** from MiteMap zip archives containing tracking data and metadata
+- **Automatic data cleaning** with configurable filtering parameters
+- **Multiple folder support** for batch processing of experiments
+
+### 📊 Advanced Visualizations
+- **Individual trajectory plots** with speed and movement analysis
+- **Violin plots** for position distribution comparisons
+- **Heatmap extraction** from tracking data
+- **Customizable arena layouts** and odor source positioning
+
+### 📈 Statistical Analysis
+- **Zone preference testing** using binomial tests with p-value adjustment
+- **Convex hull analysis** for spatial behavior quantification
+- **Movement metrics** including speed, turning angles, and immobility detection
+- **Summary statistics** at individual and group levels
+
+### 🛠️ Utilities
+- **File management** tools for handling MiteMap exports
+- **Data structure validation** and cleaning
+- **Flexible metadata integration**
+
+## Arena Layout
+
+The standard MiteMap arena configuration:
+
+```{r arena-layout, eval=FALSE, echo=TRUE}
+# Example showing arena layout with zones
+library(ggplot2)
+library(dplyr)
+
+# Create sample arena boundary
+circleFun <- function(center = c(0, 0), diameter = 40, npoints = 100) {
+  r <- diameter / 2
+  tt <- seq(0, 2 * pi, length.out = npoints)
+  xx <- center[1] + r * cos(tt)
+  yy <- center[2] + r * sin(tt)
+  return(data.frame(x = xx, y = yy))
+}
+
+dat <- circleFun()
+
+ggplot(dat, aes(x, y)) +
+  geom_path(color = "black", size = 1.2) +
+  coord_fixed() +
+  theme_minimal() +
+  geom_vline(xintercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_polygon(data = mutate(dat, x = ifelse(x > 0, 0, x)), 
+               fill = "lightblue", alpha = 0.3) +
+  geom_point(x = -19.5, y = 0, size = 4, shape = 8, color = "red") +
+  geom_label(x = -14, y = 0, label = "Odor source", color = "red") +
+  geom_label(x = 5, y = 0, label = "Control zone", color = "blue", hjust = 0) +
+  geom_label(x = -15, y = 15, label = "Treatment zone", color = "lightblue", hjust = 0) +
+  labs(
+    title = "Standard MiteMap Arena Layout",
+    subtitle = "40mm diameter arena with odor source at (-19.5, 0)",
+    x = "x (mm)", y = "y (mm)"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray60")
+  )
+```
+
+## Scientific Background
+
+This package implements methods described in:
+
+**Masier, L.‐S., Roy, L., & Durand, J.‐F. (2022). A new methodology for arthropod behavioral assays using MiteMap, a cost‐effective open‐source tool for 2D tracking. *Journal of Experimental Zoology Part A: Ecological and Integrative Physiology*, 337(4), 333-344.** [doi:10.1002/jez.2651](https://onlinelibrary.wiley.com/doi/10.1002/jez.2651)
+
+## Data Workflow
+
+```{r workflow, echo=FALSE, eval=FALSE}
+# Conceptual workflow diagram would go here
+# 1. MiteMap System → Raw ZIP files
+# 2. import_mitemap() → Processed tracking data
+# 3. filter_mitemap() → Clean data
+# 4. Analysis functions → Results
+# 5. Visualization functions → Plots and figures
+```
+
+The typical MiteMapTools workflow involves:
+
+1. **Data Collection**: MiteMap system generates ZIP files containing CSV tracking data
+2. **Import**: Use `import_mitemap()` to load and merge data with metadata
+3. **Processing**: Apply `filter_mitemap()` to clean and standardize coordinates
+4. **Analysis**: Calculate behavioral metrics with statistical functions
+5. **Visualization**: Create publication-ready plots and figures
+
+## Getting Started
+
+For detailed tutorials and examples, see:
+
+- [**Getting Started Guide**](articles/getting-started.html) - Complete walkthrough of basic functionality
+- [**Function Reference**](reference/index.html) - Detailed documentation for all functions
+- [**GitHub Repository**](https://github.com/adrientaudiere/MiteMapTools) - Source code and issues
+
+## Authors
+
+- **Adrien Taudière** - Package development and maintenance
+- **Lise Roy** - MiteMap system development and methodology
+
+## Citation
+
+If you use MiteMapTools in your research, please cite:
+
+```
+Masier, L.-S., Roy, L., & Durand, J.-F. (2022). A new methodology for arthropod 
+behavioral assays using MiteMap, a cost-effective open-source tool for 2D tracking. 
+Journal of Experimental Zoology Part A: Ecological and Integrative Physiology, 
+337(4), 333-344. doi:10.1002/jez.2651
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.

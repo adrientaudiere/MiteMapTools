@@ -6,10 +6,27 @@ template:
     fg: "#003f5f"
     primary: "#b96821"
     secondary: "#1A5B55"
+  includes:
+    in_header: |
+      <!-- Google Analytics or other tracking code can go here -->
+      
 navbar:
+  title: "MiteMapTools"
   structure:
     left: [intro, reference, articles, tutorials, news]
     right: [search, github]
+  components:
+    articles:
+      text: "Tutorials"
+      menu:
+      - text: "Getting Started"
+        href: articles/getting-started.html
+
+home:
+  title: "MiteMapTools • Arthropod Movement Analysis"
+  description: >
+    A comprehensive R package for importing, analyzing, and visualizing 
+    movement data from MiteMap tracking systems.
 
 articles:
 - title: "Getting Started"
@@ -18,46 +35,55 @@ articles:
   - getting-started
 
 reference:
-- title: "Data Import"
-  desc: "Functions to import MiteMap data from various sources"
+- title: "📥 Data Import & Management"
+  desc: "Import MiteMap data from ZIP archives and manage files"
   contents:
   - import_mitemap
   - import_mitemap_from_multiple_folder
+  - rename_files_with_number
+  - get_file_extension
   
-- title: "Data Processing"
-  desc: "Functions to filter and clean tracking data"
+- title: "🔧 Data Processing & Filtering"
+  desc: "Clean, filter, and process tracking data"
   contents:
   - filter_mitemap
   - summarize_mitemap
   
-- title: "Visualization"
-  desc: "Functions to create plots and visualizations"
+- title: "📊 Visualization & Plotting"
+  desc: "Create plots, heatmaps, and visualizations of movement data"
   contents:
   - plot_ind_mitemap
   - vioplot_mitemap
   - extract_heatmap
   
-- title: "Statistical Analysis"
-  desc: "Functions for behavioral analysis and statistics"
+- title: "📈 Statistical Analysis & Metrics"
+  desc: "Analyze behavioral patterns and calculate movement metrics"
   contents:
   - binom_test_mitemap
   - convex_hull_mitemap
   
-- title: "Example Data"
-  desc: "Sample datasets included with the package"
+- title: "💾 Example Datasets"
+  desc: "Sample datasets for testing and learning"
   contents:
   - MM_data
   
-- title: "Utilities"
-  desc: "Helper functions and utilities"
+- title: "📦 Package Information"
+  desc: "Package documentation and metadata"
   contents:
-  - get_file_extension
   - MiteMapTools-package
-  - rename_files_with_number
 
 authors:
   Adrien Taudière:
     href: "https://github.com/adrientaudiere"
+    html: "<img src='https://github.com/adrientaudiere.png' width='24' height='24'> Adrien Taudière"
   Lise Roy:
     href: "https://orcid.org/0000-0001-8833-1717"
+    html: "<img src='https://orcid.org/sites/default/files/images/orcid_16x16.png' width='16' height='16'> Lise Roy"
+
+footer:
+  structure:
+    left: [developed_by, built_with]
+    right: [package_citation]
+  components:
+    package_citation: "Please cite this package if you use it in your research"
 
