@@ -7,7 +7,6 @@ template:
     primary: "#b96821"
     secondary: "#1A5B55"
 navbar:
-  bg: secondary
   structure:
     left: [intro, reference, articles, tutorials, news]
     right: [search, github]
