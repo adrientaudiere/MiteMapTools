@@ -1,8 +1,13 @@
 url: https://adrientaudiere.github.io/MiteMapTools/
 template:
   bootstrap: 5
-
+  bslib:
+    bg: "#faefd1"
+    fg: "#003f5f"
+    primary: "#b96821"
+    secondary: "#1A5B55"
 navbar:
+  bg: secondary
   structure:
     left: [intro, reference, articles, tutorials, news]
     right: [search, github]
