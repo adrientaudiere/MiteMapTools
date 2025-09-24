@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# MiteMapTools <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# MiteMapTools
 
 MiteMapTools is a comprehensive R package for importing, analyzing, and visualizing movement data from MiteMap tracking systems. MiteMap is a cost-effective, open-source tool for 2D behavioral tracking of arthropods, particularly useful for studying chemotactic responses and movement patterns in controlled laboratory settings.
 

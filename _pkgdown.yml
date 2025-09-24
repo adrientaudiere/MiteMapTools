@@ -6,9 +6,14 @@ template:
     fg: "#003f5f"
     primary: "#b96821"
     secondary: "#1A5B55"
+    base_font: {google: "Inter"}
+    heading_font: {google: "Inter"}
+    code_font: {google: "JetBrains Mono"}
   includes:
     in_header: |
-      <!-- Google Analytics or other tracking code can go here -->
+      <!-- SEO Meta Tags -->
+      <meta name="keywords" content="R package, arthropod tracking, behavioral analysis, MiteMap, movement analysis, ethology">
+      <meta name="author" content="Adrien Taudière, Lise Roy">
       
 navbar:
   title: "MiteMapTools"
@@ -21,12 +26,22 @@ navbar:
       menu:
       - text: "Getting Started"
         href: articles/getting-started.html
+    github:
+      icon: fab-github
+      href: https://github.com/adrientaudiere/MiteMapTools
+      aria-label: "GitHub repository"
 
 home:
   title: "MiteMapTools • Arthropod Movement Analysis"
   description: >
     A comprehensive R package for importing, analyzing, and visualizing 
-    movement data from MiteMap tracking systems.
+    movement data from MiteMap tracking systems. Study chemotactic responses 
+    and movement patterns in arthropods with precision tracking data.
+  links:
+  - text: "View on GitHub"
+    href: https://github.com/adrientaudiere/MiteMapTools
+  - text: "Report an issue"  
+    href: https://github.com/adrientaudiere/MiteMapTools/issues
 
 articles:
 - title: "Getting Started"
@@ -85,5 +100,12 @@ footer:
     left: [developed_by, built_with]
     right: [package_citation]
   components:
-    package_citation: "Please cite this package if you use it in your research"
+    package_citation: 
+      text: "Cite MiteMapTools"
+      href: https://onlinelibrary.wiley.com/doi/10.1002/jez.2651
+
+development:
+  mode: auto
+  version_label: default
+  version_tooltip: "Version"
 
