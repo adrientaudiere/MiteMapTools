@@ -52,6 +52,7 @@ binom_test_mitemap <- function(MiteMap,
                                level = "run",
                                alternative = "two.sided") {
   if (verbose) {
+    cli::cli_alert_info("Running binomial test with format: {.field {format}}, level: {.field {level}}")
     MM_ind <- summarize_mitemap(MiteMap)
   } else {
     MM_ind <- suppressWarnings(summarize_mitemap(MiteMap))
@@ -78,7 +79,7 @@ binom_test_mitemap <- function(MiteMap,
         in_right = in_left_prop_TRUE <= 0.5
       )
   } else {
-    stop("format must be 'HH' or 'CH'")
+    cli::cli_abort("Parameter {.arg format} must be 'HH' or 'CH', not {.val {format}}")
   }
 
   if (level == "run") {
@@ -98,7 +99,7 @@ binom_test_mitemap <- function(MiteMap,
         no = sum(in_left_FALSE, na.rm = TRUE)
       )
   } else {
-    stop("Paramter `level` must be 'run' or 'lines'")
+    cli::cli_abort("Parameter {.arg level} must be 'run' or 'lines', not {.val {level}}")
   }
 
   CI <- apply(MM_ind, 1, function(xx) {
@@ -155,5 +156,10 @@ binom_test_mitemap <- function(MiteMap,
       estimate = estimate,
       CI = CI
     )
+  
+  if (verbose) {
+    cli::cli_alert_success("Binomial test completed for {nrow(New_MM_ind)} group{?s} with {p.adjust_method} adjustment")
+  }
+  
   return(New_MM_ind)
 }

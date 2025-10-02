@@ -44,10 +44,21 @@ extract_heatmap <- function(path_to_folder,
     include.dirs = TRUE
   )
 
+  if (verbose) {
+    cli::cli_alert_info("Extracting heatmaps from {length(zip_files)} zip file{?s}")
+  }
+  
   mm <- import_mitemap(path_to_folder, verbose = verbose, force = force, ...)
   dir.create(output_path)
 
+  if (verbose) {
+    cli::cli_progress_bar("Extracting heatmaps", total = length(zip_files))
+  }
+  
   for (i in 1:length(zip_files)) {
+    if (verbose) {
+      cli::cli_progress_update()
+    }
     files_in_zip <- unzip(zip_files[i], list = TRUE)
     heatmap_file <-
       files_in_zip$Name[grepl(".png", files_in_zip$Name)]
@@ -72,5 +83,10 @@ extract_heatmap <- function(path_to_folder,
         exdir = paste(output_path, "/", mod, sep = "")
       )
     }
+  }
+  
+  if (verbose) {
+    cli::cli_progress_done()
+    cli::cli_alert_success("Heatmaps extracted to {.path {output_path}}")
   }
 }

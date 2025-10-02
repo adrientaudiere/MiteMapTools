@@ -114,54 +114,40 @@ filter_mitemap <- function(MiteMap,
     mutate(x.mm. = x.mm. + center_x, y.mm. = y.mm. + center_y)
 
   if (verbose) {
-    message(
-      paste0(
-        "Rows removed when clearing for run with times sup to maximum_time: ",
-        sum(MiteMap$File_name %in% names(bad_time_value)),
-        " (", length(bad_time_value), " runs)\n"
-      ),
-      paste0(
-        "Rows removed when clearing the first secondes: ",
-        sum(MiteMap$X..t.s. < first_seconds_to_delete),
-        "\n"
-      ),
-      paste0(
-        "Rows removed when clearing bad x range: ",
-        sum(MiteMap$File_name %in% names(bad_range_x)),
-        " (", length(bad_range_x), " runs)\n"
-      ),
-      paste0(
-        "Rows removed when clearing bad y range: ",
-        sum(MiteMap$File_name %in% names(bad_range_y)),
-        " (", length(bad_range_y), " runs)\n"
-      ),
-      paste0(
-        "Rows removed when clearing bad x values: ",
-        sum(MiteMap$x.mm. < min_x_value |
-          MiteMap$x.mm. > max_x_value),
-        "\n"
-      ),
-      paste0(
-        "Rows removed when clearing bad y values: ",
-        sum(MiteMap$y.mm. < min_y_value |
-          MiteMap$y.mm. > max_y_value),
-        "\n\n"
-      ),
-      paste0(
-        "Total rows after filtering: ",
-        nrow(new_MiteMap),
-        " (from ",
-        nrow(MiteMap),
-        ")\n"
-      ),
-      paste0(
-        "Total runs after filtering: ",
-        length(unique(new_MiteMap$File_name)),
-        " (from ",
-        length(unique(MiteMap$File_name)),
-        ")\n"
-      )
-    )
+    cli::cli_h2("Data filtering summary")
+    
+    rows_bad_time <- sum(MiteMap$File_name %in% names(bad_time_value))
+    if (rows_bad_time > 0) {
+      cli::cli_alert_info("Rows removed (run with times > maximum_time): {rows_bad_time} ({length(bad_time_value)} run{?s})")
+    }
+    
+    rows_first_seconds <- sum(MiteMap$X..t.s. < first_seconds_to_delete)
+    if (rows_first_seconds > 0) {
+      cli::cli_alert_info("Rows removed (first {first_seconds_to_delete} second{?s}): {rows_first_seconds}")
+    }
+    
+    rows_bad_x_range <- sum(MiteMap$File_name %in% names(bad_range_x))
+    if (rows_bad_x_range > 0) {
+      cli::cli_alert_info("Rows removed (bad x range): {rows_bad_x_range} ({length(bad_range_x)} run{?s})")
+    }
+    
+    rows_bad_y_range <- sum(MiteMap$File_name %in% names(bad_range_y))
+    if (rows_bad_y_range > 0) {
+      cli::cli_alert_info("Rows removed (bad y range): {rows_bad_y_range} ({length(bad_range_y)} run{?s})")
+    }
+    
+    rows_bad_x_values <- sum(MiteMap$x.mm. < min_x_value | MiteMap$x.mm. > max_x_value)
+    if (rows_bad_x_values > 0) {
+      cli::cli_alert_info("Rows removed (bad x values): {rows_bad_x_values}")
+    }
+    
+    rows_bad_y_values <- sum(MiteMap$y.mm. < min_y_value | MiteMap$y.mm. > max_y_value)
+    if (rows_bad_y_values > 0) {
+      cli::cli_alert_info("Rows removed (bad y values): {rows_bad_y_values}")
+    }
+    
+    cli::cli_alert_success("Total rows after filtering: {nrow(new_MiteMap)} (from {nrow(MiteMap)})")
+    cli::cli_alert_success("Total runs after filtering: {length(unique(new_MiteMap$File_name))} (from {length(unique(MiteMap$File_name))})")
   }
   return(new_MiteMap)
 }

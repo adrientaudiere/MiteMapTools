@@ -38,7 +38,16 @@ rename_files_with_number <- function(path_to_folder, keep_original = FALSE) {
     full.names = TRUE
   )
 
+  if (length(folders_to_renamed) == 0) {
+    cli::cli_alert_info("No files with parentheses found in {.path {path_to_folder}}")
+    return(invisible(NULL))
+  }
+
+  cli::cli_alert_info("Found {length(folders_to_renamed)} file{?s} to rename")
+  cli::cli_progress_bar("Renaming files", total = length(folders_to_renamed))
+
   for (folder in folders_to_renamed) {
+    cli::cli_progress_update()
     dir.create("unzip_temp")
     setwd("unzip_temp")
     zip::unzip(folder)
@@ -60,6 +69,8 @@ rename_files_with_number <- function(path_to_folder, keep_original = FALSE) {
       lapply(folders_to_renamed, unlink)
     }
   }
+  cli::cli_progress_done()
+  cli::cli_alert_success("Renamed {length(folders_to_renamed)} file{?s}")
   setwd(old_wd)
   unlink("unzip_temp", recursive = TRUE, force = TRUE)
 }
@@ -81,10 +92,10 @@ rename_files_with_number <- function(path_to_folder, keep_original = FALSE) {
 #' get_file_extension("my_file.csv.zip")
 get_file_extension <- function(file_path) {
   if (stringr::str_count(file_path, "\\.") == 0) {
-    stop("There is no '.' inside your file path: ", file_path)
+    cli::cli_abort("There is no '.' in the file path: {.path {file_path}}")
   }
   if (stringr::str_count(file_path, "\\.") > 1) {
-    warning("There is more than one '.' inside your file path: ", file_path)
+    cli::cli_alert_warning("There is more than one '.' in the file path: {.path {file_path}}")
   }
   file_ext <- strsplit(basename(file_path), ".", fixed = TRUE)[[1]][-1]
   return(file_ext)
