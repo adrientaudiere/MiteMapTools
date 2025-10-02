@@ -25,10 +25,10 @@ vioplot_mitemap <- function(MiteMap,
   }
 
   if (is.null(factor)) {
-    stop("You must provide a column name for factor.")
+    cli::cli_abort("You must provide a column name for {.arg factor}")
   }
   if (!factor %in% colnames(MiteMap)) {
-    stop(paste("The factor", factor, "is not a column name of MiteMap."))
+    cli::cli_abort("The factor {.val {factor}} is not a column name of MiteMap")
   }
 
   modality_interm <-
