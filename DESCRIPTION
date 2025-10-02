@@ -27,7 +27,8 @@ Depends:
     R (>= 4.1.0),
     dplyr,
     readxl,
-    conflicted
+    conflicted,
+    cli
 Suggests: 
     gganimate,
     grDevices,

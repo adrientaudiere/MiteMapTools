@@ -54,7 +54,16 @@ convex_hull_mitemap <- function(MiteMap,
   center_of_area_y <- list()
   hull_length <- list()
 
-  for (run in unique(MiteMap$File_name)) {
+  unique_runs <- unique(MiteMap$File_name)
+  if (verbose) {
+    cli::cli_alert_info("Computing convex hulls for {length(unique_runs)} run{?s}")
+    cli::cli_progress_bar("Processing runs", total = length(unique_runs))
+  }
+  
+  for (run in unique_runs) {
+    if (verbose) {
+      cli::cli_progress_update()
+    }
     x <-
       floor(as.numeric(MiteMap[MiteMap$File_name == run, ]$x.mm.) * unity) /
         unity
@@ -64,29 +73,13 @@ convex_hull_mitemap <- function(MiteMap,
     tbe_table <- table(paste(x, y, sep = ":"))
     if (length(tbe_table) < min_nb_spatial_points) {
       if (verbose) {
-        message(
-          paste(
-            "No convex Hull found for sample:",
-            run,
-            "(not enough spatial points)"
-          )
-        )
+        cli::cli_alert_warning("No convex hull for {.field {run}} (not enough spatial points)")
       }
       next
     }
     if (verbose) {
-      message(
-        paste(
-          "Number of spatial points conserved using tbe = ",
-          tbe,
-          ": ",
-          sum(tbe_table > tbe),
-          " (",
-          round(sum(tbe_table > tbe) / length(tbe_table) * 100, 2),
-          " %)",
-          sep = ""
-        )
-      )
+      percent <- round(sum(tbe_table > tbe) / length(tbe_table) * 100, 2)
+      cli::cli_alert_info("Spatial points conserved (tbe = {tbe}): {sum(tbe_table > tbe)} ({percent}%)")
     }
     nms <- names(tbe_table)
     coords <-
@@ -108,13 +101,7 @@ convex_hull_mitemap <- function(MiteMap,
     idx <- which(dst < quantile(dst, probs = probs_quantile))
     if (length(idx) == 0) {
       if (verbose) {
-        message(
-          paste(
-            "No convex Hull found for sample:",
-            run,
-            "(none distance < quantile) "
-          )
-        )
+        cli::cli_alert_warning("No convex hull for {.field {run}} (no distance < quantile)")
       }
       next
     }
@@ -166,6 +153,10 @@ convex_hull_mitemap <- function(MiteMap,
         )
       }
     }
+  }
+  
+  if (verbose) {
+    cli::cli_progress_done()
   }
 
   return(

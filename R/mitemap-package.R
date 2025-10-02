@@ -38,6 +38,7 @@ if (getRversion() >= "2.15.1") {
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli cli_alert_info cli_alert_success cli_alert_warning cli_alert_danger cli_progress_bar cli_progress_update cli_progress_done
 #' @importFrom grDevices chull rgb
 #' @importFrom graphics lines points title
 #' @importFrom stats binom.test na.omit p.adjust quantile

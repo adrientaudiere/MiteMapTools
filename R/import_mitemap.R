@@ -170,11 +170,12 @@ import_mitemap <- function(path_to_folder,
   }
 
   if (file.exists(csv_folder_temp)) {
-    stop(
-      "The folder", csv_folder_temp, "is present in your path workink directory.
-      Please (i) manually delete it or (ii) call import_mite_map with force=TRUE or run
-      (iii) unlink(paste0(tempdir(), '/', 'csv_folder'), recursive = TRUE)."
-    )
+    cli::cli_abort(c(
+      "The folder {.path {csv_folder_temp}} already exists in your working directory",
+      "i" = "Manually delete it, or",
+      "i" = "Call {.fn import_mitemap} with {.code force=TRUE}, or",
+      "i" = "Run {.code unlink(paste0(tempdir(), '/', 'csv_folder'), recursive = TRUE)}"
+    ))
   }
 
   zip_files <- list.files(
@@ -186,16 +187,18 @@ import_mitemap <- function(path_to_folder,
 
   if (length(zip_files) == 0) {
     unlink(csv_folder_temp, recursive = TRUE)
+    cli::cli_abort("The folder {.path {path_to_folder}} does not contain any zip files")
+  }
 
-    stop(paste(
-      "The folder",
-      path_to_folder,
-      "do not contain any zip files.",
-      sep = " "
-    ))
+  if (verbose) {
+    cli::cli_alert_info("Found {length(zip_files)} zip file{?s} to process")
+    cli::cli_progress_bar("Extracting zip files", total = length(zip_files))
   }
 
   for (i in 1:length(zip_files)) {
+    if (verbose) {
+      cli::cli_progress_update()
+    }
     files_in_zip <- unzip(zip_files[i], list = TRUE)
     file_of_interest <-
       files_in_zip$Name[grepl(raw_data_name, files_in_zip$Name)]
@@ -206,23 +209,36 @@ import_mitemap <- function(path_to_folder,
     }
     if (length(file_of_interest) > 1) {
       unlink(csv_folder_temp, recursive = TRUE)
-
-      stop(paste(
-        "There is multiple csv files for the format",
-      ))
+      cli::cli_abort("There are multiple csv files for the format in {.path {zip_files[i]}}")
     }
     if (length(file_of_interest > 0)) {
       unzip(zip_files[i], file_of_interest, exdir = csv_folder_temp)
     }
   }
 
+  if (verbose) {
+    cli::cli_progress_done()
+  }
+  
   file.remove(list.files(csv_folder_temp, pattern = "jpg", full.names = TRUE)) # remove jpg files if present
   file.remove(list.files(csv_folder_temp, pattern = "png", full.names = TRUE)) # remove png files if present
   csv_files <- list.files(csv_folder_temp, full.names = TRUE)
 
+  if (verbose) {
+    cli::cli_alert_info("Reading {length(csv_files)} csv file{?s}")
+    cli::cli_progress_bar("Reading csv files", total = length(csv_files))
+  }
+
   csv_list <- list()
   for (f in csv_files) {
+    if (verbose) {
+      cli::cli_progress_update()
+    }
     csv_list[[f]] <- read.delim(f)
+  }
+  
+  if (verbose) {
+    cli::cli_progress_done()
   }
   df <- dplyr::bind_rows(csv_list, .id = "File_name")
 
@@ -263,14 +279,14 @@ import_mitemap <- function(path_to_folder,
         .name_repair = "unique_quiet"
       )
     } else {
-      stop("format_metadata must be either NULL, 'csv' or 'xlsx'")
+      cli::cli_abort("Parameter {.arg format_metadata} must be {.val NULL}, {.val csv} or {.val xlsx}, not {.val {format_metadata}}")
     }
   } else {
     if (length(path_to_metadata) > 1) {
-      stop(
-        "There is more than one xlsx/csv file in the folder.
-        Use the path to metadata argument to set the correct path to the metadata file."
-      )
+      cli::cli_abort(c(
+        "There is more than one xlsx/csv file in the folder",
+        "i" = "Use the {.arg path_to_metadata} argument to specify the correct metadata file"
+      ))
     }
     metadata <- read.csv(path_to_metadata, dec = dec, sep = sep)
   }
@@ -302,7 +318,7 @@ import_mitemap <- function(path_to_folder,
 
   if (nrow(df_final) == 0) {
     if (verbose) {
-      message("There is no correspondance between metadata and files names.")
+      cli::cli_alert_danger("There is no correspondence between metadata and files names.")
     }
     return(NULL)
   }
@@ -316,43 +332,28 @@ import_mitemap <- function(path_to_folder,
   nb_files_not_in_csv <- length(files_not_in_csv)
 
   if (ncol(df) + ncol(metadata) != ncol(df_final) + 1) {
-    stop("The number of columns (variables) is not the addition of csv + metadata.")
+    cli::cli_abort("The number of columns (variables) is not the sum of csv + metadata columns")
   }
 
   if (verbose) {
     if (nb_files_not_in_csv != 0) {
-      warning(
-        paste(
-          nb_files_not_in_csv,
-          "file(s) described in metadata were not present in the list of csv files"
-        )
+      cli::cli_alert_warning(
+        "{nb_files_not_in_csv} file{?s} described in metadata {?was/were} not present in the list of csv files"
       )
     }
 
-    if (nb_files_not_in_csv != 0) {
-      warning(
-        paste(
-          nb_files_not_in_metadata,
-          "file(s) present in the list of csv files were not described in metadata"
-        )
+    if (nb_files_not_in_metadata != 0) {
+      cli::cli_alert_warning(
+        "{nb_files_not_in_metadata} file{?s} present in the list of csv files {?was/were} not described in metadata"
       )
     }
-    message(paste(
-      "\n",
-      "The final number of samples for folder is ",
-      nrow(df_final),
-      ".\n",
-      sep = ""
-    ))
+    cli::cli_alert_success("The final number of samples for folder is {nrow(df_final)}")
   }
 
   if (min(df_final$`x.mm.`) > 0 | min(df_final$`y.mm.`) > 0) {
     if (verbose) {
-      warning(paste(
-        "At least one of the x.mm. or y.mm. variable have only positive values.
-      You may want to center the data using the center_x and center_y parameters.
-      By default, these parameters are set to 0."
-      ))
+      cli::cli_alert_warning("At least one of the x.mm. or y.mm. variable have only positive values")
+      cli::cli_alert_info("You may want to center the data using the center_x and center_y parameters (default: 0)")
     }
   }
 
@@ -485,9 +486,14 @@ import_mitemap_from_multiple_folder <-
            verbose = TRUE,
            ...) {
     res <- list()
+    if (verbose) {
+      cli::cli_alert_info("Importing data from {length(folders)} folder{?s}")
+      cli::cli_progress_bar("Processing folders", total = length(folders))
+    }
     for (i in 1:length(folders)) {
       if (verbose) {
-        print(basename(folders[[i]]))
+        cli::cli_progress_update()
+        cli::cli_alert_info("Processing: {basename(folders[[i]])}")
       }
       res[[i]] <-
         import_mitemap(
@@ -497,6 +503,9 @@ import_mitemap_from_multiple_folder <-
           return_with_logs = return_with_logs,
           ...
         )
+    }
+    if (verbose) {
+      cli::cli_progress_done()
     }
 
     if (return_with_logs) {
