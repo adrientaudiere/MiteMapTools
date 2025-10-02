@@ -54,6 +54,8 @@ reference:
   - get_file_extension
   - MiteMapTools-package
   - rename_files_with_number
+  - path_intersections
+  
 
 authors:
   Adrien Taudière:

@@ -94,6 +94,13 @@
 #' @examples
 #' mm_csv <- import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+#'   file_name_column = "File (mite ID)", verbose = FALSE, 
+#'   compute_metrics = FALSE
+#' )
+#' dim(mm_csv)
+#' \dontrun{
+#' mm_csv <- import_mitemap(
+#'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   file_name_column = "File (mite ID)", verbose = FALSE
 #' )
 #' dim(mm_csv)
@@ -130,7 +137,7 @@
 #' )
 #'
 #' dim(mm_wo_metadata)
-#'
+#' }
 import_mitemap <- function(path_to_folder,
                            path_to_metadata = NULL,
                            format_metadata = "csv",
@@ -355,6 +362,8 @@ import_mitemap <- function(path_to_folder,
 
   if (compute_metrics) {
     df_final <- df_final |>
+      arrange(File_name, X..t.s.) |>
+      group_by(File_name) |>
       mutate(x.mm. = x.mm. + center_x, y.mm. = y.mm. + center_y) |>
       mutate(distance_from_previous = sqrt(((lag(x.mm., n = n_lag) - x.mm.)^2 + (lag(y.mm., n = n_lag) - y.mm.)^2))) |>
       mutate(speed_mm_s = distance_from_previous / (X..t.s. - lag(X..t.s., n = n_lag))) |>
@@ -381,6 +390,7 @@ import_mitemap <- function(path_to_folder,
         cross_prod <- (x2 - x1) * (y3 - y2) - (y2 - y1) * (x3 - x2)
         ifelse(cross_prod >= 0, angle_deg, 360 - angle_deg)
       }) |>
+      mutate(turning_angle_clockwise = ifelse(is_immobile, 0, turning_angle_clockwise)) |>
       mutate(turning_angle = turning_angle_clockwise - 180) |>
       mutate(turning_angle_odor_clockwise = {
         x1 <- x_odor
@@ -401,7 +411,17 @@ import_mitemap <- function(path_to_folder,
         ifelse(cross_prod >= 0, angle_deg, 360 - angle_deg)
       }) |>
       mutate(turning_angle_odor = turning_angle_odor_clockwise - 180) |>
-      mutate(turning_angle_ratio_odor = turning_angle - turning_angle_odor)
+      mutate(turning_angle_ratio_odor = turning_angle - turning_angle_odor) |>
+    group_modify(~ {
+      result <- compute_crossings(.x$X..t.s., .x$x.mm., .x$y.mm., time_window = 10)
+      
+      .x %>%
+        mutate(
+          crossings_at_point = result$crossings_at_point,
+          crossings_cumsum = result$crossings_cumsum,
+          crossings_windowed = result$crossings_windowed
+        )
+    })
   }
 
   res <- list()
