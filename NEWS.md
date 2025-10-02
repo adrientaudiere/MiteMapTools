@@ -6,6 +6,8 @@
 for all numeric columns. Add also parameter `selected_cols` to select specific
 columns to summarize.
 
+- Add `cli` messages and progress bar.
+
 # Version 0.0.2
 
 ## Improvements 

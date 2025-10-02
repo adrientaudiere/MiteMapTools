@@ -1,3 +1,54 @@
+#' Compute Crossings Between Path Segments
+#' @description
+#' Internally used in function [import_mitemap()] to compute the number of crossings
+#' in a path. A crossing is defined as an intersection between two segments of the
+#' path. The function can also compute crossings within a specified time window.
+#' 
+#' @param time_vec (numerical vector) the vector of time
+#' @param x_vec (numerical vector) the vector of x coordinates
+#' @param y_vec (numerical vector) the vector of y coordinates
+#' @param time_window (numerical, default = NULL) If not NULL, only crossings
+#'  with segments that started within the last 'time_window' seconds are counted
+#'  focusing only on recent "interactions" with previous path.
+#'
+#' @returns A list with three elements:
+#'  - crossings_at_point: A numerical vector indicating the number of crossings
+#'  at each point in the path.
+#'  - crossings_cumsum: A numerical vector representing the cumulative sum of
+#'  crossings up to each point.
+#'  - crossings_windowed: A numerical vector indicating the number of crossings
+#'  at each point, considering only segments that started within the specified
+#'  time window.
+#' @export 
+#' @author Adrien Taudière
+#' @examples 
+#' time_vec <- c(0, 1, 2, 3, 4, 5)
+#' x_vec <- c(0, 1, 1, 0, -1, -1)
+#' y_vec <- c(0, 0, 1, 1, 0, -1)
+#' result <- compute_crossings(time_vec, x_vec, y_vec, time_window = 3)
+#' result
+#' 
+#' MM <- import_mitemap(
+#'  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+#'  file_name_column = "File (mite ID)", compute_metrics = FALSE
+#'  )
+#'  
+#'  MM <- MM |>
+#'  group_by(File_name) |>
+#'    group_modify(~ {
+#'result <- compute_crossings(.x$X..t.s., .x$x.mm., .x$y.mm., time_window = 10)
+#'
+#'.x %>%
+#'  mutate(
+#'    crossings_at_point = result$crossings_at_point,
+#'    crossings_cumsum = result$crossings_cumsum,
+#'    crossings_windowed = result$crossings_windowed
+#'  )
+#'}) |>
+#'group_by(Treatment, File_name) |>
+#'summarize(n_crossings = max(crossings_cumsum, na.rm = TRUE)) |>
+#'  ggstatsplot::ggbetweenstats(Treatment, n_crossings)
+
 compute_crossings <- function(time_vec, x_vec, y_vec, time_window = NULL) {
   n <- length(time_vec)
   
