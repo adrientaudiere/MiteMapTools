@@ -1,5 +1,7 @@
-MM_data_messy <- import_mitemap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  clean = FALSE, verbose = FALSE
+MM_data_messy <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  clean = FALSE,
+  verbose = FALSE
 )
 
 MM_filtered <- filter_mitemap(MM_data_messy, verbose = FALSE)
@@ -14,9 +16,9 @@ MM_almost_no_filtered <- filter_mitemap(MM_data_messy,
 )
 
 test_that("filter_mitemap works", {
-  expect_equal(dim(MM_filtered), c(70828, 35))
-  expect_equal(dim(MM_data_messy), c(76032, 35))
-  expect_equal(dim(MM_almost_no_filtered), c(74545, 35))
+  expect_equal(dim(MM_filtered), c(70828, 38))
+  expect_equal(dim(MM_data_messy), c(76032, 38))
+  expect_equal(dim(MM_almost_no_filtered), c(74545, 38))
 })
 
 test_that("filter_mitemap parameter validation", {

@@ -5,6 +5,7 @@ HH
 Masier
 MiteMap
 Mitemap
+Summarise
 abc
 additioning
 adjustement
@@ -13,8 +14,10 @@ binom
 carte
 chemotactic
 csv
+cumsum
 doi
 donnees
+dplyr
 et
 extdata
 gganimate
@@ -22,9 +25,9 @@ ggplot
 jez
 linewidth
 mitemap
-num
 param
 params
+pre
 pseudoreplication
 rda
 readxl

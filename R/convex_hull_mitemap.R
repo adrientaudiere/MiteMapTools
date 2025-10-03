@@ -59,7 +59,7 @@ convex_hull_mitemap <- function(MiteMap,
     cli::cli_alert_info("Computing convex hulls for {length(unique_runs)} run{?s}")
     cli::cli_progress_bar("Processing runs", total = length(unique_runs))
   }
-  
+
   for (run in unique_runs) {
     if (verbose) {
       cli::cli_progress_update()
@@ -76,10 +76,6 @@ convex_hull_mitemap <- function(MiteMap,
         cli::cli_alert_warning("No convex hull for {.field {run}} (not enough spatial points)")
       }
       next
-    }
-    if (verbose) {
-      percent <- round(sum(tbe_table > tbe) / length(tbe_table) * 100, 2)
-      cli::cli_alert_info("Spatial points conserved (tbe = {tbe}): {sum(tbe_table > tbe)} ({percent}%)")
     }
     nms <- names(tbe_table)
     coords <-
@@ -154,7 +150,7 @@ convex_hull_mitemap <- function(MiteMap,
       }
     }
   }
-  
+
   if (verbose) {
     cli::cli_progress_done()
   }

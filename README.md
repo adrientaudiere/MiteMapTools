@@ -111,6 +111,8 @@ library(MiteMapTools)
 #> Le chargement a nécessité le package : readxl
 #> 
 #> Le chargement a nécessité le package : conflicted
+#> 
+#> Le chargement a nécessité le package : cli
 
 # Import MiteMap from folders
 MM <- import_mitemap(

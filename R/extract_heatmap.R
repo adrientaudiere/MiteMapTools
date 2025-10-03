@@ -16,6 +16,7 @@
 #' @export
 #' @author Adrien Taudière
 #' @examples
+#' \dontrun{
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   factor = "Treatment"
 #' )
@@ -26,6 +27,7 @@
 #'   clean = FALSE, force = TRUE
 #' )
 #' unlink("Heatmap", recursive = TRUE)
+#' }
 extract_heatmap <- function(path_to_folder,
                             factor = NULL,
                             output_path = "Heatmap",
@@ -47,14 +49,14 @@ extract_heatmap <- function(path_to_folder,
   if (verbose) {
     cli::cli_alert_info("Extracting heatmaps from {length(zip_files)} zip file{?s}")
   }
-  
+
   mm <- import_mitemap(path_to_folder, verbose = verbose, force = force, ...)
   dir.create(output_path)
 
   if (verbose) {
     cli::cli_progress_bar("Extracting heatmaps", total = length(zip_files))
   }
-  
+
   for (i in 1:length(zip_files)) {
     if (verbose) {
       cli::cli_progress_update()
@@ -84,7 +86,7 @@ extract_heatmap <- function(path_to_folder,
       )
     }
   }
-  
+
   if (verbose) {
     cli::cli_progress_done()
     cli::cli_alert_success("Heatmaps extracted to {.path {output_path}}")

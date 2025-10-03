@@ -42,6 +42,7 @@ Create folder(s) with heatmaps extracted from zip files optionally organized
 by a factor
 }
 \examples{
+\dontrun{
 extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
   factor = "Treatment"
 )
@@ -52,6 +53,7 @@ extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTool
   clean = FALSE, force = TRUE
 )
 unlink("Heatmap", recursive = TRUE)
+}
 }
 \author{
 Adrien Taudière

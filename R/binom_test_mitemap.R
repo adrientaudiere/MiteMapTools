@@ -156,10 +156,10 @@ binom_test_mitemap <- function(MiteMap,
       estimate = estimate,
       CI = CI
     )
-  
+
   if (verbose) {
     cli::cli_alert_success("Binomial test completed for {nrow(New_MM_ind)} group{?s} with {p.adjust_method} adjustment")
   }
-  
+
   return(New_MM_ind)
 }

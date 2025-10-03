@@ -205,8 +205,8 @@ ggplot(dat, aes(x, y)) +
 
 ### Summarise statistics at the run level 
 
-```{r summarise-runs}
-# Summarise statistics at the run level
+```{r summarize-runs}
+# Summarize statistics at the run level
 MM_summary <- suppressWarnings(summarize_mitemap(MM))
 glimpse(MM_summary)
 ```

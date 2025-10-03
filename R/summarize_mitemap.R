@@ -29,10 +29,7 @@
 #' @author Adrien Taudière
 #' @export
 #' @examples
-#' mm_csv <- suppressWarnings(import_mitemap(
-#'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'   file_name_column = "File (mite ID)"
-#' ))
+#' mm_csv <- MM_data
 #'
 #' sum_mm <- summarize_mitemap(mm_csv)
 #' dim(sum_mm)

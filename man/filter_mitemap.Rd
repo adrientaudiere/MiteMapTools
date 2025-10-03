@@ -80,7 +80,8 @@ x.mm. > 'max_x_value', y.mm. < 'min_y value' or y.mm. > 'max_y_value').
 \examples{
 mm_csv <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-  file_name_column = "File (mite ID)", verbose = FALSE, clean = FALSE
+  file_name_column = "File (mite ID)", verbose = FALSE, clean = FALSE,
+  compute_metrics = FALSE
 )
 dim(mm_csv)
 

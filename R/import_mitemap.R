@@ -23,7 +23,7 @@
 #'   If there is only one csv file set path_to_metadata="csv" (or "xlsx").
 #'   Need to be set using a complete path to csv file if this file is not in
 #'   the folder or if their is multiple xlsx/csv files in the folder.
-#' @param format_metadata Either csv or xlsx. If set to NULL, no metadata is used.
+#' @param format_metadata Either "csv", "xlsx" or NULL. If set to NULL, no metadata is used.
 #' @param clean (logical, default TRUE) Do we clean the MiteMap result using
 #'  [filter_mitemap()] function? See [filter_mitemap()] for additional parameters.
 #' @param delete_parenthesis (Logical, default FALSE) Do we delete parenthesis with a number
@@ -31,7 +31,6 @@
 #'   Note that the name of the csv inside a zip  file with a parenthesis do not have
 #'   parenthesis into this name. Thus, we recommended to
 #'   set TRUE at least in one of delete_parenthesis or replace_parenthesis parameter.
-#'
 #' @param replace_parenthesis (Logical, default TRUE) Replace abc_name(1) by abc_name_1
 #' in the name of the files in the metadata.
 #' @param delete_space (Logical, default TRUE) Delete_space in the name of the
@@ -42,6 +41,9 @@
 #'   kept. May be useful for debugging.
 #' @param dec decimal for the csv metadata files.
 #' @param sep separator for the csv metadata files.
+#' @param na_readxl (string, default "NA") String to be interpreted as NA
+#'  when using readxl to read xlsx metadata files. Only used if format_metadata
+#'  is "xlsx".
 #' @param n_lag (int, default 1) Number of time step to compute speed and
 #' turning angle. If n_lag=1 (default), speed and turning angle are computed
 #' between two consecutive time step (0.2s). If n_lag=2 speed and turning angle
@@ -65,6 +67,9 @@
 #'
 #' @param radius_CH the radius of the circular half arena (in mm). Default is 23.175
 #'  to fit with the area of HH shape.
+#' @param time_window_crossings (numeric, default NULL) If not NULL, a time window
+#'  (in seconds) is used to compute a windowed number of crossings of the y axis.
+#'  See [compute_crossings()] for more details.
 #' @param verbose (logical, default TRUE). If TRUE, print additional information.
 #' @param ... Other params for be passed on to [filter_mitemap()].
 #'
@@ -94,7 +99,7 @@
 #' @examples
 #' mm_csv <- import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
-#'   file_name_column = "File (mite ID)", verbose = FALSE, 
+#'   file_name_column = "File (mite ID)", verbose = FALSE,
 #'   compute_metrics = FALSE
 #' )
 #' dim(mm_csv)
@@ -161,6 +166,7 @@ import_mitemap <- function(path_to_folder,
                            file_name_column = "File_name",
                            raw_data_name = "donnees_brutes",
                            radius_CH = 23.175,
+                           time_window_crossings = NULL,
                            verbose = TRUE,
                            ...) {
   csv_folder_temp <- paste0(tempdir(), "/", "csv_folder")
@@ -219,7 +225,7 @@ import_mitemap <- function(path_to_folder,
   if (verbose) {
     cli::cli_progress_done()
   }
-  
+
   file.remove(list.files(csv_folder_temp, pattern = "jpg", full.names = TRUE)) # remove jpg files if present
   file.remove(list.files(csv_folder_temp, pattern = "png", full.names = TRUE)) # remove png files if present
   csv_files <- list.files(csv_folder_temp, full.names = TRUE)
@@ -236,7 +242,7 @@ import_mitemap <- function(path_to_folder,
     }
     csv_list[[f]] <- read.delim(f)
   }
-  
+
   if (verbose) {
     cli::cli_progress_done()
   }
@@ -413,16 +419,20 @@ import_mitemap <- function(path_to_folder,
       }) |>
       mutate(turning_angle_odor = turning_angle_odor_clockwise - 180) |>
       mutate(turning_angle_ratio_odor = turning_angle - turning_angle_odor) |>
-    group_modify(~ {
-      result <- compute_crossings(.x$X..t.s., .x$x.mm., .x$y.mm., time_window = 10)
-      
-      .x %>%
-        mutate(
-          crossings_at_point = result$crossings_at_point,
-          crossings_cumsum = result$crossings_cumsum,
-          crossings_windowed = result$crossings_windowed
+      group_modify(~ {
+        result <- compute_crossings(.x$X..t.s.,
+          .x$x.mm.,
+          .x$y.mm.,
+          time_window = time_window_crossings
         )
-    })
+
+        .x %>%
+          mutate(
+            crossings_at_point = result$crossings_at_point,
+            crossings_cumsum = result$crossings_cumsum,
+            crossings_windowed = result$crossings_windowed
+          )
+      })
   }
 
   res <- list()

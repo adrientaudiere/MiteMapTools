@@ -9,7 +9,7 @@ mm_csv_log <- import_mitemap(
 )
 
 test_that("import_mitemap is running well", {
-  expect_equal(dim(mm_csv), c(70828, 35))
+  expect_equal(dim(mm_csv), c(70828, 38))
   expect_equal(length(mm_csv_log), 4)
 })
 

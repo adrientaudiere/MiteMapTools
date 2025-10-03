@@ -35,7 +35,7 @@ Suggests:
     graphics,
     utils,
     ggplot2,
-    ggstatsplot
+    ggstatsplot,
     ggrain,
     here,
     knitr,

@@ -28,6 +28,7 @@ import_mitemap(
   file_name_column = "File_name",
   raw_data_name = "donnees_brutes",
   radius_CH = 23.175,
+  time_window_crossings = NULL,
   verbose = TRUE,
   ...
 )
@@ -41,7 +42,7 @@ If there is only one csv file set path_to_metadata="csv" (or "xlsx").
 Need to be set using a complete path to csv file if this file is not in
 the folder or if their is multiple xlsx/csv files in the folder.}
 
-\item{format_metadata}{Either csv or xlsx. If set to NULL, no metadata is used.}
+\item{format_metadata}{Either "csv", "xlsx" or NULL. If set to NULL, no metadata is used.}
 
 \item{clean}{(logical, default TRUE) Do we clean the MiteMap result using
 \code{\link[=filter_mitemap]{filter_mitemap()}} function? See \code{\link[=filter_mitemap]{filter_mitemap()}} for additional parameters.}
@@ -67,6 +68,10 @@ kept. May be useful for debugging.}
 \item{dec}{decimal for the csv metadata files.}
 
 \item{sep}{separator for the csv metadata files.}
+
+\item{na_readxl}{(string, default "NA") String to be interpreted as NA
+when using readxl to read xlsx metadata files. Only used if format_metadata
+is "xlsx".}
 
 \item{n_lag}{(int, default 1) Number of time step to compute speed and
 turning angle. If n_lag=1 (default), speed and turning angle are computed
@@ -100,6 +105,10 @@ speed and turning angles are computed for each time step ?}
 
 \item{radius_CH}{the radius of the circular half arena (in mm). Default is 23.175
 to fit with the area of HH shape.}
+
+\item{time_window_crossings}{(numeric, default NULL) If not NULL, a time window
+(in seconds) is used to compute a windowed number of crossings of the y axis.
+See \code{\link[=compute_crossings]{compute_crossings()}} for more details.}
 
 \item{verbose}{(logical, default TRUE). If TRUE, print additional information.}
 
@@ -151,6 +160,13 @@ the name of the files in the metadata.
 \examples{
 mm_csv <- import_mitemap(
   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+  file_name_column = "File (mite ID)", verbose = FALSE,
+  compute_metrics = FALSE
+)
+dim(mm_csv)
+\dontrun{
+mm_csv <- import_mitemap(
+  system.file("extdata", "mitemap_example", package = "MiteMapTools"),
   file_name_column = "File (mite ID)", verbose = FALSE
 )
 dim(mm_csv)
@@ -187,7 +203,7 @@ mm_wo_metadata <- import_mitemap(
 )
 
 dim(mm_wo_metadata)
-
+}
 }
 \author{
 Adrien Taudière

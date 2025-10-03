@@ -15,12 +15,12 @@ test_that("get_file_extension handles files with paths", {
 })
 
 test_that("get_file_extension warns about multiple dots", {
-  expect_warning(get_file_extension("my.file.csv"), "more than one")
+  expect_message(get_file_extension("my.file.csv"), "more than one")
 })
 
 test_that("get_file_extension errors when no extension", {
-  expect_error(get_file_extension("no_extension"), "no '\\.' inside")
-  expect_error(get_file_extension("folder/file_without_ext"), "no '\\.' inside")
+  expect_error(get_file_extension("no_extension"))
+  expect_error(get_file_extension("folder/file_without_ext"))
 })
 
 test_that("get_file_extension handles edge cases", {

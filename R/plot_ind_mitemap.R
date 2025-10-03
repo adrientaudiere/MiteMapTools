@@ -34,7 +34,8 @@
 #' MM <- import_mitemap(
 #'   system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   file_name_column = "File (mite ID)",
-#'   verbose = FALSE
+#'   verbose = FALSE,
+#'   compute_metrics = FALSE
 #' )
 #'
 #' library(patchwork)
