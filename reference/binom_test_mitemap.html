@@ -118,64 +118,65 @@ This approach is not recommended as it introduce a high pseudoreplication risk.<
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">binom_test_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, factor <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 48 warnings in `summarise()`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running binomial test with format: <span style="color: #00BB00;">HH</span>, level: <span style="color: #00BB00;">run</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 18 warnings in `summarise()`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> The first warning was:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `across(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 75: `File_name = "MM012022_05_17_15h29m25s"`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 133: `File_name = "MM012022_05_17_20h27m19s"`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `min()`:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> no non-missing arguments to min; returning Inf</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 47 remaining warnings.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 17 remaining warnings.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Binomial test completed for 3 groups with BH adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Treatment     n   yes    no p.value p.value.adj estimate CI           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DCM          10     5     5   1           1        0.5   0.187 - 0.813</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix          96    54    42   0.261       0.392    0.562 0.457 - 0.664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     120    75    45   0.008       0.024    0.625 0.532 - 0.712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix         112    64    48   0.156       0.234    0.571 0.474 - 0.665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     129    79    50   0.013       0.039    0.612 0.523 - 0.697</span>
 <span class="r-in"><span><span class="fu">binom_test_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, factor <span class="op">=</span> <span class="st">"Treatment"</span>, format <span class="op">=</span> <span class="st">"CH"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 48 warnings in `summarise()`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running binomial test with format: <span style="color: #00BB00;">CH</span>, level: <span style="color: #00BB00;">run</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 18 warnings in `summarise()`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> The first warning was:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `across(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 75: `File_name = "MM012022_05_17_15h29m25s"`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 133: `File_name = "MM012022_05_17_20h27m19s"`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `min()`:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> no non-missing arguments to min; returning Inf</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 47 remaining warnings.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 17 remaining warnings.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Binomial test completed for 3 groups with BH adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Treatment     n   yes    no p.value p.value.adj estimate CI           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DCM          10     5     5 1          1            0.5  0.187 - 0.813</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix          96    71    25 0.000<span style="text-decoration: underline;">01</span>    0.000<span style="text-decoration: underline;">015</span>     0.74 0.64 - 0.824 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     120    90    30 0.000<span style="text-decoration: underline;">01</span>    0.000<span style="text-decoration: underline;">015</span>     0.75 0.663 - 0.825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DCM          10     5     5 1          1           0.5   0.187 - 0.813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix         112    85    27 0.000<span style="text-decoration: underline;">01</span>    0.000<span style="text-decoration: underline;">015</span>    0.759 0.669 - 0.835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     129    95    34 0.000<span style="text-decoration: underline;">01</span>    0.000<span style="text-decoration: underline;">015</span>    0.736 0.652 - 0.81 </span>
 <span class="r-in"><span><span class="fu">binom_test_mitemap</span><span class="op">(</span><span class="va">MM_data</span>, factor <span class="op">=</span> <span class="st">"Treatment"</span>, level <span class="op">=</span> <span class="st">"lines"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 48 warnings in `summarise()`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running binomial test with format: <span style="color: #00BB00;">HH</span>, level: <span style="color: #00BB00;">lines</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 18 warnings in `summarise()`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> The first warning was:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `across(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 75: `File_name = "MM012022_05_17_15h29m25s"`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 133: `File_name = "MM012022_05_17_20h27m19s"`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `min()`:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> no non-missing arguments to min; returning Inf</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 47 remaining warnings.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 17 remaining warnings.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Binomial test completed for 3 groups with BH adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Treatment     n   yes    no p.value p.value.adj estimate CI           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DCM          10  <span style="text-decoration: underline;">6</span>416  <span style="text-decoration: underline;">7</span>611 0.000<span style="text-decoration: underline;">01</span>     0.000<span style="text-decoration: underline;">01</span>    0.457 0.449 - 0.466</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix          96 <span style="text-decoration: underline;">62</span>156 <span style="text-decoration: underline;">72</span>749 0.000<span style="text-decoration: underline;">01</span>     0.000<span style="text-decoration: underline;">01</span>    0.461 0.458 - 0.463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     120 <span style="text-decoration: underline;">78</span>416 <span style="text-decoration: underline;">91</span>702 0.000<span style="text-decoration: underline;">01</span>     0.000<span style="text-decoration: underline;">01</span>    0.461 0.459 - 0.463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Mix         112 <span style="text-decoration: underline;">72</span>443 <span style="text-decoration: underline;">84</span>648 0.000<span style="text-decoration: underline;">01</span>     0.000<span style="text-decoration: underline;">01</span>    0.461 0.459 - 0.464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> nothing     129 <span style="text-decoration: underline;">83</span>916 <span style="text-decoration: underline;">98</span>754 0.000<span style="text-decoration: underline;">01</span>     0.000<span style="text-decoration: underline;">01</span>    0.459 0.457 - 0.462</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">MM_data</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Biomol_sp</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DGSS"</span>, <span class="st">"DGL1"</span>, <span class="st">"D_carpathicus"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">binom_test_mitemap</span><span class="op">(</span>factor <span class="op">=</span> <span class="st">"Biomol_sp"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 6 warnings in `summarise()`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> The first warning was:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `across(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In group 53: `File_name = "MM012022_05_18_00h25m45s"`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning in `min()`:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> no non-missing arguments to min; returning Inf</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 5 remaining warnings.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running binomial test with format: <span style="color: #00BB00;">HH</span>, level: <span style="color: #00BB00;">run</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Binomial test completed for 3 groups with BH adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biomol_sp         n   yes    no p.value p.value.adj estimate CI           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DGL1             18    13     5   0.096       0.288    0.722 0.465 - 0.903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> DGSS             59    34    25   0.298       0.388    0.576 0.441 - 0.704</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> D_carpathicus    12     8     4   0.388       0.388    0.667 0.349 - 0.901</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DGL1             19    14     5   0.064       0.192    0.737 0.488 - 0.909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> DGSS             67    37    30   0.464       0.607    0.552 0.426 - 0.674</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> D_carpathicus    15     9     6   0.607       0.607    0.6   0.323 - 0.837</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

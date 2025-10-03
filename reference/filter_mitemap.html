@@ -155,23 +155,24 @@ x.mm. &gt; 'max_x_value', y.mm. &lt; 'min_y value' or y.mm. &gt; 'max_y_value').
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mm_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="import_mitemap.html">import_mitemap</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mitemap_example"</span>, package <span class="op">=</span> <span class="st">"MiteMapTools"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, clean <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  file_name_column <span class="op">=</span> <span class="st">"File (mite ID)"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, clean <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  compute_metrics <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mm_csv</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76032    35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76032    24</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">MM_filtered_1</span> <span class="op">&lt;-</span> <span class="fu">filter_mitemap</span><span class="op">(</span><span class="va">mm_csv</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing for run with times sup to maximum_time: 0 (0 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing the first secondes: 603</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad x range: 2798 (2 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad y range: 0 (0 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad x values: 1960</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad y values: 26</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Total rows after filtering: 70828 (from 76032)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Total runs after filtering: 50 (from 53)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data filtering summary</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (first 2 seconds): 603</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad x range): 2798 (2 runs)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad x values): 1960</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad y values): 26</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Total rows after filtering: 70828 (from 76032)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Total runs after filtering: 50 (from 53)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">MM_filtered_1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70828    35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70828    24</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">MM_filtered_2</span> <span class="op">&lt;-</span> <span class="fu">filter_mitemap</span><span class="op">(</span><span class="va">mm_csv</span>,</span></span>
 <span class="r-in"><span>  bad_range_value_x <span class="op">=</span> <span class="fl">41</span>,</span></span>
@@ -179,17 +180,18 @@ x.mm. &gt; 'max_x_value', y.mm. &lt; 'min_y value' or y.mm. &gt; 'max_y_value').
 <span class="r-in"><span>  first_seconds_to_delete <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>  maximum_time <span class="op">=</span> <span class="fl">301.1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing for run with times sup to maximum_time: 12941 (9 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing the first secondes: 359</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad x range: 2798 (2 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad y range: 0 (0 runs)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad x values: 1960</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Rows removed when clearing bad y values: 26</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Total rows after filtering: 58177 (from 76032)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Total runs after filtering: 41 (from 53)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data filtering summary</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (run with times &gt; maximum_time): 12941 (9 runs)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (first 1 second): 359</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad x range): 2798 (2 runs)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad x values): 1960</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Rows removed (bad y values): 26</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Total rows after filtering: 58177 (from 76032)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Total runs after filtering: 41 (from 53)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">MM_filtered_2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 58177    35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 58177    24</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
