@@ -58,4 +58,7 @@
 .nav-link .nav-text .navbar-brand {
     color: #faefd1 !important;
 }
+.nav-link:hover {
+    background-color: #1A5B5540 !important;
+    color: #fff !important;
 }
