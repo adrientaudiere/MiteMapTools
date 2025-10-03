@@ -279,7 +279,7 @@ combined_data %>%
 ## Data Filtering and Processing
 
 The `filter_mitemap()` function allows you to clean and process the tracking data. Note that 
-this is done automatically with clean=TRUE in [import_mitemap()], but you can 
+this is done automatically with clean=TRUE in `import_mitemap()`, but you can 
 
 ```{r filtering}
 # Apply custom filtering
