@@ -55,7 +55,7 @@
   background-color: #1A5B55 !important;
 }
 
-.nav-link .nav-text .navbar-brand {
+.nav-link, .nav-text, .navbar-brand {
     color: #faefd1 !important;
 }
 .nav-link:hover {

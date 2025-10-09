@@ -19,6 +19,6 @@ MM_data <- import_mitemap(
 system.file("extdata", "mitemap_example_large", package = "MiteMapTools"),
 file_name_column = "File (mite ID)", verbose = FALSE
 )
-save(MM_data, file="data/MM_data.rda")
+save(MM_data, file="data/MM_data.rda", compress = "bzip2")
 }
 \keyword{datasets}
