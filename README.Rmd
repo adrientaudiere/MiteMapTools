@@ -54,7 +54,7 @@ High-resolution positional data with columns:
 - X coordinate (mm)  
 - Y coordinate (mm)
 
-[MiteMapTools::import_mitemap()] computes summary metrics including the presence in defined zones (HH and CH formats, see figure \@ref(fig:shape)):
+`import_mitemap()` computes summary metrics including the presence in defined zones (HH and CH formats, see figure at the end of the page):
 
 ### HH Format (Half-Half)
 Arena divided by a line through the odor source, computing:

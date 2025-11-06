@@ -261,7 +261,8 @@ import_mitemap <- function(path_to_folder,
   }
 
   df <- tibble(df) |>
-    mutate(File_name = gsub(File_name, pattern = paste0(tempdir(), "/"), replacement = ""))
+    mutate(File_name = gsub(File_name, pattern = paste0(tempdir(), "/"), replacement = "")
+           fixed=TRUE)
 
   if (is.null(path_to_metadata)) {
     if (is.null(format_metadata)) {
