@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MiteMapTools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
                         <h4 data-toc-skip class="author">Adrien Taudière
 and Lise Roy</h4>
             
-            <h4 data-toc-skip class="date">2025-11-06</h4>
+            <h4 data-toc-skip class="date">2025-11-17</h4>
       
 
       <div class="d-none name"><code>getting-started.Rmd</code></div>
@@ -248,7 +248,7 @@ experimental condition:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create violin plots showing position distributions by experimental condition</span></span>
 <span><span class="fu"><a href="../reference/vioplot_mitemap.html">vioplot_mitemap</a></span><span class="op">(</span><span class="va">MM</span>, <span class="st">"Treatment"</span>, prop_points <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/violin-plot-1.png" width="100%"></p>
+<p><img src="figures/violin-plot-1.png" class="r-plt" width="100%"></p>
 <p>This plot shows how different treatments affect the distribution of
 organism positions along the x-axis (with the odor source typically
 positioned at x = -20mm and y = 0mm).</p>
@@ -267,7 +267,7 @@ positioned at x = -20mm and y = 0mm).</p>
 <span></span>
 <span><span class="co"># Combine plots side by side</span></span>
 <span><span class="va">p_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">p_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&amp;</span> <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/individual-plots-1.png" width="100%"></p>
+<p><img src="figures/individual-plots-1.png" class="r-plt" width="100%"></p>
 <p>You can also add arena context:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot with arena circle and odor source</span></span>
@@ -280,7 +280,7 @@ positioned at x = -20mm and y = 0mm).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_arena</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
-<p><img src="figures/individual-plots-with-arena-1.png" width="100%"></p>
+<p><img src="figures/individual-plots-with-arena-1.png" class="r-plt" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="data-structure-requirements">Data Structure Requirements<a class="anchor" aria-label="anchor" href="#data-structure-requirements"></a>
@@ -320,7 +320,7 @@ time</li>
 <li>Analyzes time spent inside/outside the circle and behavioral
 preference indices</li>
 </ul>
-<p><img src="figures/arena-diagram-1.png" width="100%"></p>
+<p><img src="figures/arena-diagram-1.png" class="r-plt" width="100%"></p>
 </div>
 </div>
 <div class="section level3">
@@ -454,7 +454,7 @@ preference indices</li>
 <span>    x <span class="op">=</span> <span class="st">"Treatment"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Biomol_sp</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/unnamed-chunk-3-1.png" width="100%"></p>
+<p><img src="figures/unnamed-chunk-3-1.png" class="r-plt" width="100%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MM_summary</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">turning_angle_mean</span> <span class="op">&lt;</span> <span class="fl">20</span> <span class="op">&amp;</span> <span class="va">turning_angle_mean</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -467,7 +467,7 @@ preference indices</li>
 <span>    y <span class="op">=</span> <span class="st">"Turning angle"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Treatment"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="figures/unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="figures/unnamed-chunk-4-1.png" class="r-plt" width="100%"></p>
 </div>
 <div class="section level4">
 <h4 id="binomial-tests-for-zone-preferences">Binomial Tests for Zone Preferences<a class="anchor" aria-label="anchor" href="#binomial-tests-for-zone-preferences"></a>
@@ -541,7 +541,7 @@ zones:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 9995 rows containing non-finite outside the scale range</span></span>
 <span><span class="co">#&gt; (`stat_boxplot()`).</span></span></code></pre></div>
-<p><img src="figures/convex-hull-1.png" width="100%"></p>
+<p><img src="figures/convex-hull-1.png" class="r-plt" width="100%"></p>
 </div>
 </div>
 <div class="section level3">
@@ -592,7 +592,7 @@ plots:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_speed</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
-<p><img src="figures/speed-analysis-1.png" width="100%"></p>
+<p><img src="figures/speed-analysis-1.png" class="r-plt" width="100%"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Combine multiple speed plots</span></span>
@@ -607,7 +607,7 @@ plots:</p>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span>
 <span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre></div>
-<p><img src="figures/speed-analysis-2.png" width="100%"></p>
+<p><img src="figures/speed-analysis-2.png" class="r-plt" width="100%"></p>
 </div>
 </div>
 </div>
@@ -669,7 +669,7 @@ Hardware</a>: Hardware implementation details</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
