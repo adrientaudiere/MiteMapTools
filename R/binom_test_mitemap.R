@@ -15,7 +15,8 @@
 #'
 #' @param MiteMap (required) The result of import_mitemap
 #' @param factor (required, default NULL) The column name to separate individuals
-#' in the MiteMap data frame (e.g., "Treatment").
+#' in the MiteMap data frame (e.g., "Treatment"). Can be a character vector of
+#' multiple column names (e.g., c("Treatment", "Biomol_sp")).
 #' @param format (default "HH") The format of `left` area. "HH" for Half-Half,
 #' "CH" for Circular-Half.
 #' @param verbose (Logical, default = TRUE) If TRUE, the function print additional
@@ -38,12 +39,58 @@
 #'
 #'
 #' binom_test_mitemap(MM_data, factor = "Treatment")
+#' binom_test_mitemap(MM_data, factor = c("Treatment", "Biomol_sp"))
 #' binom_test_mitemap(MM_data, factor = "Treatment", format = "CH")
 #' binom_test_mitemap(MM_data, factor = "Treatment", level = "lines")
 #'
 #' MM_data |>
 #'   filter(Biomol_sp %in% c("DGSS", "DGL1", "D_carpathicus")) |>
-#'   binom_test_mitemap(factor = "Biomol_sp")
+#'   binom_test_mitemap(factor = c("Treatment", "Biomol_sp")) |>
+#'  mutate(
+#'    # Add significance stars
+#'    p.stars = case_when(
+#'      p.value.adj < 0.001 ~ "***",
+#'      p.value.adj < 0.01 ~ "**",
+#'      p.value.adj < 0.05 ~ "*",
+#'      TRUE ~ ""
+#'    ),
+#'    p.value = paste0(sprintf("%.3f", p.value), p.stars),
+#'    p.value.adj = paste0(sprintf("%.3f", p.value.adj), p.stars),
+#'    estimate = sprintf("%.3f", estimate)
+#'  ) |>
+#'  select(-p.stars) |>
+#'  gt(groupname_col = "Treatment") |>  
+#'  tab_header(
+#'    title = md("**Binomial Test Results**"),
+#'    subtitle = "Species and Treatment Analysis"
+#'  ) |>
+#'  cols_label(
+#'    Biomol_sp = "Species",
+#'    Treatment = "Treat.",
+#'    n = "N",
+#'    yes = "Odor side",
+#'    no = "Other side",
+#'    p.value = "P-value",
+#'    p.value.adj = "Adj. P-value",
+#'    estimate = "Estimate",
+#'    CI = "95% CI"
+#'  ) |>
+#'  cols_align(
+#'    align = "center",
+#'    columns = c(n, yes, no, p.value, p.value.adj, estimate, CI)
+#'  ) |>
+#'  tab_style(
+#'    style = cell_text(weight = "bold"),
+#'    locations = cells_column_labels()
+#'  ) |>
+#'   tab_style(
+#'    style = list(
+#'      cell_fill(color = "grey90"),
+#'      cell_text(weight = "bold", size = px(14))
+#'    ),
+#'    locations = cells_row_groups()
+#'  )
+
 binom_test_mitemap <- function(MiteMap,
                                factor = NULL,
                                format = "HH",
@@ -84,7 +131,7 @@ binom_test_mitemap <- function(MiteMap,
 
   if (level == "run") {
     MM_ind <- MM_ind |>
-      group_by(.data[[factor]]) |>
+      group_by(across(all_of(factor))) |>
       summarise(
         n = n(),
         yes = sum(in_left, na.rm = TRUE),
@@ -92,7 +139,7 @@ binom_test_mitemap <- function(MiteMap,
       )
   } else if (level == "lines") {
     MM_ind <- MM_ind |>
-      group_by(.data[[factor]]) |>
+      group_by(across(all_of(factor))) |>
       summarise(
         n = n(),
         yes = sum(in_left_TRUE, na.rm = TRUE),

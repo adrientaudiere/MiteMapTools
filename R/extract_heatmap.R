@@ -2,10 +2,11 @@
 #' by a factor
 #'
 #' @param path_to_folder Path to folder
-#' @param factor (character, default NULL) Set to a column name
-#'  to create subfolder for each levels of the modality. If left to NULL,
-#'  all heatmaps are extracted in the same folder.
-#' @param output_path (default =  "Heatmap")
+#' @param factor (character, default NULL) Set to a column name or a vector of
+#'   column names to create subfolder for each levels of the modality.
+#'   If multiple factors are provided, they value will be collapsed with "_".
+#'   If left to NULL, all heatmaps are extracted in the same folder.
+#' @param output_path (default =  "Heatmap") The path to the output folder.
 #' @param verbose (Logical, default = TRUE) If TRUE, the function print additional
 #'  information.
 #' @param force Force overwriting the path to output_path
@@ -19,6 +20,10 @@
 #' \dontrun{
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   factor = "Treatment"
+#' )
+#' unlink("Heatmap", recursive = TRUE)
+#' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
+#'   factor = c("Treatment","Biomol_sp")
 #' )
 #' extract_heatmap(system.file("extdata", "mitemap_example", package = "MiteMapTools"),
 #'   factor = "Biomol_sp", force = TRUE
@@ -77,7 +82,8 @@ extract_heatmap <- function(path_to_folder,
     } else {
       mod <- mm |>
         filter(File_name == heatmap_name) |>
-        pull(factor) |>
+        mutate(combined_factor = paste(!!!syms(factor), sep = "_")) |>
+        pull(combined_factor) |>
         unique()
 
       unzip(zip_files[i],

@@ -1,3 +1,11 @@
+# Version 0.1.1
+
+## New Features
+
+- The `factor` parameter of function `binom_test_mitemap()` now accepts also vector of names to enable the analysis of multiple factors.
+
+- The `factor` parameter of function `extract_heatmap()` now accepts also vector of names to enable the analysis of multiple factors. The factor are first collapsed into a new combined factor, the order of the factor is important.
+
 # Version 0.1.0 
 
 ## New Features
